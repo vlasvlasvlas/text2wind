@@ -181,7 +181,7 @@ class Text2Wind {
     }
 
     toggleAutoPlay() {
-        if (!this.autoText) return;
+        if (!this.autoText) return false;
         this.autoPlaying = !this.autoPlaying;
         return this.autoPlaying;
     }
@@ -190,6 +190,9 @@ class Text2Wind {
         this.autoPlaying = false;
         this.autoText = null;
         this.autoIndex = 0;
+        this.autoTimer = 0;
+        // Clean up text engine state so manual typing works
+        this.text.wordBuffer = '';
     }
 
     updateAutoTypewriter(dt) {

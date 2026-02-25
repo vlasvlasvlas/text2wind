@@ -164,7 +164,7 @@ export class UI {
                     if (playBtn) playBtn.textContent = '⏸ Pausar';
                 }
             };
-            reader.readAsText(file);
+            reader.readAsText(file, 'UTF-8');
         });
     }
 
