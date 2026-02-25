@@ -1,0 +1,18 @@
+{
+  "name": "text2wind",
+  "version": "1.0.0",
+  "description": "Una interfaz espigadora: del texto al viento. Experiencia web inmersiva donde las palabras escritas nacen como tipografía viva, respiran en un paisaje atmosférico y se disuelven en viento, sonido y silencio.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.170.0",
+    "tone": "^15.1.3"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0"
+  }
+}

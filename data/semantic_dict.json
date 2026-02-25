@@ -1,0 +1,6242 @@
+{
+  "_meta": {
+    "generator": "Text2Wind Semantic Dictionary Generator",
+    "version": "1.0.0",
+    "description": "Maps Spanish words to environmental effects via word embeddings",
+    "concept": "Inspired by Agnès Varda's 'Les Glaneurs et la Glaneuse' (2000)",
+    "total_words": 360,
+    "poles": [
+      "heat",
+      "cold",
+      "wind",
+      "water",
+      "calm",
+      "darkness",
+      "light"
+    ],
+    "generated_at": "2026-02-24T20:18:44",
+    "model": "es_core_news_lg"
+  },
+  "poles": {
+    "heat": {
+      "emoji": "🔥",
+      "label": "Calor",
+      "affects": {
+        "temperature": 1.0,
+        "heat_haze": 0.7
+      }
+    },
+    "cold": {
+      "emoji": "❄️",
+      "label": "Frío",
+      "affects": {
+        "temperature": -1.0,
+        "snow": 0.5
+      }
+    },
+    "wind": {
+      "emoji": "💨",
+      "label": "Viento",
+      "affects": {
+        "wind_intensity": 1.0,
+        "storm": 0.4
+      }
+    },
+    "water": {
+      "emoji": "🌧️",
+      "label": "Agua",
+      "affects": {
+        "rain": 1.0,
+        "fog": 0.3
+      }
+    },
+    "calm": {
+      "emoji": "🌿",
+      "label": "Calma",
+      "affects": {
+        "wind_intensity": -0.8,
+        "fog": 0.2,
+        "letter_life": 1.0
+      }
+    },
+    "darkness": {
+      "emoji": "🌑",
+      "label": "Oscuridad",
+      "affects": {
+        "hour_shift": -4.0,
+        "luminosity": -0.7
+      }
+    },
+    "light": {
+      "emoji": "☀️",
+      "label": "Luz",
+      "affects": {
+        "hour_shift": 4.0,
+        "luminosity": 0.8
+      }
+    }
+  },
+  "words": {
+    "abismo": {
+      "poles": {
+        "heat": 0.056,
+        "cold": 0.081,
+        "wind": 0.177,
+        "water": 0.215,
+        "calm": 0.114,
+        "darkness": 0.494,
+        "light": 0.194
+      },
+      "effects": {
+        "temperature": -0.025,
+        "heat_haze": 0.039,
+        "snow": 0.041,
+        "wind_intensity": 0.086,
+        "storm": 0.071,
+        "rain": 0.215,
+        "fog": 0.087,
+        "letter_life": 0.114,
+        "hour_shift": -1.0,
+        "luminosity": -0.191
+      }
+    },
+    "abrasar": {
+      "poles": {
+        "heat": 0.382,
+        "cold": 0.23,
+        "wind": 0.199,
+        "water": 0.099,
+        "calm": 0.181,
+        "darkness": 0.15,
+        "light": 0.199
+      },
+      "effects": {
+        "temperature": 0.152,
+        "heat_haze": 0.267,
+        "snow": 0.115,
+        "wind_intensity": 0.054,
+        "storm": 0.08,
+        "rain": 0.099,
+        "fog": 0.066,
+        "letter_life": 0.181,
+        "hour_shift": 0.196,
+        "luminosity": 0.054
+      }
+    },
+    "abrazo": {
+      "poles": {
+        "wind": 0.01,
+        "calm": 0.218
+      },
+      "effects": {
+        "wind_intensity": -0.164,
+        "storm": 0.004,
+        "fog": 0.044,
+        "letter_life": 0.218
+      }
+    },
+    "acequia": {
+      "poles": {
+        "water": 0.203
+      },
+      "effects": {
+        "rain": 0.203,
+        "fog": 0.061
+      }
+    },
+    "agua": {
+      "poles": {
+        "heat": 0.34,
+        "cold": 0.278,
+        "wind": 0.034,
+        "water": 0.562,
+        "darkness": 0.046
+      },
+      "effects": {
+        "temperature": 0.062,
+        "heat_haze": 0.238,
+        "snow": 0.139,
+        "wind_intensity": 0.034,
+        "storm": 0.014,
+        "rain": 0.562,
+        "fog": 0.169,
+        "hour_shift": -0.184,
+        "luminosity": -0.032
+      }
+    },
+    "ahogar": {
+      "poles": {
+        "heat": 0.074,
+        "wind": 0.135,
+        "water": 0.147,
+        "calm": 0.114,
+        "darkness": 0.086
+      },
+      "effects": {
+        "temperature": 0.074,
+        "heat_haze": 0.052,
+        "wind_intensity": 0.044,
+        "storm": 0.054,
+        "rain": 0.147,
+        "fog": 0.067,
+        "letter_life": 0.114,
+        "hour_shift": -0.344,
+        "luminosity": -0.06
+      }
+    },
+    "alba": {
+      "poles": {
+        "heat": 0.026,
+        "darkness": 0.122,
+        "light": 0.261
+      },
+      "effects": {
+        "temperature": 0.026,
+        "heat_haze": 0.018,
+        "hour_shift": 0.556,
+        "luminosity": 0.123
+      }
+    },
+    "alegría": {
+      "poles": {
+        "calm": 0.339,
+        "darkness": 0.004,
+        "light": 0.133
+      },
+      "effects": {
+        "wind_intensity": -0.271,
+        "fog": 0.068,
+        "letter_life": 0.339,
+        "hour_shift": 0.516,
+        "luminosity": 0.104
+      }
+    },
+    "aliento": {
+      "poles": {
+        "heat": 0.273,
+        "cold": 0.202,
+        "wind": 0.248,
+        "water": 0.18,
+        "calm": 0.437,
+        "darkness": 0.15,
+        "light": 0.24
+      },
+      "effects": {
+        "temperature": 0.071,
+        "heat_haze": 0.191,
+        "snow": 0.101,
+        "wind_intensity": -0.102,
+        "storm": 0.099,
+        "rain": 0.18,
+        "fog": 0.141,
+        "letter_life": 0.437,
+        "hour_shift": 0.36,
+        "luminosity": 0.087
+      }
+    },
+    "amanecer": {
+      "poles": {
+        "heat": 0.346,
+        "cold": 0.234,
+        "wind": 0.335,
+        "water": 0.256,
+        "calm": 0.333,
+        "darkness": 0.448,
+        "light": 0.503
+      },
+      "effects": {
+        "temperature": 0.112,
+        "heat_haze": 0.242,
+        "snow": 0.117,
+        "wind_intensity": 0.069,
+        "storm": 0.134,
+        "rain": 0.256,
+        "fog": 0.143,
+        "letter_life": 0.333,
+        "hour_shift": 0.22,
+        "luminosity": 0.089
+      }
+    },
+    "amarillo": {
+      "poles": {
+        "heat": 0.198,
+        "cold": 0.263,
+        "darkness": 0.104,
+        "light": 0.257
+      },
+      "effects": {
+        "temperature": -0.065,
+        "heat_haze": 0.139,
+        "snow": 0.132,
+        "hour_shift": 0.612,
+        "luminosity": 0.133
+      }
+    },
+    "amor": {
+      "poles": {
+        "calm": 0.193,
+        "darkness": 0.045,
+        "light": 0.062
+      },
+      "effects": {
+        "wind_intensity": -0.154,
+        "fog": 0.039,
+        "letter_life": 0.193,
+        "hour_shift": 0.068,
+        "luminosity": 0.018
+      }
+    },
+    "anciano": {
+      "poles": {
+        "calm": 0.006,
+        "darkness": 0.063
+      },
+      "effects": {
+        "wind_intensity": -0.005,
+        "fog": 0.001,
+        "letter_life": 0.006,
+        "hour_shift": -0.252,
+        "luminosity": -0.044
+      }
+    },
+    "angustia": {
+      "poles": {
+        "wind": 0.17,
+        "water": 0.073,
+        "calm": 0.216,
+        "darkness": 0.268,
+        "light": 0.012
+      },
+      "effects": {
+        "wind_intensity": -0.003,
+        "storm": 0.068,
+        "rain": 0.073,
+        "fog": 0.065,
+        "letter_life": 0.216,
+        "hour_shift": -1.0,
+        "luminosity": -0.178
+      }
+    },
+    "apagar": {
+      "poles": {
+        "heat": 0.13,
+        "wind": 0.036,
+        "darkness": 0.058,
+        "light": 0.061
+      },
+      "effects": {
+        "temperature": 0.13,
+        "heat_haze": 0.091,
+        "wind_intensity": 0.036,
+        "storm": 0.014,
+        "hour_shift": 0.012,
+        "luminosity": 0.008
+      }
+    },
+    "ardiente": {
+      "poles": {
+        "heat": 0.481,
+        "cold": 0.173,
+        "wind": 0.138,
+        "water": 0.154,
+        "calm": 0.403,
+        "darkness": 0.315,
+        "light": 0.376
+      },
+      "effects": {
+        "temperature": 0.308,
+        "heat_haze": 0.337,
+        "snow": 0.086,
+        "wind_intensity": -0.184,
+        "storm": 0.055,
+        "rain": 0.154,
+        "fog": 0.127,
+        "letter_life": 0.403,
+        "hour_shift": 0.244,
+        "luminosity": 0.08
+      }
+    },
+    "arena": {
+      "poles": {
+        "heat": 0.255,
+        "cold": 0.238,
+        "wind": 0.066,
+        "water": 0.322,
+        "calm": 0.046,
+        "darkness": 0.123,
+        "light": 0.088
+      },
+      "effects": {
+        "temperature": 0.017,
+        "heat_haze": 0.178,
+        "snow": 0.119,
+        "wind_intensity": 0.029,
+        "storm": 0.026,
+        "rain": 0.322,
+        "fog": 0.106,
+        "letter_life": 0.046,
+        "hour_shift": -0.14,
+        "luminosity": -0.016
+      }
+    },
+    "armonía": {
+      "poles": {
+        "calm": 0.448,
+        "light": 0.09
+      },
+      "effects": {
+        "wind_intensity": -0.358,
+        "fog": 0.09,
+        "letter_life": 0.448,
+        "hour_shift": 0.36,
+        "luminosity": 0.072
+      }
+    },
+    "arrojar": {
+      "poles": {
+        "heat": 0.0
+      },
+      "effects": {
+        "temperature": 0.0,
+        "heat_haze": 0.0
+      }
+    },
+    "arroyo": {
+      "poles": {
+        "wind": 0.003,
+        "water": 0.41,
+        "darkness": 0.003
+      },
+      "effects": {
+        "wind_intensity": 0.003,
+        "storm": 0.001,
+        "rain": 0.41,
+        "fog": 0.123,
+        "hour_shift": -0.012,
+        "luminosity": -0.002
+      }
+    },
+    "atardecer": {
+      "poles": {
+        "heat": 0.358,
+        "cold": 0.278,
+        "wind": 0.252,
+        "water": 0.299,
+        "calm": 0.332,
+        "darkness": 0.376,
+        "light": 0.496
+      },
+      "effects": {
+        "temperature": 0.08,
+        "heat_haze": 0.251,
+        "snow": 0.139,
+        "wind_intensity": -0.014,
+        "storm": 0.101,
+        "rain": 0.299,
+        "fog": 0.156,
+        "letter_life": 0.332,
+        "hour_shift": 0.48,
+        "luminosity": 0.134
+      }
+    },
+    "aullar": {
+      "poles": {
+        "wind": 0.147
+      },
+      "effects": {
+        "wind_intensity": 0.147,
+        "storm": 0.059
+      }
+    },
+    "aurora": {
+      "poles": {
+        "wind": 0.001,
+        "water": 0.002,
+        "darkness": 0.05,
+        "light": 0.261
+      },
+      "effects": {
+        "wind_intensity": 0.001,
+        "storm": 0.0,
+        "rain": 0.002,
+        "fog": 0.001,
+        "hour_shift": 0.844,
+        "luminosity": 0.174
+      }
+    },
+    "avalancha": {
+      "poles": {
+        "wind": 0.18,
+        "water": 0.172
+      },
+      "effects": {
+        "wind_intensity": 0.18,
+        "storm": 0.072,
+        "rain": 0.172,
+        "fog": 0.052
+      }
+    },
+    "azote": {
+      "poles": {
+        "heat": 0.071,
+        "wind": 0.336,
+        "water": 0.021
+      },
+      "effects": {
+        "temperature": 0.071,
+        "heat_haze": 0.05,
+        "wind_intensity": 0.336,
+        "storm": 0.134,
+        "rain": 0.021,
+        "fog": 0.006
+      }
+    },
+    "azul": {
+      "poles": {
+        "heat": 0.003,
+        "cold": 0.177,
+        "darkness": 0.041,
+        "light": 0.216
+      },
+      "effects": {
+        "temperature": -0.174,
+        "heat_haze": 0.002,
+        "snow": 0.088,
+        "hour_shift": 0.7,
+        "luminosity": 0.144
+      }
+    },
+    "barro": {
+      "poles": {
+        "heat": 0.421,
+        "cold": 0.361,
+        "wind": 0.088,
+        "water": 0.352,
+        "calm": 0.105,
+        "darkness": 0.28,
+        "light": 0.081
+      },
+      "effects": {
+        "temperature": 0.06,
+        "heat_haze": 0.295,
+        "snow": 0.18,
+        "wind_intensity": 0.004,
+        "storm": 0.035,
+        "rain": 0.352,
+        "fog": 0.127,
+        "letter_life": 0.105,
+        "hour_shift": -0.796,
+        "luminosity": -0.131
+      }
+    },
+    "basura": {
+      "poles": {
+        "water": 0.041
+      },
+      "effects": {
+        "rain": 0.041,
+        "fog": 0.012
+      }
+    },
+    "bello": {
+      "poles": {
+        "heat": 0.001,
+        "calm": 0.281,
+        "darkness": 0.071,
+        "light": 0.24
+      },
+      "effects": {
+        "temperature": 0.001,
+        "heat_haze": 0.001,
+        "wind_intensity": -0.225,
+        "fog": 0.056,
+        "letter_life": 0.281,
+        "hour_shift": 0.676,
+        "luminosity": 0.142
+      }
+    },
+    "blanco": {
+      "poles": {
+        "heat": 0.051,
+        "cold": 0.219,
+        "darkness": 0.099,
+        "light": 0.164
+      },
+      "effects": {
+        "temperature": -0.168,
+        "heat_haze": 0.036,
+        "snow": 0.11,
+        "hour_shift": 0.26,
+        "luminosity": 0.062
+      }
+    },
+    "blando": {
+      "poles": {
+        "heat": 0.253,
+        "cold": 0.321,
+        "wind": 0.082,
+        "water": 0.025,
+        "calm": 0.33,
+        "darkness": 0.174,
+        "light": 0.145
+      },
+      "effects": {
+        "temperature": -0.068,
+        "heat_haze": 0.177,
+        "snow": 0.161,
+        "wind_intensity": -0.182,
+        "storm": 0.033,
+        "rain": 0.025,
+        "fog": 0.074,
+        "letter_life": 0.33,
+        "hour_shift": -0.116,
+        "luminosity": -0.006
+      }
+    },
+    "borrasca": {
+      "poles": {
+        "heat": 0.107,
+        "cold": 0.169,
+        "wind": 0.376,
+        "water": 0.226,
+        "darkness": 0.104,
+        "light": 0.008
+      },
+      "effects": {
+        "temperature": -0.062,
+        "heat_haze": 0.075,
+        "snow": 0.085,
+        "wind_intensity": 0.376,
+        "storm": 0.15,
+        "rain": 0.226,
+        "fog": 0.068,
+        "hour_shift": -0.384,
+        "luminosity": -0.066
+      }
+    },
+    "bosque": {
+      "poles": {
+        "heat": 0.183,
+        "cold": 0.329,
+        "wind": 0.131,
+        "water": 0.301,
+        "calm": 0.141,
+        "darkness": 0.301,
+        "light": 0.097
+      },
+      "effects": {
+        "temperature": -0.146,
+        "heat_haze": 0.128,
+        "snow": 0.165,
+        "wind_intensity": 0.018,
+        "storm": 0.052,
+        "rain": 0.301,
+        "fog": 0.118,
+        "letter_life": 0.141,
+        "hour_shift": -0.816,
+        "luminosity": -0.133
+      }
+    },
+    "bramar": {
+      "poles": {
+        "wind": 0.15
+      },
+      "effects": {
+        "wind_intensity": 0.15,
+        "storm": 0.06
+      }
+    },
+    "brasa": {
+      "poles": {
+        "heat": 0.262
+      },
+      "effects": {
+        "temperature": 0.262,
+        "heat_haze": 0.183
+      }
+    },
+    "brillante": {
+      "poles": {
+        "heat": 0.172,
+        "cold": 0.157,
+        "calm": 0.215,
+        "darkness": 0.19,
+        "light": 0.505
+      },
+      "effects": {
+        "temperature": 0.015,
+        "heat_haze": 0.12,
+        "snow": 0.079,
+        "wind_intensity": -0.172,
+        "fog": 0.043,
+        "letter_life": 0.215,
+        "hour_shift": 1.0,
+        "luminosity": 0.271
+      }
+    },
+    "brillo": {
+      "poles": {
+        "heat": 0.224,
+        "cold": 0.17,
+        "water": 0.004,
+        "calm": 0.151,
+        "darkness": 0.147,
+        "light": 0.55
+      },
+      "effects": {
+        "temperature": 0.054,
+        "heat_haze": 0.157,
+        "snow": 0.085,
+        "rain": 0.004,
+        "fog": 0.031,
+        "wind_intensity": -0.121,
+        "letter_life": 0.151,
+        "hour_shift": 1.0,
+        "luminosity": 0.337
+      }
+    },
+    "brisa": {
+      "poles": {
+        "heat": 0.291,
+        "cold": 0.264,
+        "wind": 0.421,
+        "water": 0.402,
+        "calm": 0.332,
+        "darkness": 0.093,
+        "light": 0.235
+      },
+      "effects": {
+        "temperature": 0.027,
+        "heat_haze": 0.204,
+        "snow": 0.132,
+        "wind_intensity": 0.155,
+        "storm": 0.168,
+        "rain": 0.402,
+        "fog": 0.187,
+        "letter_life": 0.332,
+        "hour_shift": 0.568,
+        "luminosity": 0.123
+      }
+    },
+    "brotar": {
+      "poles": {
+        "heat": 0.134,
+        "cold": 0.041,
+        "wind": 0.086,
+        "water": 0.094,
+        "calm": 0.088,
+        "darkness": 0.079,
+        "light": 0.204
+      },
+      "effects": {
+        "temperature": 0.093,
+        "heat_haze": 0.094,
+        "snow": 0.021,
+        "wind_intensity": 0.016,
+        "storm": 0.034,
+        "rain": 0.094,
+        "fog": 0.046,
+        "letter_life": 0.088,
+        "hour_shift": 0.5,
+        "luminosity": 0.108
+      }
+    },
+    "caballo": {
+      "poles": {
+        "heat": 0.015,
+        "cold": 0.022,
+        "wind": 0.029,
+        "darkness": 0.01
+      },
+      "effects": {
+        "temperature": -0.007,
+        "heat_haze": 0.01,
+        "snow": 0.011,
+        "wind_intensity": 0.029,
+        "storm": 0.012,
+        "hour_shift": -0.04,
+        "luminosity": -0.007
+      }
+    },
+    "caer": {
+      "poles": {
+        "heat": 0.007,
+        "cold": 0.015,
+        "wind": 0.13,
+        "darkness": 0.094
+      },
+      "effects": {
+        "temperature": -0.008,
+        "heat_haze": 0.005,
+        "snow": 0.007,
+        "wind_intensity": 0.13,
+        "storm": 0.052,
+        "hour_shift": -0.376,
+        "luminosity": -0.066
+      }
+    },
+    "calentar": {
+      "poles": {
+        "heat": 0.333,
+        "cold": 0.174,
+        "calm": 0.162,
+        "light": 0.083
+      },
+      "effects": {
+        "temperature": 0.159,
+        "heat_haze": 0.233,
+        "snow": 0.087,
+        "wind_intensity": -0.13,
+        "fog": 0.032,
+        "letter_life": 0.162,
+        "hour_shift": 0.332,
+        "luminosity": 0.066
+      }
+    },
+    "caliente": {
+      "poles": {
+        "heat": 0.499,
+        "cold": 0.357,
+        "wind": 0.013,
+        "water": 0.166,
+        "calm": 0.282,
+        "darkness": 0.061,
+        "light": 0.177
+      },
+      "effects": {
+        "temperature": 0.142,
+        "heat_haze": 0.349,
+        "snow": 0.178,
+        "wind_intensity": -0.213,
+        "storm": 0.005,
+        "rain": 0.166,
+        "fog": 0.106,
+        "letter_life": 0.282,
+        "hour_shift": 0.464,
+        "luminosity": 0.099
+      }
+    },
+    "calma": {
+      "poles": {
+        "heat": 0.078,
+        "cold": 0.008,
+        "wind": 0.165,
+        "water": 0.072,
+        "calm": 0.598,
+        "darkness": 0.097,
+        "light": 0.088
+      },
+      "effects": {
+        "temperature": 0.07,
+        "heat_haze": 0.055,
+        "snow": 0.004,
+        "wind_intensity": -0.313,
+        "storm": 0.066,
+        "rain": 0.072,
+        "fog": 0.141,
+        "letter_life": 0.598,
+        "hour_shift": -0.036,
+        "luminosity": 0.003
+      }
+    },
+    "calor": {
+      "poles": {
+        "heat": 0.607,
+        "cold": 0.425,
+        "wind": 0.268,
+        "water": 0.323,
+        "calm": 0.195,
+        "darkness": 0.072,
+        "light": 0.184
+      },
+      "effects": {
+        "temperature": 0.182,
+        "heat_haze": 0.425,
+        "snow": 0.212,
+        "wind_intensity": 0.112,
+        "storm": 0.107,
+        "rain": 0.323,
+        "fog": 0.136,
+        "letter_life": 0.195,
+        "hour_shift": 0.448,
+        "luminosity": 0.097
+      }
+    },
+    "caminante": {
+      "poles": {
+        "heat": 0.321,
+        "cold": 0.327,
+        "wind": 0.297,
+        "water": 0.268,
+        "calm": 0.468,
+        "darkness": 0.403,
+        "light": 0.411
+      },
+      "effects": {
+        "temperature": -0.006,
+        "heat_haze": 0.225,
+        "snow": 0.164,
+        "wind_intensity": -0.077,
+        "storm": 0.119,
+        "rain": 0.268,
+        "fog": 0.174,
+        "letter_life": 0.468,
+        "hour_shift": 0.032,
+        "luminosity": 0.047
+      }
+    },
+    "caminar": {
+      "poles": {
+        "heat": 0.18,
+        "cold": 0.213,
+        "wind": 0.171,
+        "water": 0.125,
+        "calm": 0.403,
+        "darkness": 0.198,
+        "light": 0.203
+      },
+      "effects": {
+        "temperature": -0.033,
+        "heat_haze": 0.126,
+        "snow": 0.106,
+        "wind_intensity": -0.151,
+        "storm": 0.068,
+        "rain": 0.125,
+        "fog": 0.118,
+        "letter_life": 0.403,
+        "hour_shift": 0.02,
+        "luminosity": 0.024
+      }
+    },
+    "camino": {
+      "poles": {
+        "wind": 0.025,
+        "water": 0.031,
+        "calm": 0.203,
+        "darkness": 0.176,
+        "light": 0.061
+      },
+      "effects": {
+        "wind_intensity": -0.137,
+        "storm": 0.01,
+        "rain": 0.031,
+        "fog": 0.05,
+        "letter_life": 0.203,
+        "hour_shift": -0.46,
+        "luminosity": -0.074
+      }
+    },
+    "candente": {
+      "poles": {
+        "heat": 0.217,
+        "cold": 0.031,
+        "calm": 0.182,
+        "darkness": 0.1,
+        "light": 0.2
+      },
+      "effects": {
+        "temperature": 0.186,
+        "heat_haze": 0.152,
+        "snow": 0.015,
+        "wind_intensity": -0.146,
+        "fog": 0.036,
+        "letter_life": 0.182,
+        "hour_shift": 0.4,
+        "luminosity": 0.09
+      }
+    },
+    "canto": {
+      "poles": {
+        "heat": 0.022,
+        "calm": 0.188,
+        "darkness": 0.066,
+        "light": 0.153
+      },
+      "effects": {
+        "temperature": 0.022,
+        "heat_haze": 0.015,
+        "wind_intensity": -0.15,
+        "fog": 0.038,
+        "letter_life": 0.188,
+        "hour_shift": 0.348,
+        "luminosity": 0.076
+      }
+    },
+    "caos": {
+      "poles": {
+        "wind": 0.254,
+        "darkness": 0.175
+      },
+      "effects": {
+        "wind_intensity": 0.254,
+        "storm": 0.102,
+        "hour_shift": -0.7,
+        "luminosity": -0.122
+      }
+    },
+    "caricia": {
+      "poles": {
+        "heat": 0.1,
+        "cold": 0.017,
+        "wind": 0.107,
+        "water": 0.037,
+        "calm": 0.423,
+        "darkness": 0.095,
+        "light": 0.238
+      },
+      "effects": {
+        "temperature": 0.083,
+        "heat_haze": 0.07,
+        "snow": 0.009,
+        "wind_intensity": -0.231,
+        "storm": 0.043,
+        "rain": 0.037,
+        "fog": 0.096,
+        "letter_life": 0.423,
+        "hour_shift": 0.572,
+        "luminosity": 0.124
+      }
+    },
+    "carmesí": {
+      "poles": {
+        "heat": 0.089,
+        "cold": 0.054,
+        "darkness": 0.231,
+        "light": 0.265
+      },
+      "effects": {
+        "temperature": 0.035,
+        "heat_haze": 0.062,
+        "snow": 0.027,
+        "hour_shift": 0.136,
+        "luminosity": 0.05
+      }
+    },
+    "casa": {
+      "poles": {
+        "calm": 0.05,
+        "darkness": 0.051
+      },
+      "effects": {
+        "wind_intensity": -0.04,
+        "fog": 0.01,
+        "letter_life": 0.05,
+        "hour_shift": -0.204,
+        "luminosity": -0.036
+      }
+    },
+    "cascada": {
+      "poles": {
+        "heat": 0.189,
+        "cold": 0.274,
+        "wind": 0.158,
+        "water": 0.47,
+        "calm": 0.069,
+        "darkness": 0.23,
+        "light": 0.181
+      },
+      "effects": {
+        "temperature": -0.085,
+        "heat_haze": 0.132,
+        "snow": 0.137,
+        "wind_intensity": 0.103,
+        "storm": 0.063,
+        "rain": 0.47,
+        "fog": 0.155,
+        "letter_life": 0.069,
+        "hour_shift": -0.196,
+        "luminosity": -0.016
+      }
+    },
+    "caudal": {
+      "poles": {
+        "water": 0.258
+      },
+      "effects": {
+        "rain": 0.258,
+        "fog": 0.077
+      }
+    },
+    "ceguera": {
+      "poles": {
+        "darkness": 0.18,
+        "light": 0.013
+      },
+      "effects": {
+        "hour_shift": -0.668,
+        "luminosity": -0.116
+      }
+    },
+    "ceniza": {
+      "poles": {
+        "heat": 0.461,
+        "cold": 0.288,
+        "wind": 0.169,
+        "water": 0.253,
+        "darkness": 0.245,
+        "light": 0.111
+      },
+      "effects": {
+        "temperature": 0.173,
+        "heat_haze": 0.323,
+        "snow": 0.144,
+        "wind_intensity": 0.169,
+        "storm": 0.068,
+        "rain": 0.253,
+        "fog": 0.076,
+        "hour_shift": -0.536,
+        "luminosity": -0.083
+      }
+    },
+    "centelleo": {
+      "poles": {
+        "heat": 0.1,
+        "cold": 0.009,
+        "wind": 0.023,
+        "water": 0.052,
+        "calm": 0.013,
+        "darkness": 0.152,
+        "light": 0.396
+      },
+      "effects": {
+        "temperature": 0.091,
+        "heat_haze": 0.07,
+        "snow": 0.004,
+        "wind_intensity": 0.013,
+        "storm": 0.009,
+        "rain": 0.052,
+        "fog": 0.018,
+        "letter_life": 0.013,
+        "hour_shift": 0.976,
+        "luminosity": 0.21
+      }
+    },
+    "cercanía": {
+      "poles": {
+        "calm": 0.085
+      },
+      "effects": {
+        "wind_intensity": -0.068,
+        "fog": 0.017,
+        "letter_life": 0.085
+      }
+    },
+    "charco": {
+      "poles": {
+        "heat": 0.133,
+        "cold": 0.198,
+        "wind": 0.095,
+        "water": 0.4,
+        "darkness": 0.167
+      },
+      "effects": {
+        "temperature": -0.065,
+        "heat_haze": 0.093,
+        "snow": 0.099,
+        "wind_intensity": 0.095,
+        "storm": 0.038,
+        "rain": 0.4,
+        "fog": 0.12,
+        "hour_shift": -0.668,
+        "luminosity": -0.117
+      }
+    },
+    "chispa": {
+      "poles": {
+        "heat": 0.117,
+        "wind": 0.063,
+        "calm": 0.015,
+        "darkness": 0.036,
+        "light": 0.223
+      },
+      "effects": {
+        "temperature": 0.117,
+        "heat_haze": 0.082,
+        "wind_intensity": 0.051,
+        "storm": 0.025,
+        "fog": 0.003,
+        "letter_life": 0.015,
+        "hour_shift": 0.748,
+        "luminosity": 0.153
+      }
+    },
+    "ciclón": {
+      "poles": {
+        "heat": 0.06,
+        "cold": 0.089,
+        "wind": 0.466,
+        "water": 0.148
+      },
+      "effects": {
+        "temperature": -0.029,
+        "heat_haze": 0.042,
+        "snow": 0.044,
+        "wind_intensity": 0.466,
+        "storm": 0.186,
+        "rain": 0.148,
+        "fog": 0.044
+      }
+    },
+    "cielo": {
+      "poles": {
+        "heat": 0.28,
+        "cold": 0.288,
+        "wind": 0.248,
+        "water": 0.31,
+        "calm": 0.179,
+        "darkness": 0.44,
+        "light": 0.423
+      },
+      "effects": {
+        "temperature": -0.008,
+        "heat_haze": 0.196,
+        "snow": 0.144,
+        "wind_intensity": 0.105,
+        "storm": 0.099,
+        "rain": 0.31,
+        "fog": 0.129,
+        "letter_life": 0.179,
+        "hour_shift": -0.068,
+        "luminosity": 0.03
+      }
+    },
+    "ciervo": {
+      "poles": {
+        "heat": 0.014,
+        "cold": 0.113,
+        "calm": 0.039,
+        "darkness": 0.115,
+        "light": 0.056
+      },
+      "effects": {
+        "temperature": -0.099,
+        "heat_haze": 0.01,
+        "snow": 0.057,
+        "wind_intensity": -0.031,
+        "fog": 0.008,
+        "letter_life": 0.039,
+        "hour_shift": -0.236,
+        "luminosity": -0.036
+      }
+    },
+    "colina": {
+      "poles": {
+        "heat": 0.048,
+        "cold": 0.05,
+        "water": 0.207,
+        "darkness": 0.098
+      },
+      "effects": {
+        "temperature": -0.002,
+        "heat_haze": 0.034,
+        "snow": 0.025,
+        "rain": 0.207,
+        "fog": 0.062,
+        "hour_shift": -0.392,
+        "luminosity": -0.069
+      }
+    },
+    "color": {
+      "poles": {
+        "heat": 0.036,
+        "cold": 0.109,
+        "light": 0.233
+      },
+      "effects": {
+        "temperature": -0.073,
+        "heat_haze": 0.025,
+        "snow": 0.054,
+        "hour_shift": 0.932,
+        "luminosity": 0.186
+      }
+    },
+    "conejo": {
+      "poles": {
+        "heat": 0.022,
+        "cold": 0.035
+      },
+      "effects": {
+        "temperature": -0.013,
+        "heat_haze": 0.015,
+        "snow": 0.018
+      }
+    },
+    "congelar": {
+      "poles": {
+        "heat": 0.045,
+        "cold": 0.134
+      },
+      "effects": {
+        "temperature": -0.089,
+        "heat_haze": 0.032,
+        "snow": 0.067
+      }
+    },
+    "contemplar": {
+      "poles": {
+        "calm": 0.127,
+        "darkness": 0.107,
+        "light": 0.224
+      },
+      "effects": {
+        "wind_intensity": -0.102,
+        "fog": 0.025,
+        "letter_life": 0.127,
+        "hour_shift": 0.468,
+        "luminosity": 0.104
+      }
+    },
+    "coral": {
+      "poles": {
+        "calm": 0.063,
+        "darkness": 0.057,
+        "light": 0.092
+      },
+      "effects": {
+        "wind_intensity": -0.05,
+        "fog": 0.013,
+        "letter_life": 0.063,
+        "hour_shift": 0.14,
+        "luminosity": 0.034
+      }
+    },
+    "corazón": {
+      "poles": {
+        "heat": 0.231,
+        "cold": 0.103,
+        "wind": 0.106,
+        "water": 0.12,
+        "calm": 0.448,
+        "darkness": 0.298,
+        "light": 0.273
+      },
+      "effects": {
+        "temperature": 0.128,
+        "heat_haze": 0.162,
+        "snow": 0.051,
+        "wind_intensity": -0.252,
+        "storm": 0.042,
+        "rain": 0.12,
+        "fog": 0.126,
+        "letter_life": 0.448,
+        "hour_shift": -0.1,
+        "luminosity": 0.01
+      }
+    },
+    "correr": {
+      "poles": {
+        "heat": 0.046,
+        "cold": 0.073,
+        "wind": 0.147,
+        "calm": 0.066
+      },
+      "effects": {
+        "temperature": -0.027,
+        "heat_haze": 0.032,
+        "snow": 0.036,
+        "wind_intensity": 0.094,
+        "storm": 0.059,
+        "fog": 0.013,
+        "letter_life": 0.066
+      }
+    },
+    "corriente": {
+      "poles": {
+        "heat": 0.132,
+        "cold": 0.029,
+        "wind": 0.05,
+        "water": 0.188,
+        "calm": 0.131,
+        "darkness": 0.074,
+        "light": 0.142
+      },
+      "effects": {
+        "temperature": 0.103,
+        "heat_haze": 0.092,
+        "snow": 0.015,
+        "wind_intensity": -0.055,
+        "storm": 0.02,
+        "rain": 0.188,
+        "fog": 0.083,
+        "letter_life": 0.131,
+        "hour_shift": 0.272,
+        "luminosity": 0.062
+      }
+    },
+    "costa": {
+      "poles": {
+        "heat": 0.002,
+        "cold": 0.001,
+        "wind": 0.044,
+        "water": 0.219
+      },
+      "effects": {
+        "temperature": 0.001,
+        "heat_haze": 0.001,
+        "snow": 0.001,
+        "wind_intensity": 0.044,
+        "storm": 0.018,
+        "rain": 0.219,
+        "fog": 0.066
+      }
+    },
+    "crecer": {
+      "poles": {
+        "calm": 0.016
+      },
+      "effects": {
+        "wind_intensity": -0.013,
+        "fog": 0.003,
+        "letter_life": 0.016
+      }
+    },
+    "crepúsculo": {
+      "poles": {
+        "heat": 0.264,
+        "cold": 0.244,
+        "wind": 0.225,
+        "water": 0.193,
+        "calm": 0.227,
+        "darkness": 0.503,
+        "light": 0.534
+      },
+      "effects": {
+        "temperature": 0.02,
+        "heat_haze": 0.185,
+        "snow": 0.122,
+        "wind_intensity": 0.043,
+        "storm": 0.09,
+        "rain": 0.193,
+        "fog": 0.103,
+        "letter_life": 0.227,
+        "hour_shift": 0.124,
+        "luminosity": 0.075
+      }
+    },
+    "cripta": {
+      "poles": {
+        "darkness": 0.182
+      },
+      "effects": {
+        "hour_shift": -0.728,
+        "luminosity": -0.127
+      }
+    },
+    "cristal": {
+      "poles": {
+        "heat": 0.175,
+        "cold": 0.303,
+        "water": 0.068,
+        "calm": 0.026,
+        "darkness": 0.24,
+        "light": 0.349
+      },
+      "effects": {
+        "temperature": -0.128,
+        "heat_haze": 0.122,
+        "snow": 0.151,
+        "rain": 0.068,
+        "fog": 0.026,
+        "wind_intensity": -0.021,
+        "letter_life": 0.026,
+        "hour_shift": 0.436,
+        "luminosity": 0.111
+      }
+    },
+    "cuervo": {
+      "poles": {
+        "heat": 0.074,
+        "cold": 0.089,
+        "wind": 0.094,
+        "water": 0.018,
+        "darkness": 0.288,
+        "light": 0.171
+      },
+      "effects": {
+        "temperature": -0.015,
+        "heat_haze": 0.052,
+        "snow": 0.044,
+        "wind_intensity": 0.094,
+        "storm": 0.038,
+        "rain": 0.018,
+        "fog": 0.005,
+        "hour_shift": -0.468,
+        "luminosity": -0.065
+      }
+    },
+    "cueva": {
+      "poles": {
+        "cold": 0.066,
+        "water": 0.186,
+        "darkness": 0.303
+      },
+      "effects": {
+        "temperature": -0.066,
+        "snow": 0.033,
+        "rain": 0.186,
+        "fog": 0.056,
+        "hour_shift": -1.0,
+        "luminosity": -0.212
+      }
+    },
+    "dejar": {
+      "poles": {
+        "calm": 0.028
+      },
+      "effects": {
+        "wind_intensity": -0.022,
+        "fog": 0.006,
+        "letter_life": 0.028
+      }
+    },
+    "delgado": {
+      "poles": {
+        "cold": 0.079,
+        "light": 0.016
+      },
+      "effects": {
+        "temperature": -0.079,
+        "snow": 0.04,
+        "hour_shift": 0.064,
+        "luminosity": 0.013
+      }
+    },
+    "delicado": {
+      "poles": {
+        "heat": 0.064,
+        "cold": 0.062,
+        "calm": 0.286,
+        "light": 0.085
+      },
+      "effects": {
+        "temperature": 0.002,
+        "heat_haze": 0.045,
+        "snow": 0.031,
+        "wind_intensity": -0.229,
+        "fog": 0.057,
+        "letter_life": 0.286,
+        "hour_shift": 0.34,
+        "luminosity": 0.068
+      }
+    },
+    "denso": {
+      "poles": {
+        "heat": 0.181,
+        "cold": 0.295,
+        "wind": 0.089,
+        "water": 0.085,
+        "calm": 0.141,
+        "darkness": 0.123,
+        "light": 0.096
+      },
+      "effects": {
+        "temperature": -0.114,
+        "heat_haze": 0.127,
+        "snow": 0.147,
+        "wind_intensity": -0.024,
+        "storm": 0.036,
+        "rain": 0.085,
+        "fog": 0.054,
+        "letter_life": 0.141,
+        "hour_shift": -0.108,
+        "luminosity": -0.009
+      }
+    },
+    "derretir": {
+      "poles": {
+        "heat": 0.336,
+        "cold": 0.368,
+        "wind": 0.156,
+        "water": 0.094,
+        "calm": 0.021,
+        "darkness": 0.035,
+        "light": 0.033
+      },
+      "effects": {
+        "temperature": -0.032,
+        "heat_haze": 0.235,
+        "snow": 0.184,
+        "wind_intensity": 0.139,
+        "storm": 0.062,
+        "rain": 0.094,
+        "fog": 0.032,
+        "letter_life": 0.021,
+        "hour_shift": -0.008,
+        "luminosity": 0.002
+      }
+    },
+    "descanso": {
+      "poles": {
+        "heat": 0.06,
+        "cold": 0.0,
+        "calm": 0.418,
+        "light": 0.044
+      },
+      "effects": {
+        "temperature": 0.06,
+        "heat_haze": 0.042,
+        "snow": 0.0,
+        "wind_intensity": -0.334,
+        "fog": 0.084,
+        "letter_life": 0.418,
+        "hour_shift": 0.176,
+        "luminosity": 0.035
+      }
+    },
+    "desecho": {
+      "poles": {
+        "heat": 0.194,
+        "cold": 0.064,
+        "water": 0.073,
+        "calm": 0.04,
+        "darkness": 0.071
+      },
+      "effects": {
+        "temperature": 0.13,
+        "heat_haze": 0.136,
+        "snow": 0.032,
+        "rain": 0.073,
+        "fog": 0.03,
+        "wind_intensity": -0.032,
+        "letter_life": 0.04,
+        "hour_shift": -0.284,
+        "luminosity": -0.05
+      }
+    },
+    "desgastado": {
+      "poles": {
+        "heat": 0.117,
+        "cold": 0.155,
+        "wind": 0.027,
+        "calm": 0.057,
+        "darkness": 0.089,
+        "light": 0.079
+      },
+      "effects": {
+        "temperature": -0.038,
+        "heat_haze": 0.082,
+        "snow": 0.077,
+        "wind_intensity": -0.019,
+        "storm": 0.011,
+        "fog": 0.011,
+        "letter_life": 0.057,
+        "hour_shift": -0.04,
+        "luminosity": 0.001
+      }
+    },
+    "desierto": {
+      "poles": {
+        "heat": 0.31,
+        "cold": 0.337,
+        "wind": 0.21,
+        "water": 0.349,
+        "calm": 0.129,
+        "darkness": 0.388,
+        "light": 0.176
+      },
+      "effects": {
+        "temperature": -0.027,
+        "heat_haze": 0.217,
+        "snow": 0.169,
+        "wind_intensity": 0.107,
+        "storm": 0.084,
+        "rain": 0.349,
+        "fog": 0.131,
+        "letter_life": 0.129,
+        "hour_shift": -0.848,
+        "luminosity": -0.131
+      }
+    },
+    "despertar": {
+      "poles": {
+        "heat": 0.134,
+        "cold": 0.031,
+        "wind": 0.172,
+        "calm": 0.378,
+        "darkness": 0.293,
+        "light": 0.333
+      },
+      "effects": {
+        "temperature": 0.103,
+        "heat_haze": 0.094,
+        "snow": 0.015,
+        "wind_intensity": -0.13,
+        "storm": 0.069,
+        "fog": 0.076,
+        "letter_life": 0.378,
+        "hour_shift": 0.16,
+        "luminosity": 0.061
+      }
+    },
+    "destello": {
+      "poles": {
+        "heat": 0.258,
+        "cold": 0.178,
+        "wind": 0.316,
+        "water": 0.145,
+        "calm": 0.228,
+        "darkness": 0.389,
+        "light": 0.691
+      },
+      "effects": {
+        "temperature": 0.08,
+        "heat_haze": 0.181,
+        "snow": 0.089,
+        "wind_intensity": 0.134,
+        "storm": 0.126,
+        "rain": 0.145,
+        "fog": 0.089,
+        "letter_life": 0.228,
+        "hour_shift": 1.0,
+        "luminosity": 0.28
+      }
+    },
+    "diluvio": {
+      "poles": {
+        "heat": 0.087,
+        "cold": 0.026,
+        "wind": 0.285,
+        "water": 0.295,
+        "darkness": 0.202
+      },
+      "effects": {
+        "temperature": 0.061,
+        "heat_haze": 0.061,
+        "snow": 0.013,
+        "wind_intensity": 0.285,
+        "storm": 0.114,
+        "rain": 0.295,
+        "fog": 0.088,
+        "hour_shift": -0.808,
+        "luminosity": -0.141
+      }
+    },
+    "disonancia": {
+      "poles": {
+        "calm": 0.012
+      },
+      "effects": {
+        "wind_intensity": -0.01,
+        "fog": 0.002,
+        "letter_life": 0.012
+      }
+    },
+    "distancia": {
+      "poles": {
+        "calm": 0.014,
+        "light": 0.003
+      },
+      "effects": {
+        "wind_intensity": -0.011,
+        "fog": 0.003,
+        "letter_life": 0.014,
+        "hour_shift": 0.012,
+        "luminosity": 0.002
+      }
+    },
+    "dolor": {
+      "poles": {
+        "heat": 0.09,
+        "wind": 0.108,
+        "calm": 0.194,
+        "darkness": 0.093
+      },
+      "effects": {
+        "temperature": 0.09,
+        "heat_haze": 0.063,
+        "wind_intensity": -0.047,
+        "storm": 0.043,
+        "fog": 0.039,
+        "letter_life": 0.194,
+        "hour_shift": -0.372,
+        "luminosity": -0.065
+      }
+    },
+    "dorado": {
+      "poles": {
+        "heat": 0.132,
+        "cold": 0.166,
+        "calm": 0.019,
+        "darkness": 0.12,
+        "light": 0.299
+      },
+      "effects": {
+        "temperature": -0.034,
+        "heat_haze": 0.092,
+        "snow": 0.083,
+        "wind_intensity": -0.015,
+        "fog": 0.004,
+        "letter_life": 0.019,
+        "hour_shift": 0.716,
+        "luminosity": 0.155
+      }
+    },
+    "dormir": {
+      "poles": {
+        "heat": 0.06,
+        "cold": 0.023,
+        "calm": 0.193,
+        "darkness": 0.048
+      },
+      "effects": {
+        "temperature": 0.037,
+        "heat_haze": 0.042,
+        "snow": 0.011,
+        "wind_intensity": -0.154,
+        "fog": 0.039,
+        "letter_life": 0.193,
+        "hour_shift": -0.192,
+        "luminosity": -0.034
+      }
+    },
+    "dulzura": {
+      "poles": {
+        "calm": 0.226,
+        "light": 0.049
+      },
+      "effects": {
+        "wind_intensity": -0.181,
+        "fog": 0.045,
+        "letter_life": 0.226,
+        "hour_shift": 0.196,
+        "luminosity": 0.039
+      }
+    },
+    "duradero": {
+      "poles": {
+        "calm": 0.169
+      },
+      "effects": {
+        "wind_intensity": -0.135,
+        "fog": 0.034,
+        "letter_life": 0.169
+      }
+    },
+    "débil": {
+      "poles": {
+        "cold": 0.009,
+        "wind": 0.056
+      },
+      "effects": {
+        "temperature": -0.009,
+        "snow": 0.004,
+        "wind_intensity": 0.056,
+        "storm": 0.022
+      }
+    },
+    "eclipse": {
+      "poles": {
+        "darkness": 0.038,
+        "light": 0.143
+      },
+      "effects": {
+        "hour_shift": 0.42,
+        "luminosity": 0.088
+      }
+    },
+    "enterrar": {
+      "poles": {
+        "heat": 0.004,
+        "darkness": 0.218
+      },
+      "effects": {
+        "temperature": 0.004,
+        "heat_haze": 0.003,
+        "hour_shift": -0.872,
+        "luminosity": -0.153
+      }
+    },
+    "equilibrio": {
+      "poles": {
+        "calm": 0.332,
+        "light": 0.039
+      },
+      "effects": {
+        "wind_intensity": -0.266,
+        "fog": 0.066,
+        "letter_life": 0.332,
+        "hour_shift": 0.156,
+        "luminosity": 0.031
+      }
+    },
+    "erupción": {
+      "poles": {
+        "heat": 0.12,
+        "wind": 0.083,
+        "water": 0.093
+      },
+      "effects": {
+        "temperature": 0.12,
+        "heat_haze": 0.084,
+        "wind_intensity": 0.083,
+        "storm": 0.033,
+        "rain": 0.093,
+        "fog": 0.028
+      }
+    },
+    "escalera": {
+      "poles": {
+        "heat": 0.03,
+        "cold": 0.071,
+        "wind": 0.012,
+        "water": 0.134,
+        "calm": 0.015,
+        "darkness": 0.24,
+        "light": 0.079
+      },
+      "effects": {
+        "temperature": -0.041,
+        "heat_haze": 0.021,
+        "snow": 0.035,
+        "wind_intensity": 0.0,
+        "storm": 0.005,
+        "rain": 0.134,
+        "fog": 0.043,
+        "letter_life": 0.015,
+        "hour_shift": -0.644,
+        "luminosity": -0.105
+      }
+    },
+    "escape": {
+      "poles": {
+        "heat": 0.076,
+        "cold": 0.048,
+        "wind": 0.17,
+        "water": 0.014,
+        "darkness": 0.134
+      },
+      "effects": {
+        "temperature": 0.028,
+        "heat_haze": 0.053,
+        "snow": 0.024,
+        "wind_intensity": 0.17,
+        "storm": 0.068,
+        "rain": 0.014,
+        "fog": 0.004,
+        "hour_shift": -0.536,
+        "luminosity": -0.094
+      }
+    },
+    "escarcha": {
+      "poles": {
+        "heat": 0.422,
+        "cold": 0.605,
+        "wind": 0.326,
+        "water": 0.388,
+        "calm": 0.192,
+        "darkness": 0.342,
+        "light": 0.345
+      },
+      "effects": {
+        "temperature": -0.183,
+        "heat_haze": 0.295,
+        "snow": 0.302,
+        "wind_intensity": 0.172,
+        "storm": 0.13,
+        "rain": 0.388,
+        "fog": 0.155,
+        "letter_life": 0.192,
+        "hour_shift": 0.012,
+        "luminosity": 0.037
+      }
+    },
+    "escuchar": {
+      "poles": {
+        "calm": 0.128
+      },
+      "effects": {
+        "wind_intensity": -0.102,
+        "fog": 0.026,
+        "letter_life": 0.128
+      }
+    },
+    "espejo": {
+      "poles": {
+        "heat": 0.084,
+        "cold": 0.141,
+        "water": 0.023,
+        "calm": 0.158,
+        "darkness": 0.351,
+        "light": 0.519
+      },
+      "effects": {
+        "temperature": -0.057,
+        "heat_haze": 0.059,
+        "snow": 0.07,
+        "rain": 0.023,
+        "fog": 0.039,
+        "wind_intensity": -0.126,
+        "letter_life": 0.158,
+        "hour_shift": 0.672,
+        "luminosity": 0.17
+      }
+    },
+    "espera": {
+      "poles": {
+        "calm": 0.058
+      },
+      "effects": {
+        "wind_intensity": -0.046,
+        "fog": 0.012,
+        "letter_life": 0.058
+      }
+    },
+    "esperanza": {
+      "poles": {
+        "heat": 0.038,
+        "wind": 0.031,
+        "water": 0.041,
+        "calm": 0.401,
+        "darkness": 0.218,
+        "light": 0.259
+      },
+      "effects": {
+        "temperature": 0.038,
+        "heat_haze": 0.027,
+        "wind_intensity": -0.29,
+        "storm": 0.012,
+        "rain": 0.041,
+        "fog": 0.093,
+        "letter_life": 0.401,
+        "hour_shift": 0.164,
+        "luminosity": 0.055
+      }
+    },
+    "espiga": {
+      "poles": {
+        "heat": 0.029,
+        "cold": 0.025,
+        "light": 0.052
+      },
+      "effects": {
+        "temperature": 0.004,
+        "heat_haze": 0.02,
+        "snow": 0.013,
+        "hour_shift": 0.208,
+        "luminosity": 0.042
+      }
+    },
+    "espigar": {
+      "poles": {
+        "heat": 0.037,
+        "calm": 0.038,
+        "darkness": 0.033,
+        "light": 0.099
+      },
+      "effects": {
+        "temperature": 0.037,
+        "heat_haze": 0.026,
+        "wind_intensity": -0.03,
+        "fog": 0.008,
+        "letter_life": 0.038,
+        "hour_shift": 0.264,
+        "luminosity": 0.056
+      }
+    },
+    "esquina": {
+      "poles": {
+        "darkness": 0.0
+      },
+      "effects": {
+        "hour_shift": 0.0,
+        "luminosity": 0.0
+      }
+    },
+    "estallido": {
+      "poles": {
+        "heat": 0.175,
+        "cold": 0.013,
+        "wind": 0.366,
+        "water": 0.058,
+        "calm": 0.027,
+        "darkness": 0.179,
+        "light": 0.126
+      },
+      "effects": {
+        "temperature": 0.162,
+        "heat_haze": 0.122,
+        "snow": 0.006,
+        "wind_intensity": 0.344,
+        "storm": 0.146,
+        "rain": 0.058,
+        "fog": 0.023,
+        "letter_life": 0.027,
+        "hour_shift": -0.212,
+        "luminosity": -0.024
+      }
+    },
+    "estanque": {
+      "poles": {
+        "heat": 0.308,
+        "cold": 0.33,
+        "wind": 0.158,
+        "water": 0.469,
+        "calm": 0.213,
+        "darkness": 0.364,
+        "light": 0.236
+      },
+      "effects": {
+        "temperature": -0.022,
+        "heat_haze": 0.216,
+        "snow": 0.165,
+        "wind_intensity": -0.012,
+        "storm": 0.063,
+        "rain": 0.469,
+        "fog": 0.183,
+        "letter_life": 0.213,
+        "hour_shift": -0.512,
+        "luminosity": -0.066
+      }
+    },
+    "estrecho": {
+      "poles": {
+        "cold": 0.094,
+        "water": 0.081,
+        "calm": 0.075,
+        "darkness": 0.074,
+        "light": 0.013
+      },
+      "effects": {
+        "temperature": -0.094,
+        "snow": 0.047,
+        "rain": 0.081,
+        "fog": 0.039,
+        "wind_intensity": -0.06,
+        "letter_life": 0.075,
+        "hour_shift": -0.244,
+        "luminosity": -0.041
+      }
+    },
+    "estrella": {
+      "poles": {
+        "heat": 0.045,
+        "cold": 0.038,
+        "darkness": 0.023,
+        "light": 0.288
+      },
+      "effects": {
+        "temperature": 0.007,
+        "heat_haze": 0.032,
+        "snow": 0.019,
+        "hour_shift": 1.0,
+        "luminosity": 0.214
+      }
+    },
+    "estruendo": {
+      "poles": {
+        "heat": 0.367,
+        "cold": 0.226,
+        "wind": 0.598,
+        "water": 0.321,
+        "calm": 0.272,
+        "darkness": 0.4,
+        "light": 0.332
+      },
+      "effects": {
+        "temperature": 0.141,
+        "heat_haze": 0.257,
+        "snow": 0.113,
+        "wind_intensity": 0.38,
+        "storm": 0.239,
+        "rain": 0.321,
+        "fog": 0.151,
+        "letter_life": 0.272,
+        "hour_shift": -0.272,
+        "luminosity": -0.014
+      }
+    },
+    "eterno": {
+      "poles": {
+        "calm": 0.16,
+        "darkness": 0.144,
+        "light": 0.02
+      },
+      "effects": {
+        "wind_intensity": -0.128,
+        "fog": 0.032,
+        "letter_life": 0.16,
+        "hour_shift": -0.496,
+        "luminosity": -0.085
+      }
+    },
+    "explosión": {
+      "poles": {
+        "heat": 0.19,
+        "cold": 0.008,
+        "wind": 0.282,
+        "water": 0.183,
+        "darkness": 0.11,
+        "light": 0.075
+      },
+      "effects": {
+        "temperature": 0.182,
+        "heat_haze": 0.133,
+        "snow": 0.004,
+        "wind_intensity": 0.282,
+        "storm": 0.113,
+        "rain": 0.183,
+        "fog": 0.055,
+        "hour_shift": -0.14,
+        "luminosity": -0.017
+      }
+    },
+    "extraño": {
+      "poles": {
+        "heat": 0.102,
+        "cold": 0.151,
+        "wind": 0.147,
+        "calm": 0.164,
+        "darkness": 0.333,
+        "light": 0.201
+      },
+      "effects": {
+        "temperature": -0.049,
+        "heat_haze": 0.071,
+        "snow": 0.075,
+        "wind_intensity": 0.016,
+        "storm": 0.059,
+        "fog": 0.033,
+        "letter_life": 0.164,
+        "hour_shift": -0.528,
+        "luminosity": -0.072
+      }
+    },
+    "faro": {
+      "poles": {
+        "darkness": 0.045,
+        "light": 0.127
+      },
+      "effects": {
+        "hour_shift": 0.328,
+        "luminosity": 0.07
+      }
+    },
+    "fiebre": {
+      "poles": {
+        "heat": 0.087,
+        "wind": 0.014,
+        "water": 0.036
+      },
+      "effects": {
+        "temperature": 0.087,
+        "heat_haze": 0.061,
+        "wind_intensity": 0.014,
+        "storm": 0.006,
+        "rain": 0.036,
+        "fog": 0.011
+      }
+    },
+    "flor": {
+      "poles": {
+        "heat": 0.036,
+        "cold": 0.022,
+        "calm": 0.028,
+        "light": 0.128
+      },
+      "effects": {
+        "temperature": 0.014,
+        "heat_haze": 0.025,
+        "snow": 0.011,
+        "wind_intensity": -0.022,
+        "fog": 0.006,
+        "letter_life": 0.028,
+        "hour_shift": 0.512,
+        "luminosity": 0.102
+      }
+    },
+    "florecer": {
+      "poles": {
+        "heat": 0.195,
+        "cold": 0.108,
+        "wind": 0.022,
+        "water": 0.028,
+        "calm": 0.334,
+        "darkness": 0.138,
+        "light": 0.357
+      },
+      "effects": {
+        "temperature": 0.087,
+        "heat_haze": 0.136,
+        "snow": 0.054,
+        "wind_intensity": -0.245,
+        "storm": 0.009,
+        "rain": 0.028,
+        "fog": 0.075,
+        "letter_life": 0.334,
+        "hour_shift": 0.876,
+        "luminosity": 0.189
+      }
+    },
+    "flotar": {
+      "poles": {
+        "heat": 0.121,
+        "cold": 0.251,
+        "wind": 0.223,
+        "water": 0.228,
+        "calm": 0.103,
+        "darkness": 0.131,
+        "light": 0.156
+      },
+      "effects": {
+        "temperature": -0.13,
+        "heat_haze": 0.085,
+        "snow": 0.126,
+        "wind_intensity": 0.141,
+        "storm": 0.089,
+        "rain": 0.228,
+        "fog": 0.089,
+        "letter_life": 0.103,
+        "hour_shift": 0.1,
+        "luminosity": 0.033
+      }
+    },
+    "fogata": {
+      "poles": {
+        "heat": 0.193,
+        "water": 0.036,
+        "darkness": 0.008
+      },
+      "effects": {
+        "temperature": 0.193,
+        "heat_haze": 0.135,
+        "rain": 0.036,
+        "fog": 0.011,
+        "hour_shift": -0.032,
+        "luminosity": -0.006
+      }
+    },
+    "fondo": {
+      "poles": {
+        "cold": 0.114,
+        "water": 0.036,
+        "calm": 0.026,
+        "darkness": 0.271,
+        "light": 0.145
+      },
+      "effects": {
+        "temperature": -0.114,
+        "snow": 0.057,
+        "rain": 0.036,
+        "fog": 0.016,
+        "wind_intensity": -0.021,
+        "letter_life": 0.026,
+        "hour_shift": -0.504,
+        "luminosity": -0.074
+      }
+    },
+    "forastero": {
+      "poles": {
+        "darkness": 0.028
+      },
+      "effects": {
+        "hour_shift": -0.112,
+        "luminosity": -0.02
+      }
+    },
+    "frágil": {
+      "poles": {
+        "cold": 0.063,
+        "wind": 0.029,
+        "calm": 0.13,
+        "darkness": 0.05,
+        "light": 0.011
+      },
+      "effects": {
+        "temperature": -0.063,
+        "snow": 0.032,
+        "wind_intensity": -0.075,
+        "storm": 0.012,
+        "fog": 0.026,
+        "letter_life": 0.13,
+        "hour_shift": -0.156,
+        "luminosity": -0.026
+      }
+    },
+    "frío": {
+      "poles": {
+        "heat": 0.549,
+        "cold": 0.643,
+        "wind": 0.364,
+        "water": 0.318,
+        "calm": 0.212,
+        "darkness": 0.178,
+        "light": 0.108
+      },
+      "effects": {
+        "temperature": -0.094,
+        "heat_haze": 0.384,
+        "snow": 0.322,
+        "wind_intensity": 0.194,
+        "storm": 0.146,
+        "rain": 0.318,
+        "fog": 0.138,
+        "letter_life": 0.212,
+        "hour_shift": -0.28,
+        "luminosity": -0.038
+      }
+    },
+    "fuego": {
+      "poles": {
+        "heat": 0.551,
+        "cold": 0.205,
+        "wind": 0.314,
+        "water": 0.21,
+        "calm": 0.068,
+        "darkness": 0.229,
+        "light": 0.174
+      },
+      "effects": {
+        "temperature": 0.346,
+        "heat_haze": 0.386,
+        "snow": 0.102,
+        "wind_intensity": 0.26,
+        "storm": 0.126,
+        "rain": 0.21,
+        "fog": 0.077,
+        "letter_life": 0.068,
+        "hour_shift": -0.22,
+        "luminosity": -0.021
+      }
+    },
+    "fuerte": {
+      "poles": {
+        "heat": 0.126,
+        "cold": 0.083,
+        "wind": 0.18,
+        "calm": 0.198,
+        "darkness": 0.001,
+        "light": 0.07
+      },
+      "effects": {
+        "temperature": 0.043,
+        "heat_haze": 0.088,
+        "snow": 0.042,
+        "wind_intensity": 0.022,
+        "storm": 0.072,
+        "fog": 0.04,
+        "letter_life": 0.198,
+        "hour_shift": 0.276,
+        "luminosity": 0.055
+      }
+    },
+    "fugaz": {
+      "poles": {
+        "light": 0.033
+      },
+      "effects": {
+        "hour_shift": 0.132,
+        "luminosity": 0.026
+      }
+    },
+    "fulgor": {
+      "poles": {
+        "heat": 0.077,
+        "wind": 0.065,
+        "calm": 0.009,
+        "darkness": 0.226,
+        "light": 0.501
+      },
+      "effects": {
+        "temperature": 0.077,
+        "heat_haze": 0.054,
+        "wind_intensity": 0.058,
+        "storm": 0.026,
+        "fog": 0.002,
+        "letter_life": 0.009,
+        "hour_shift": 1.0,
+        "luminosity": 0.243
+      }
+    },
+    "glaciar": {
+      "poles": {
+        "heat": 0.147,
+        "cold": 0.496,
+        "wind": 0.108,
+        "water": 0.328,
+        "darkness": 0.218,
+        "light": 0.013
+      },
+      "effects": {
+        "temperature": -0.349,
+        "heat_haze": 0.103,
+        "snow": 0.248,
+        "wind_intensity": 0.108,
+        "storm": 0.043,
+        "rain": 0.328,
+        "fog": 0.098,
+        "hour_shift": -0.82,
+        "luminosity": -0.142
+      }
+    },
+    "gota": {
+      "poles": {
+        "heat": 0.061,
+        "cold": 0.067,
+        "water": 0.314
+      },
+      "effects": {
+        "temperature": -0.006,
+        "heat_haze": 0.043,
+        "snow": 0.034,
+        "rain": 0.314,
+        "fog": 0.094
+      }
+    },
+    "grande": {
+      "poles": {
+        "heat": 0.009,
+        "cold": 0.044,
+        "calm": 0.011,
+        "darkness": 0.007,
+        "light": 0.035
+      },
+      "effects": {
+        "temperature": -0.035,
+        "heat_haze": 0.006,
+        "snow": 0.022,
+        "wind_intensity": -0.009,
+        "fog": 0.002,
+        "letter_life": 0.011,
+        "hour_shift": 0.112,
+        "luminosity": 0.023
+      }
+    },
+    "gris": {
+      "poles": {
+        "cold": 0.188,
+        "darkness": 0.075,
+        "light": 0.114
+      },
+      "effects": {
+        "temperature": -0.188,
+        "snow": 0.094,
+        "hour_shift": 0.156,
+        "luminosity": 0.039
+      }
+    },
+    "grito": {
+      "poles": {
+        "heat": 0.012,
+        "wind": 0.253,
+        "calm": 0.023,
+        "darkness": 0.05,
+        "light": 0.001
+      },
+      "effects": {
+        "temperature": 0.012,
+        "heat_haze": 0.008,
+        "wind_intensity": 0.235,
+        "storm": 0.101,
+        "fog": 0.005,
+        "letter_life": 0.023,
+        "hour_shift": -0.196,
+        "luminosity": -0.034
+      }
+    },
+    "grueso": {
+      "poles": {
+        "heat": 0.021,
+        "cold": 0.151
+      },
+      "effects": {
+        "temperature": -0.13,
+        "heat_haze": 0.015,
+        "snow": 0.075
+      }
+    },
+    "gruta": {
+      "poles": {
+        "cold": 0.025,
+        "water": 0.221,
+        "darkness": 0.249
+      },
+      "effects": {
+        "temperature": -0.025,
+        "snow": 0.013,
+        "rain": 0.221,
+        "fog": 0.066,
+        "hour_shift": -0.996,
+        "luminosity": -0.174
+      }
+    },
+    "gélido": {
+      "poles": {
+        "heat": 0.291,
+        "cold": 0.573,
+        "wind": 0.331,
+        "water": 0.21,
+        "calm": 0.164,
+        "darkness": 0.263,
+        "light": 0.144
+      },
+      "effects": {
+        "temperature": -0.282,
+        "heat_haze": 0.204,
+        "snow": 0.286,
+        "wind_intensity": 0.2,
+        "storm": 0.132,
+        "rain": 0.21,
+        "fog": 0.096,
+        "letter_life": 0.164,
+        "hour_shift": -0.476,
+        "luminosity": -0.069
+      }
+    },
+    "habitación": {
+      "poles": {
+        "heat": 0.053,
+        "cold": 0.002,
+        "water": 0.031,
+        "calm": 0.188,
+        "darkness": 0.159,
+        "light": 0.118
+      },
+      "effects": {
+        "temperature": 0.051,
+        "heat_haze": 0.037,
+        "snow": 0.001,
+        "rain": 0.031,
+        "fog": 0.047,
+        "wind_intensity": -0.15,
+        "letter_life": 0.188,
+        "hour_shift": -0.164,
+        "luminosity": -0.017
+      }
+    },
+    "helado": {
+      "poles": {
+        "heat": 0.333,
+        "cold": 0.525,
+        "wind": 0.127,
+        "water": 0.14,
+        "calm": 0.152,
+        "darkness": 0.126,
+        "light": 0.047
+      },
+      "effects": {
+        "temperature": -0.192,
+        "heat_haze": 0.233,
+        "snow": 0.263,
+        "wind_intensity": 0.005,
+        "storm": 0.051,
+        "rain": 0.14,
+        "fog": 0.072,
+        "letter_life": 0.152,
+        "hour_shift": -0.316,
+        "luminosity": -0.051
+      }
+    },
+    "hermoso": {
+      "poles": {
+        "heat": 0.013,
+        "cold": 0.016,
+        "calm": 0.254,
+        "darkness": 0.082,
+        "light": 0.218
+      },
+      "effects": {
+        "temperature": -0.003,
+        "heat_haze": 0.009,
+        "snow": 0.008,
+        "wind_intensity": -0.203,
+        "fog": 0.051,
+        "letter_life": 0.254,
+        "hour_shift": 0.544,
+        "luminosity": 0.117
+      }
+    },
+    "hervir": {
+      "poles": {
+        "heat": 0.198
+      },
+      "effects": {
+        "temperature": 0.198,
+        "heat_haze": 0.139
+      }
+    },
+    "hielo": {
+      "poles": {
+        "heat": 0.361,
+        "cold": 0.723,
+        "wind": 0.238,
+        "water": 0.372,
+        "calm": 0.023,
+        "darkness": 0.226,
+        "light": 0.058
+      },
+      "effects": {
+        "temperature": -0.362,
+        "heat_haze": 0.253,
+        "snow": 0.361,
+        "wind_intensity": 0.22,
+        "storm": 0.095,
+        "rain": 0.372,
+        "fog": 0.116,
+        "letter_life": 0.023,
+        "hour_shift": -0.672,
+        "luminosity": -0.112
+      }
+    },
+    "hierba": {
+      "poles": {
+        "heat": 0.242,
+        "cold": 0.204,
+        "water": 0.24,
+        "calm": 0.102,
+        "darkness": 0.062,
+        "light": 0.027
+      },
+      "effects": {
+        "temperature": 0.038,
+        "heat_haze": 0.169,
+        "snow": 0.102,
+        "rain": 0.24,
+        "fog": 0.092,
+        "wind_intensity": -0.082,
+        "letter_life": 0.102,
+        "hour_shift": -0.14,
+        "luminosity": -0.022
+      }
+    },
+    "hogar": {
+      "poles": {
+        "calm": 0.042
+      },
+      "effects": {
+        "wind_intensity": -0.034,
+        "fog": 0.008,
+        "letter_life": 0.042
+      }
+    },
+    "hoguera": {
+      "poles": {
+        "heat": 0.28,
+        "wind": 0.004,
+        "water": 0.043,
+        "darkness": 0.21,
+        "light": 0.037
+      },
+      "effects": {
+        "temperature": 0.28,
+        "heat_haze": 0.196,
+        "wind_intensity": 0.004,
+        "storm": 0.002,
+        "rain": 0.043,
+        "fog": 0.013,
+        "hour_shift": -0.692,
+        "luminosity": -0.117
+      }
+    },
+    "hombre": {
+      "poles": {
+        "heat": 0.035,
+        "calm": 0.123,
+        "darkness": 0.229,
+        "light": 0.141
+      },
+      "effects": {
+        "temperature": 0.035,
+        "heat_haze": 0.025,
+        "wind_intensity": -0.098,
+        "fog": 0.025,
+        "letter_life": 0.123,
+        "hour_shift": -0.352,
+        "luminosity": -0.048
+      }
+    },
+    "horizonte": {
+      "poles": {
+        "heat": 0.009,
+        "cold": 0.126,
+        "wind": 0.061,
+        "water": 0.121,
+        "calm": 0.099,
+        "darkness": 0.289,
+        "light": 0.369
+      },
+      "effects": {
+        "temperature": -0.117,
+        "heat_haze": 0.006,
+        "snow": 0.063,
+        "wind_intensity": -0.018,
+        "storm": 0.024,
+        "rain": 0.121,
+        "fog": 0.056,
+        "letter_life": 0.099,
+        "hour_shift": 0.32,
+        "luminosity": 0.093
+      }
+    },
+    "horno": {
+      "poles": {
+        "heat": 0.344,
+        "cold": 0.033
+      },
+      "effects": {
+        "temperature": 0.311,
+        "heat_haze": 0.241,
+        "snow": 0.017
+      }
+    },
+    "horrible": {
+      "poles": {
+        "heat": 0.139,
+        "cold": 0.08,
+        "wind": 0.166,
+        "water": 0.001,
+        "calm": 0.055,
+        "darkness": 0.278,
+        "light": 0.06
+      },
+      "effects": {
+        "temperature": 0.059,
+        "heat_haze": 0.097,
+        "snow": 0.04,
+        "wind_intensity": 0.122,
+        "storm": 0.066,
+        "rain": 0.001,
+        "fog": 0.011,
+        "letter_life": 0.055,
+        "hour_shift": -0.872,
+        "luminosity": -0.147
+      }
+    },
+    "huella": {
+      "poles": {
+        "calm": 0.011,
+        "darkness": 0.078,
+        "light": 0.1
+      },
+      "effects": {
+        "wind_intensity": -0.009,
+        "fog": 0.002,
+        "letter_life": 0.011,
+        "hour_shift": 0.088,
+        "luminosity": 0.025
+      }
+    },
+    "huida": {
+      "poles": {
+        "wind": 0.105
+      },
+      "effects": {
+        "wind_intensity": 0.105,
+        "storm": 0.042
+      }
+    },
+    "humedad": {
+      "poles": {
+        "heat": 0.362,
+        "cold": 0.293,
+        "wind": 0.089,
+        "water": 0.334,
+        "calm": 0.14,
+        "darkness": 0.047,
+        "light": 0.07
+      },
+      "effects": {
+        "temperature": 0.069,
+        "heat_haze": 0.253,
+        "snow": 0.146,
+        "wind_intensity": -0.023,
+        "storm": 0.036,
+        "rain": 0.334,
+        "fog": 0.128,
+        "letter_life": 0.14,
+        "hour_shift": 0.092,
+        "luminosity": 0.023
+      }
+    },
+    "hundirse": {
+      "poles": {
+        "heat": 0.126,
+        "cold": 0.17,
+        "wind": 0.324,
+        "water": 0.245,
+        "calm": 0.075,
+        "darkness": 0.298,
+        "light": 0.104
+      },
+      "effects": {
+        "temperature": -0.044,
+        "heat_haze": 0.088,
+        "snow": 0.085,
+        "wind_intensity": 0.264,
+        "storm": 0.13,
+        "rain": 0.245,
+        "fog": 0.088,
+        "letter_life": 0.075,
+        "hour_shift": -0.776,
+        "luminosity": -0.125
+      }
+    },
+    "huracán": {
+      "poles": {
+        "wind": 0.391,
+        "water": 0.023
+      },
+      "effects": {
+        "wind_intensity": 0.391,
+        "storm": 0.156,
+        "rain": 0.023,
+        "fog": 0.007
+      }
+    },
+    "incendio": {
+      "poles": {
+        "heat": 0.131,
+        "wind": 0.177
+      },
+      "effects": {
+        "temperature": 0.131,
+        "heat_haze": 0.092,
+        "wind_intensity": 0.177,
+        "storm": 0.071
+      }
+    },
+    "infinito": {
+      "poles": {
+        "cold": 0.07,
+        "wind": 0.01,
+        "water": 0.029,
+        "calm": 0.193,
+        "darkness": 0.308,
+        "light": 0.261
+      },
+      "effects": {
+        "temperature": -0.07,
+        "snow": 0.035,
+        "wind_intensity": -0.144,
+        "storm": 0.004,
+        "rain": 0.029,
+        "fog": 0.047,
+        "letter_life": 0.193,
+        "hour_shift": -0.188,
+        "luminosity": -0.007
+      }
+    },
+    "inmensidad": {
+      "poles": {
+        "heat": 0.092,
+        "cold": 0.174,
+        "wind": 0.084,
+        "water": 0.284,
+        "calm": 0.283,
+        "darkness": 0.297,
+        "light": 0.374
+      },
+      "effects": {
+        "temperature": -0.082,
+        "heat_haze": 0.064,
+        "snow": 0.087,
+        "wind_intensity": -0.142,
+        "storm": 0.034,
+        "rain": 0.284,
+        "fog": 0.142,
+        "letter_life": 0.283,
+        "hour_shift": 0.308,
+        "luminosity": 0.091
+      }
+    },
+    "inundación": {
+      "poles": {
+        "wind": 0.075,
+        "water": 0.216
+      },
+      "effects": {
+        "wind_intensity": 0.075,
+        "storm": 0.03,
+        "rain": 0.216,
+        "fog": 0.065
+      }
+    },
+    "invierno": {
+      "poles": {
+        "heat": 0.328,
+        "cold": 0.445,
+        "wind": 0.1,
+        "water": 0.139,
+        "calm": 0.108,
+        "darkness": 0.038,
+        "light": 0.041
+      },
+      "effects": {
+        "temperature": -0.117,
+        "heat_haze": 0.23,
+        "snow": 0.223,
+        "wind_intensity": 0.014,
+        "storm": 0.04,
+        "rain": 0.139,
+        "fog": 0.063,
+        "letter_life": 0.108,
+        "hour_shift": 0.012,
+        "luminosity": 0.006
+      }
+    },
+    "jardín": {
+      "poles": {
+        "calm": 0.032,
+        "darkness": 0.041
+      },
+      "effects": {
+        "wind_intensity": -0.026,
+        "fog": 0.006,
+        "letter_life": 0.032,
+        "hour_shift": -0.164,
+        "luminosity": -0.029
+      }
+    },
+    "laberinto": {
+      "poles": {
+        "cold": 0.005,
+        "water": 0.009,
+        "darkness": 0.354
+      },
+      "effects": {
+        "temperature": -0.005,
+        "snow": 0.003,
+        "rain": 0.009,
+        "fog": 0.003,
+        "hour_shift": -1.0,
+        "luminosity": -0.248
+      }
+    },
+    "lago": {
+      "poles": {
+        "heat": 0.018,
+        "cold": 0.166,
+        "water": 0.371,
+        "darkness": 0.093
+      },
+      "effects": {
+        "temperature": -0.148,
+        "heat_haze": 0.013,
+        "snow": 0.083,
+        "rain": 0.371,
+        "fog": 0.111,
+        "hour_shift": -0.372,
+        "luminosity": -0.065
+      }
+    },
+    "lava": {
+      "poles": {
+        "heat": 0.432,
+        "cold": 0.328,
+        "wind": 0.143,
+        "water": 0.365,
+        "darkness": 0.163,
+        "light": 0.051
+      },
+      "effects": {
+        "temperature": 0.104,
+        "heat_haze": 0.302,
+        "snow": 0.164,
+        "wind_intensity": 0.143,
+        "storm": 0.057,
+        "rain": 0.365,
+        "fog": 0.11,
+        "hour_shift": -0.448,
+        "luminosity": -0.073
+      }
+    },
+    "lechuza": {
+      "poles": {
+        "darkness": 0.123,
+        "light": 0.066
+      },
+      "effects": {
+        "hour_shift": -0.228,
+        "luminosity": -0.033
+      }
+    },
+    "lejanía": {
+      "poles": {
+        "cold": 0.012,
+        "wind": 0.092,
+        "water": 0.072,
+        "calm": 0.11,
+        "darkness": 0.194,
+        "light": 0.158
+      },
+      "effects": {
+        "temperature": -0.012,
+        "snow": 0.006,
+        "wind_intensity": 0.004,
+        "storm": 0.037,
+        "rain": 0.072,
+        "fog": 0.044,
+        "letter_life": 0.11,
+        "hour_shift": -0.144,
+        "luminosity": -0.009
+      }
+    },
+    "lento": {
+      "poles": {
+        "heat": 0.165,
+        "cold": 0.13,
+        "wind": 0.132,
+        "water": 0.003,
+        "calm": 0.276,
+        "darkness": 0.016,
+        "light": 0.048
+      },
+      "effects": {
+        "temperature": 0.035,
+        "heat_haze": 0.115,
+        "snow": 0.065,
+        "wind_intensity": -0.089,
+        "storm": 0.053,
+        "rain": 0.003,
+        "fog": 0.056,
+        "letter_life": 0.276,
+        "hour_shift": 0.128,
+        "luminosity": 0.027
+      }
+    },
+    "ligero": {
+      "poles": {
+        "cold": 0.102
+      },
+      "effects": {
+        "temperature": -0.102,
+        "snow": 0.051
+      }
+    },
+    "llamarada": {
+      "poles": {
+        "heat": 0.188,
+        "wind": 0.181,
+        "water": 0.026,
+        "darkness": 0.103,
+        "light": 0.241
+      },
+      "effects": {
+        "temperature": 0.188,
+        "heat_haze": 0.132,
+        "wind_intensity": 0.181,
+        "storm": 0.072,
+        "rain": 0.026,
+        "fog": 0.008,
+        "hour_shift": 0.552,
+        "luminosity": 0.121
+      }
+    },
+    "llameante": {
+      "poles": {
+        "heat": 0.308,
+        "cold": 0.192,
+        "wind": 0.242,
+        "water": 0.114,
+        "calm": 0.228,
+        "darkness": 0.357,
+        "light": 0.454
+      },
+      "effects": {
+        "temperature": 0.116,
+        "heat_haze": 0.216,
+        "snow": 0.096,
+        "wind_intensity": 0.06,
+        "storm": 0.097,
+        "rain": 0.114,
+        "fog": 0.08,
+        "letter_life": 0.228,
+        "hour_shift": 0.388,
+        "luminosity": 0.113
+      }
+    },
+    "llovizna": {
+      "poles": {
+        "heat": 0.144,
+        "cold": 0.244,
+        "wind": 0.336,
+        "water": 0.299,
+        "darkness": 0.006,
+        "light": 0.005
+      },
+      "effects": {
+        "temperature": -0.1,
+        "heat_haze": 0.101,
+        "snow": 0.122,
+        "wind_intensity": 0.336,
+        "storm": 0.134,
+        "rain": 0.299,
+        "fog": 0.09,
+        "hour_shift": -0.004,
+        "luminosity": -0.0
+      }
+    },
+    "lluvia": {
+      "poles": {
+        "heat": 0.388,
+        "cold": 0.4,
+        "wind": 0.442,
+        "water": 0.52,
+        "calm": 0.036,
+        "darkness": 0.125,
+        "light": 0.133
+      },
+      "effects": {
+        "temperature": -0.012,
+        "heat_haze": 0.272,
+        "snow": 0.2,
+        "wind_intensity": 0.413,
+        "storm": 0.177,
+        "rain": 0.52,
+        "fog": 0.163,
+        "letter_life": 0.036,
+        "hour_shift": 0.032,
+        "luminosity": 0.019
+      }
+    },
+    "lobo": {
+      "poles": {
+        "cold": 0.05,
+        "darkness": 0.09
+      },
+      "effects": {
+        "temperature": -0.05,
+        "snow": 0.025,
+        "hour_shift": -0.36,
+        "luminosity": -0.063
+      }
+    },
+    "lumbre": {
+      "poles": {
+        "heat": 0.406,
+        "cold": 0.078,
+        "wind": 0.069,
+        "water": 0.197,
+        "calm": 0.243,
+        "darkness": 0.268,
+        "light": 0.333
+      },
+      "effects": {
+        "temperature": 0.328,
+        "heat_haze": 0.284,
+        "snow": 0.039,
+        "wind_intensity": -0.125,
+        "storm": 0.028,
+        "rain": 0.197,
+        "fog": 0.108,
+        "letter_life": 0.243,
+        "hour_shift": 0.26,
+        "luminosity": 0.079
+      }
+    },
+    "luminoso": {
+      "poles": {
+        "heat": 0.091,
+        "cold": 0.058,
+        "calm": 0.122,
+        "darkness": 0.118,
+        "light": 0.463
+      },
+      "effects": {
+        "temperature": 0.033,
+        "heat_haze": 0.064,
+        "snow": 0.029,
+        "wind_intensity": -0.098,
+        "fog": 0.024,
+        "letter_life": 0.122,
+        "hour_shift": 1.0,
+        "luminosity": 0.288
+      }
+    },
+    "luna": {
+      "poles": {
+        "heat": 0.088,
+        "cold": 0.099,
+        "wind": 0.018,
+        "water": 0.166,
+        "darkness": 0.262,
+        "light": 0.325
+      },
+      "effects": {
+        "temperature": -0.011,
+        "heat_haze": 0.062,
+        "snow": 0.05,
+        "wind_intensity": 0.018,
+        "storm": 0.007,
+        "rain": 0.166,
+        "fog": 0.05,
+        "hour_shift": 0.252,
+        "luminosity": 0.077
+      }
+    },
+    "luz": {
+      "poles": {
+        "heat": 0.214,
+        "cold": 0.067,
+        "wind": 0.021,
+        "water": 0.186,
+        "calm": 0.071,
+        "darkness": 0.271,
+        "light": 0.597
+      },
+      "effects": {
+        "temperature": 0.147,
+        "heat_haze": 0.15,
+        "snow": 0.034,
+        "wind_intensity": -0.036,
+        "storm": 0.008,
+        "rain": 0.186,
+        "fog": 0.07,
+        "letter_life": 0.071,
+        "hour_shift": 1.0,
+        "luminosity": 0.288
+      }
+    },
+    "madrugada": {
+      "poles": {
+        "heat": 0.061,
+        "wind": 0.104,
+        "water": 0.0
+      },
+      "effects": {
+        "temperature": 0.061,
+        "heat_haze": 0.043,
+        "wind_intensity": 0.104,
+        "storm": 0.042,
+        "rain": 0.0,
+        "fog": 0.0
+      }
+    },
+    "manantial": {
+      "poles": {
+        "heat": 0.135,
+        "cold": 0.009,
+        "water": 0.416,
+        "calm": 0.005,
+        "darkness": 0.163,
+        "light": 0.099
+      },
+      "effects": {
+        "temperature": 0.126,
+        "heat_haze": 0.095,
+        "snow": 0.004,
+        "rain": 0.416,
+        "fog": 0.126,
+        "wind_intensity": -0.004,
+        "letter_life": 0.005,
+        "hour_shift": -0.256,
+        "luminosity": -0.035
+      }
+    },
+    "mancha": {
+      "poles": {
+        "heat": 0.259,
+        "cold": 0.191,
+        "wind": 0.063,
+        "water": 0.265,
+        "darkness": 0.232,
+        "light": 0.248
+      },
+      "effects": {
+        "temperature": 0.068,
+        "heat_haze": 0.181,
+        "snow": 0.096,
+        "wind_intensity": 0.063,
+        "storm": 0.025,
+        "rain": 0.265,
+        "fog": 0.08,
+        "hour_shift": 0.064,
+        "luminosity": 0.036
+      }
+    },
+    "mano": {
+      "poles": {
+        "calm": 0.009
+      },
+      "effects": {
+        "wind_intensity": -0.007,
+        "fog": 0.002,
+        "letter_life": 0.009
+      }
+    },
+    "mar": {
+      "poles": {
+        "heat": 0.192,
+        "cold": 0.208,
+        "wind": 0.196,
+        "water": 0.549,
+        "darkness": 0.153,
+        "light": 0.09
+      },
+      "effects": {
+        "temperature": -0.016,
+        "heat_haze": 0.134,
+        "snow": 0.104,
+        "wind_intensity": 0.196,
+        "storm": 0.078,
+        "rain": 0.549,
+        "fog": 0.165,
+        "hour_shift": -0.252,
+        "luminosity": -0.035
+      }
+    },
+    "marchitar": {
+      "poles": {
+        "heat": 0.151,
+        "cold": 0.081,
+        "wind": 0.034,
+        "calm": 0.197,
+        "darkness": 0.098,
+        "light": 0.22
+      },
+      "effects": {
+        "temperature": 0.07,
+        "heat_haze": 0.106,
+        "snow": 0.041,
+        "wind_intensity": -0.124,
+        "storm": 0.014,
+        "fog": 0.039,
+        "letter_life": 0.197,
+        "hour_shift": 0.488,
+        "luminosity": 0.107
+      }
+    },
+    "marea": {
+      "poles": {
+        "heat": 0.157,
+        "cold": 0.2,
+        "wind": 0.408,
+        "water": 0.481,
+        "calm": 0.033,
+        "darkness": 0.162,
+        "light": 0.13
+      },
+      "effects": {
+        "temperature": -0.043,
+        "heat_haze": 0.11,
+        "snow": 0.1,
+        "wind_intensity": 0.382,
+        "storm": 0.163,
+        "rain": 0.481,
+        "fog": 0.151,
+        "letter_life": 0.033,
+        "hour_shift": -0.128,
+        "luminosity": -0.009
+      }
+    },
+    "mariposa": {
+      "poles": {
+        "heat": 0.02,
+        "cold": 0.098,
+        "wind": 0.004,
+        "water": 0.008,
+        "calm": 0.032,
+        "darkness": 0.045,
+        "light": 0.128
+      },
+      "effects": {
+        "temperature": -0.078,
+        "heat_haze": 0.014,
+        "snow": 0.049,
+        "wind_intensity": -0.022,
+        "storm": 0.002,
+        "rain": 0.008,
+        "fog": 0.009,
+        "letter_life": 0.032,
+        "hour_shift": 0.332,
+        "luminosity": 0.071
+      }
+    },
+    "medianoche": {
+      "poles": {
+        "heat": 0.129,
+        "cold": 0.033,
+        "wind": 0.09,
+        "water": 0.058,
+        "darkness": 0.121,
+        "light": 0.099
+      },
+      "effects": {
+        "temperature": 0.096,
+        "heat_haze": 0.09,
+        "snow": 0.017,
+        "wind_intensity": 0.09,
+        "storm": 0.036,
+        "rain": 0.058,
+        "fog": 0.017,
+        "hour_shift": -0.088,
+        "luminosity": -0.005
+      }
+    },
+    "mediodía": {
+      "poles": {
+        "heat": 0.165,
+        "wind": 0.054,
+        "water": 0.016,
+        "darkness": 0.025,
+        "light": 0.0
+      },
+      "effects": {
+        "temperature": 0.165,
+        "heat_haze": 0.115,
+        "wind_intensity": 0.054,
+        "storm": 0.022,
+        "rain": 0.016,
+        "fog": 0.005,
+        "hour_shift": -0.1,
+        "luminosity": -0.017
+      }
+    },
+    "meditación": {
+      "poles": {
+        "calm": 0.218
+      },
+      "effects": {
+        "wind_intensity": -0.174,
+        "fog": 0.044,
+        "letter_life": 0.218
+      }
+    },
+    "melodía": {
+      "poles": {
+        "calm": 0.134,
+        "light": 0.031
+      },
+      "effects": {
+        "wind_intensity": -0.107,
+        "fog": 0.027,
+        "letter_life": 0.134,
+        "hour_shift": 0.124,
+        "luminosity": 0.025
+      }
+    },
+    "memoria": {
+      "poles": {
+        "calm": 0.009
+      },
+      "effects": {
+        "wind_intensity": -0.007,
+        "fog": 0.002,
+        "letter_life": 0.009
+      }
+    },
+    "miedo": {
+      "poles": {
+        "wind": 0.059,
+        "calm": 0.063,
+        "darkness": 0.145
+      },
+      "effects": {
+        "wind_intensity": 0.009,
+        "storm": 0.024,
+        "fog": 0.013,
+        "letter_life": 0.063,
+        "hour_shift": -0.58,
+        "luminosity": -0.101
+      }
+    },
+    "mirada": {
+      "poles": {
+        "heat": 0.021,
+        "wind": 0.005,
+        "water": 0.032,
+        "calm": 0.317,
+        "darkness": 0.258,
+        "light": 0.432
+      },
+      "effects": {
+        "temperature": 0.021,
+        "heat_haze": 0.015,
+        "wind_intensity": -0.249,
+        "storm": 0.002,
+        "rain": 0.032,
+        "fog": 0.073,
+        "letter_life": 0.317,
+        "hour_shift": 0.696,
+        "luminosity": 0.165
+      }
+    },
+    "mirar": {
+      "poles": {
+        "calm": 0.085,
+        "darkness": 0.118,
+        "light": 0.21
+      },
+      "effects": {
+        "wind_intensity": -0.068,
+        "fog": 0.017,
+        "letter_life": 0.085,
+        "hour_shift": 0.368,
+        "luminosity": 0.085
+      }
+    },
+    "miserable": {
+      "poles": {
+        "heat": 0.034,
+        "cold": 0.022,
+        "wind": 0.059,
+        "water": 0.026,
+        "calm": 0.168,
+        "darkness": 0.253,
+        "light": 0.037
+      },
+      "effects": {
+        "temperature": 0.012,
+        "heat_haze": 0.024,
+        "snow": 0.011,
+        "wind_intensity": -0.075,
+        "storm": 0.024,
+        "rain": 0.026,
+        "fog": 0.041,
+        "letter_life": 0.168,
+        "hour_shift": -0.864,
+        "luminosity": -0.147
+      }
+    },
+    "momentáneo": {
+      "poles": {
+        "wind": 0.156,
+        "calm": 0.299,
+        "darkness": 0.196,
+        "light": 0.112
+      },
+      "effects": {
+        "wind_intensity": -0.083,
+        "storm": 0.062,
+        "fog": 0.06,
+        "letter_life": 0.299,
+        "hour_shift": -0.336,
+        "luminosity": -0.048
+      }
+    },
+    "montaña": {
+      "poles": {
+        "heat": 0.137,
+        "cold": 0.294,
+        "wind": 0.043,
+        "water": 0.255,
+        "calm": 0.027,
+        "darkness": 0.072
+      },
+      "effects": {
+        "temperature": -0.157,
+        "heat_haze": 0.096,
+        "snow": 0.147,
+        "wind_intensity": 0.021,
+        "storm": 0.017,
+        "rain": 0.255,
+        "fog": 0.082,
+        "letter_life": 0.027,
+        "hour_shift": -0.288,
+        "luminosity": -0.05
+      }
+    },
+    "morir": {
+      "poles": {
+        "darkness": 0.072
+      },
+      "effects": {
+        "hour_shift": -0.288,
+        "luminosity": -0.05
+      }
+    },
+    "muerte": {
+      "poles": {
+        "darkness": 0.095
+      },
+      "effects": {
+        "hour_shift": -0.38,
+        "luminosity": -0.066
+      }
+    },
+    "murmullo": {
+      "poles": {
+        "heat": 0.103,
+        "cold": 0.062,
+        "wind": 0.357,
+        "water": 0.24,
+        "calm": 0.267,
+        "darkness": 0.203,
+        "light": 0.169
+      },
+      "effects": {
+        "temperature": 0.041,
+        "heat_haze": 0.072,
+        "snow": 0.031,
+        "wind_intensity": 0.143,
+        "storm": 0.143,
+        "rain": 0.24,
+        "fog": 0.125,
+        "letter_life": 0.267,
+        "hour_shift": -0.136,
+        "luminosity": -0.007
+      }
+    },
+    "musgo": {
+      "poles": {
+        "heat": 0.11,
+        "cold": 0.289,
+        "water": 0.124,
+        "calm": 0.068,
+        "darkness": 0.089
+      },
+      "effects": {
+        "temperature": -0.179,
+        "heat_haze": 0.077,
+        "snow": 0.144,
+        "rain": 0.124,
+        "fog": 0.051,
+        "wind_intensity": -0.054,
+        "letter_life": 0.068,
+        "hour_shift": -0.356,
+        "luminosity": -0.062
+      }
+    },
+    "nacer": {
+      "poles": {
+        "light": 0.076
+      },
+      "effects": {
+        "hour_shift": 0.304,
+        "luminosity": 0.061
+      }
+    },
+    "naranja": {
+      "poles": {
+        "heat": 0.09,
+        "cold": 0.157,
+        "light": 0.037
+      },
+      "effects": {
+        "temperature": -0.067,
+        "heat_haze": 0.063,
+        "snow": 0.079,
+        "hour_shift": 0.148,
+        "luminosity": 0.03
+      }
+    },
+    "naufragio": {
+      "poles": {
+        "wind": 0.149,
+        "water": 0.109,
+        "darkness": 0.124
+      },
+      "effects": {
+        "wind_intensity": 0.149,
+        "storm": 0.06,
+        "rain": 0.109,
+        "fog": 0.033,
+        "hour_shift": -0.496,
+        "luminosity": -0.087
+      }
+    },
+    "neblina": {
+      "poles": {
+        "heat": 0.368,
+        "cold": 0.447,
+        "wind": 0.409,
+        "water": 0.47,
+        "calm": 0.119,
+        "darkness": 0.359,
+        "light": 0.318
+      },
+      "effects": {
+        "temperature": -0.079,
+        "heat_haze": 0.258,
+        "snow": 0.224,
+        "wind_intensity": 0.314,
+        "storm": 0.164,
+        "rain": 0.47,
+        "fog": 0.165,
+        "letter_life": 0.119,
+        "hour_shift": -0.164,
+        "luminosity": 0.003
+      }
+    },
+    "negro": {
+      "poles": {
+        "cold": 0.083,
+        "darkness": 0.071,
+        "light": 0.07
+      },
+      "effects": {
+        "temperature": -0.083,
+        "snow": 0.042,
+        "hour_shift": -0.004,
+        "luminosity": 0.006
+      }
+    },
+    "niebla": {
+      "poles": {
+        "heat": 0.313,
+        "cold": 0.451,
+        "wind": 0.428,
+        "water": 0.436,
+        "calm": 0.076,
+        "darkness": 0.404,
+        "light": 0.289
+      },
+      "effects": {
+        "temperature": -0.138,
+        "heat_haze": 0.219,
+        "snow": 0.226,
+        "wind_intensity": 0.367,
+        "storm": 0.171,
+        "rain": 0.436,
+        "fog": 0.146,
+        "letter_life": 0.076,
+        "hour_shift": -0.46,
+        "luminosity": -0.052
+      }
+    },
+    "nieve": {
+      "poles": {
+        "heat": 0.342,
+        "cold": 0.65,
+        "wind": 0.265,
+        "water": 0.403,
+        "calm": 0.046,
+        "darkness": 0.186,
+        "light": 0.066
+      },
+      "effects": {
+        "temperature": -0.308,
+        "heat_haze": 0.239,
+        "snow": 0.325,
+        "wind_intensity": 0.228,
+        "storm": 0.106,
+        "rain": 0.403,
+        "fog": 0.13,
+        "letter_life": 0.046,
+        "hour_shift": -0.48,
+        "luminosity": -0.077
+      }
+    },
+    "niño": {
+      "poles": {
+        "calm": 0.024
+      },
+      "effects": {
+        "wind_intensity": -0.019,
+        "fog": 0.005,
+        "letter_life": 0.024
+      }
+    },
+    "noche": {
+      "poles": {
+        "heat": 0.168,
+        "cold": 0.043,
+        "wind": 0.117,
+        "water": 0.091,
+        "calm": 0.045,
+        "darkness": 0.193,
+        "light": 0.067
+      },
+      "effects": {
+        "temperature": 0.125,
+        "heat_haze": 0.118,
+        "snow": 0.021,
+        "wind_intensity": 0.081,
+        "storm": 0.047,
+        "rain": 0.091,
+        "fog": 0.036,
+        "letter_life": 0.045,
+        "hour_shift": -0.504,
+        "luminosity": -0.081
+      }
+    },
+    "nostalgia": {
+      "poles": {
+        "calm": 0.118,
+        "darkness": 0.13,
+        "light": 0.052
+      },
+      "effects": {
+        "wind_intensity": -0.094,
+        "fog": 0.024,
+        "letter_life": 0.118,
+        "hour_shift": -0.312,
+        "luminosity": -0.049
+      }
+    },
+    "nube": {
+      "poles": {
+        "cold": 0.027,
+        "water": 0.019,
+        "darkness": 0.018
+      },
+      "effects": {
+        "temperature": -0.027,
+        "snow": 0.013,
+        "rain": 0.019,
+        "fog": 0.006,
+        "hour_shift": -0.072,
+        "luminosity": -0.013
+      }
+    },
+    "observar": {
+      "poles": {
+        "cold": 0.017,
+        "calm": 0.035,
+        "darkness": 0.039,
+        "light": 0.179
+      },
+      "effects": {
+        "temperature": -0.017,
+        "snow": 0.009,
+        "wind_intensity": -0.028,
+        "fog": 0.007,
+        "letter_life": 0.035,
+        "hour_shift": 0.56,
+        "luminosity": 0.116
+      }
+    },
+    "ocaso": {
+      "poles": {
+        "heat": 0.103,
+        "cold": 0.056,
+        "wind": 0.149,
+        "water": 0.049,
+        "calm": 0.098,
+        "darkness": 0.365,
+        "light": 0.367
+      },
+      "effects": {
+        "temperature": 0.047,
+        "heat_haze": 0.072,
+        "snow": 0.028,
+        "wind_intensity": 0.071,
+        "storm": 0.06,
+        "rain": 0.049,
+        "fog": 0.034,
+        "letter_life": 0.098,
+        "hour_shift": 0.008,
+        "luminosity": 0.038
+      }
+    },
+    "océano": {
+      "poles": {
+        "heat": 0.194,
+        "cold": 0.355,
+        "wind": 0.294,
+        "water": 0.543,
+        "calm": 0.05,
+        "darkness": 0.282,
+        "light": 0.153
+      },
+      "effects": {
+        "temperature": -0.161,
+        "heat_haze": 0.136,
+        "snow": 0.177,
+        "wind_intensity": 0.254,
+        "storm": 0.118,
+        "rain": 0.543,
+        "fog": 0.173,
+        "letter_life": 0.05,
+        "hour_shift": -0.516,
+        "luminosity": -0.075
+      }
+    },
+    "odio": {
+      "poles": {
+        "darkness": 0.008
+      },
+      "effects": {
+        "hour_shift": -0.032,
+        "luminosity": -0.006
+      }
+    },
+    "ola": {
+      "poles": {
+        "wind": 0.225,
+        "water": 0.125
+      },
+      "effects": {
+        "wind_intensity": 0.225,
+        "storm": 0.09,
+        "rain": 0.125,
+        "fog": 0.037
+      }
+    },
+    "oleaje": {
+      "poles": {
+        "heat": 0.173,
+        "cold": 0.183,
+        "wind": 0.53,
+        "water": 0.405,
+        "calm": 0.012,
+        "darkness": 0.012,
+        "light": 0.015
+      },
+      "effects": {
+        "temperature": -0.01,
+        "heat_haze": 0.121,
+        "snow": 0.091,
+        "wind_intensity": 0.52,
+        "storm": 0.212,
+        "rain": 0.405,
+        "fog": 0.124,
+        "letter_life": 0.012,
+        "hour_shift": 0.012,
+        "luminosity": 0.004
+      }
+    },
+    "oler": {
+      "poles": {
+        "heat": 0.007
+      },
+      "effects": {
+        "temperature": 0.007,
+        "heat_haze": 0.005
+      }
+    },
+    "olvido": {
+      "poles": {
+        "wind": 0.002,
+        "calm": 0.061,
+        "darkness": 0.332
+      },
+      "effects": {
+        "wind_intensity": -0.047,
+        "storm": 0.001,
+        "fog": 0.012,
+        "letter_life": 0.061,
+        "hour_shift": -1.0,
+        "luminosity": -0.232
+      }
+    },
+    "oscuridad": {
+      "poles": {
+        "heat": 0.283,
+        "cold": 0.249,
+        "wind": 0.261,
+        "water": 0.279,
+        "calm": 0.41,
+        "darkness": 0.605,
+        "light": 0.504
+      },
+      "effects": {
+        "temperature": 0.034,
+        "heat_haze": 0.198,
+        "snow": 0.124,
+        "wind_intensity": -0.067,
+        "storm": 0.104,
+        "rain": 0.279,
+        "fog": 0.166,
+        "letter_life": 0.41,
+        "hour_shift": -0.404,
+        "luminosity": -0.02
+      }
+    },
+    "oscuro": {
+      "poles": {
+        "heat": 0.179,
+        "cold": 0.282,
+        "wind": 0.1,
+        "water": 0.061,
+        "calm": 0.127,
+        "darkness": 0.527,
+        "light": 0.376
+      },
+      "effects": {
+        "temperature": -0.103,
+        "heat_haze": 0.125,
+        "snow": 0.141,
+        "wind_intensity": -0.002,
+        "storm": 0.04,
+        "rain": 0.061,
+        "fog": 0.044,
+        "letter_life": 0.127,
+        "hour_shift": -0.604,
+        "luminosity": -0.068
+      }
+    },
+    "otoño": {
+      "poles": {
+        "cold": 0.062
+      },
+      "effects": {
+        "temperature": -0.062,
+        "snow": 0.031
+      }
+    },
+    "paciencia": {
+      "poles": {
+        "calm": 0.229
+      },
+      "effects": {
+        "wind_intensity": -0.183,
+        "fog": 0.046,
+        "letter_life": 0.229
+      }
+    },
+    "palabra": {
+      "poles": {
+        "calm": 0.012
+      },
+      "effects": {
+        "wind_intensity": -0.01,
+        "fog": 0.002,
+        "letter_life": 0.012
+      }
+    },
+    "pared": {
+      "poles": {
+        "heat": 0.118,
+        "cold": 0.199,
+        "wind": 0.013,
+        "water": 0.098,
+        "calm": 0.054,
+        "darkness": 0.265,
+        "light": 0.173
+      },
+      "effects": {
+        "temperature": -0.081,
+        "heat_haze": 0.083,
+        "snow": 0.1,
+        "wind_intensity": -0.03,
+        "storm": 0.005,
+        "rain": 0.098,
+        "fog": 0.04,
+        "letter_life": 0.054,
+        "hour_shift": -0.368,
+        "luminosity": -0.047
+      }
+    },
+    "pasillo": {
+      "poles": {
+        "heat": 0.057,
+        "cold": 0.098,
+        "wind": 0.09,
+        "water": 0.053,
+        "calm": 0.096,
+        "darkness": 0.311,
+        "light": 0.107
+      },
+      "effects": {
+        "temperature": -0.041,
+        "heat_haze": 0.04,
+        "snow": 0.049,
+        "wind_intensity": 0.013,
+        "storm": 0.036,
+        "rain": 0.053,
+        "fog": 0.035,
+        "letter_life": 0.096,
+        "hour_shift": -0.816,
+        "luminosity": -0.132
+      }
+    },
+    "paso": {
+      "poles": {
+        "wind": 0.047,
+        "calm": 0.06,
+        "light": 0.03
+      },
+      "effects": {
+        "wind_intensity": -0.001,
+        "storm": 0.019,
+        "fog": 0.012,
+        "letter_life": 0.06,
+        "hour_shift": 0.12,
+        "luminosity": 0.024
+      }
+    },
+    "pausa": {
+      "poles": {
+        "calm": 0.083
+      },
+      "effects": {
+        "wind_intensity": -0.066,
+        "fog": 0.017,
+        "letter_life": 0.083
+      }
+    },
+    "paz": {
+      "poles": {
+        "calm": 0.341
+      },
+      "effects": {
+        "wind_intensity": -0.273,
+        "fog": 0.068,
+        "letter_life": 0.341
+      }
+    },
+    "pensar": {
+      "poles": {
+        "calm": 0.19,
+        "darkness": 0.086,
+        "light": 0.084
+      },
+      "effects": {
+        "wind_intensity": -0.152,
+        "fog": 0.038,
+        "letter_life": 0.19,
+        "hour_shift": -0.008,
+        "luminosity": 0.007
+      }
+    },
+    "penumbra": {
+      "poles": {
+        "heat": 0.217,
+        "cold": 0.235,
+        "wind": 0.238,
+        "water": 0.218,
+        "calm": 0.331,
+        "darkness": 0.619,
+        "light": 0.482
+      },
+      "effects": {
+        "temperature": -0.018,
+        "heat_haze": 0.152,
+        "snow": 0.117,
+        "wind_intensity": -0.027,
+        "storm": 0.095,
+        "rain": 0.218,
+        "fog": 0.132,
+        "letter_life": 0.331,
+        "hour_shift": -0.548,
+        "luminosity": -0.048
+      }
+    },
+    "pequeño": {
+      "poles": {
+        "heat": 0.091,
+        "cold": 0.167,
+        "calm": 0.196,
+        "darkness": 0.206,
+        "light": 0.157
+      },
+      "effects": {
+        "temperature": -0.076,
+        "heat_haze": 0.064,
+        "snow": 0.084,
+        "wind_intensity": -0.157,
+        "fog": 0.039,
+        "letter_life": 0.196,
+        "hour_shift": -0.196,
+        "luminosity": -0.019
+      }
+    },
+    "permanente": {
+      "poles": {
+        "calm": 0.077
+      },
+      "effects": {
+        "wind_intensity": -0.062,
+        "fog": 0.015,
+        "letter_life": 0.077
+      }
+    },
+    "persona": {
+      "poles": {
+        "calm": 0.023
+      },
+      "effects": {
+        "wind_intensity": -0.018,
+        "fog": 0.005,
+        "letter_life": 0.023
+      }
+    },
+    "pesado": {
+      "poles": {
+        "heat": 0.08,
+        "cold": 0.126,
+        "wind": 0.084,
+        "calm": 0.008
+      },
+      "effects": {
+        "temperature": -0.046,
+        "heat_haze": 0.056,
+        "snow": 0.063,
+        "wind_intensity": 0.078,
+        "storm": 0.034,
+        "fog": 0.002,
+        "letter_life": 0.008
+      }
+    },
+    "pez": {
+      "poles": {
+        "water": 0.018
+      },
+      "effects": {
+        "rain": 0.018,
+        "fog": 0.005
+      }
+    },
+    "piedra": {
+      "poles": {
+        "heat": 0.07,
+        "cold": 0.035,
+        "water": 0.041,
+        "darkness": 0.13,
+        "light": 0.073
+      },
+      "effects": {
+        "temperature": 0.035,
+        "heat_haze": 0.049,
+        "snow": 0.018,
+        "rain": 0.041,
+        "fog": 0.012,
+        "hour_shift": -0.228,
+        "luminosity": -0.033
+      }
+    },
+    "pintar": {
+      "poles": {
+        "light": 0.029
+      },
+      "effects": {
+        "hour_shift": 0.116,
+        "luminosity": 0.023
+      }
+    },
+    "placer": {
+      "poles": {
+        "calm": 0.233,
+        "light": 0.002
+      },
+      "effects": {
+        "wind_intensity": -0.186,
+        "fog": 0.047,
+        "letter_life": 0.233,
+        "hour_shift": 0.008,
+        "luminosity": 0.002
+      }
+    },
+    "plateado": {
+      "poles": {
+        "heat": 0.06,
+        "cold": 0.197,
+        "darkness": 0.063,
+        "light": 0.247
+      },
+      "effects": {
+        "temperature": -0.137,
+        "heat_haze": 0.042,
+        "snow": 0.099,
+        "hour_shift": 0.736,
+        "luminosity": 0.153
+      }
+    },
+    "playa": {
+      "poles": {
+        "water": 0.152
+      },
+      "effects": {
+        "rain": 0.152,
+        "fog": 0.046
+      }
+    },
+    "polar": {
+      "poles": {
+        "heat": 0.065,
+        "cold": 0.457,
+        "wind": 0.06,
+        "water": 0.01,
+        "light": 0.019
+      },
+      "effects": {
+        "temperature": -0.392,
+        "heat_haze": 0.045,
+        "snow": 0.229,
+        "wind_intensity": 0.06,
+        "storm": 0.024,
+        "rain": 0.01,
+        "fog": 0.003,
+        "hour_shift": 0.076,
+        "luminosity": 0.015
+      }
+    },
+    "polvo": {
+      "poles": {
+        "heat": 0.383,
+        "cold": 0.324,
+        "wind": 0.087,
+        "water": 0.183,
+        "darkness": 0.134,
+        "light": 0.094
+      },
+      "effects": {
+        "temperature": 0.059,
+        "heat_haze": 0.268,
+        "snow": 0.162,
+        "wind_intensity": 0.087,
+        "storm": 0.035,
+        "rain": 0.183,
+        "fog": 0.055,
+        "hour_shift": -0.16,
+        "luminosity": -0.019
+      }
+    },
+    "pozo": {
+      "poles": {
+        "heat": 0.068,
+        "cold": 0.031,
+        "water": 0.292,
+        "darkness": 0.34
+      },
+      "effects": {
+        "temperature": 0.037,
+        "heat_haze": 0.048,
+        "snow": 0.015,
+        "rain": 0.292,
+        "fog": 0.088,
+        "hour_shift": -1.0,
+        "luminosity": -0.238
+      }
+    },
+    "pradera": {
+      "poles": {
+        "heat": 0.189,
+        "cold": 0.235,
+        "wind": 0.002,
+        "water": 0.304,
+        "calm": 0.141,
+        "darkness": 0.14,
+        "light": 0.096
+      },
+      "effects": {
+        "temperature": -0.046,
+        "heat_haze": 0.132,
+        "snow": 0.117,
+        "wind_intensity": -0.111,
+        "storm": 0.001,
+        "rain": 0.304,
+        "fog": 0.119,
+        "letter_life": 0.141,
+        "hour_shift": -0.176,
+        "luminosity": -0.021
+      }
+    },
+    "primavera": {
+      "poles": {
+        "heat": 0.113,
+        "cold": 0.114,
+        "water": 0.031,
+        "calm": 0.009,
+        "light": 0.045
+      },
+      "effects": {
+        "temperature": -0.001,
+        "heat_haze": 0.079,
+        "snow": 0.057,
+        "rain": 0.031,
+        "fog": 0.011,
+        "wind_intensity": -0.007,
+        "letter_life": 0.009,
+        "hour_shift": 0.18,
+        "luminosity": 0.036
+      }
+    },
+    "profundidad": {
+      "poles": {
+        "water": 0.063,
+        "calm": 0.142,
+        "darkness": 0.111,
+        "light": 0.135
+      },
+      "effects": {
+        "rain": 0.063,
+        "fog": 0.047,
+        "wind_intensity": -0.114,
+        "letter_life": 0.142,
+        "hour_shift": 0.096,
+        "luminosity": 0.03
+      }
+    },
+    "profundo": {
+      "poles": {
+        "heat": 0.045,
+        "cold": 0.072,
+        "water": 0.075,
+        "calm": 0.379,
+        "darkness": 0.332,
+        "light": 0.215
+      },
+      "effects": {
+        "temperature": -0.027,
+        "heat_haze": 0.032,
+        "snow": 0.036,
+        "rain": 0.075,
+        "fog": 0.098,
+        "wind_intensity": -0.303,
+        "letter_life": 0.379,
+        "hour_shift": -0.468,
+        "luminosity": -0.06
+      }
+    },
+    "puente": {
+      "poles": {
+        "cold": 0.028,
+        "wind": 0.011,
+        "water": 0.167,
+        "calm": 0.041,
+        "darkness": 0.116,
+        "light": 0.037
+      },
+      "effects": {
+        "temperature": -0.028,
+        "snow": 0.014,
+        "wind_intensity": -0.022,
+        "storm": 0.004,
+        "rain": 0.167,
+        "fog": 0.058,
+        "letter_life": 0.041,
+        "hour_shift": -0.316,
+        "luminosity": -0.052
+      }
+    },
+    "puerta": {
+      "poles": {
+        "heat": 0.036,
+        "wind": 0.047,
+        "calm": 0.047,
+        "darkness": 0.213,
+        "light": 0.109
+      },
+      "effects": {
+        "temperature": 0.036,
+        "heat_haze": 0.025,
+        "wind_intensity": 0.009,
+        "storm": 0.019,
+        "fog": 0.009,
+        "letter_life": 0.047,
+        "hour_shift": -0.416,
+        "luminosity": -0.062
+      }
+    },
+    "pájaro": {
+      "poles": {
+        "heat": 0.017,
+        "cold": 0.08,
+        "wind": 0.076,
+        "water": 0.034,
+        "darkness": 0.145,
+        "light": 0.118
+      },
+      "effects": {
+        "temperature": -0.063,
+        "heat_haze": 0.012,
+        "snow": 0.04,
+        "wind_intensity": 0.076,
+        "storm": 0.03,
+        "rain": 0.034,
+        "fog": 0.01,
+        "hour_shift": -0.108,
+        "luminosity": -0.007
+      }
+    },
+    "páramo": {
+      "poles": {
+        "cold": 0.256,
+        "water": 0.159,
+        "darkness": 0.092
+      },
+      "effects": {
+        "temperature": -0.256,
+        "snow": 0.128,
+        "rain": 0.159,
+        "fog": 0.048,
+        "hour_shift": -0.368,
+        "luminosity": -0.064
+      }
+    },
+    "púrpura": {
+      "poles": {
+        "heat": 0.088,
+        "cold": 0.06,
+        "darkness": 0.12,
+        "light": 0.239
+      },
+      "effects": {
+        "temperature": 0.028,
+        "heat_haze": 0.062,
+        "snow": 0.03,
+        "hour_shift": 0.476,
+        "luminosity": 0.107
+      }
+    },
+    "quemar": {
+      "poles": {
+        "heat": 0.216
+      },
+      "effects": {
+        "temperature": 0.216,
+        "heat_haze": 0.151
+      }
+    },
+    "quietud": {
+      "poles": {
+        "wind": 0.073,
+        "water": 0.008,
+        "calm": 0.553,
+        "darkness": 0.209,
+        "light": 0.152
+      },
+      "effects": {
+        "wind_intensity": -0.369,
+        "storm": 0.029,
+        "rain": 0.008,
+        "fog": 0.113,
+        "letter_life": 0.553,
+        "hour_shift": -0.228,
+        "luminosity": -0.025
+      }
+    },
+    "radiante": {
+      "poles": {
+        "heat": 0.196,
+        "cold": 0.093,
+        "calm": 0.195,
+        "darkness": 0.036,
+        "light": 0.433
+      },
+      "effects": {
+        "temperature": 0.103,
+        "heat_haze": 0.137,
+        "snow": 0.046,
+        "wind_intensity": -0.156,
+        "fog": 0.039,
+        "letter_life": 0.195,
+        "hour_shift": 1.0,
+        "luminosity": 0.321
+      }
+    },
+    "recuerdo": {
+      "poles": {
+        "heat": 0.019,
+        "calm": 0.21,
+        "darkness": 0.144,
+        "light": 0.115
+      },
+      "effects": {
+        "temperature": 0.019,
+        "heat_haze": 0.013,
+        "wind_intensity": -0.168,
+        "fog": 0.042,
+        "letter_life": 0.21,
+        "hour_shift": -0.116,
+        "luminosity": -0.009
+      }
+    },
+    "reflejo": {
+      "poles": {
+        "calm": 0.119,
+        "darkness": 0.133,
+        "light": 0.36
+      },
+      "effects": {
+        "wind_intensity": -0.095,
+        "fog": 0.024,
+        "letter_life": 0.119,
+        "hour_shift": 0.908,
+        "luminosity": 0.195
+      }
+    },
+    "relato": {
+      "poles": {
+        "darkness": 0.002
+      },
+      "effects": {
+        "hour_shift": -0.008,
+        "luminosity": -0.001
+      }
+    },
+    "relinchar": {
+      "poles": {
+        "wind": 0.112
+      },
+      "effects": {
+        "wind_intensity": 0.112,
+        "storm": 0.045
+      }
+    },
+    "reloj": {
+      "poles": {
+        "light": 0.001
+      },
+      "effects": {
+        "hour_shift": 0.004,
+        "luminosity": 0.001
+      }
+    },
+    "remolino": {
+      "poles": {
+        "heat": 0.288,
+        "cold": 0.333,
+        "wind": 0.419,
+        "water": 0.392,
+        "darkness": 0.256,
+        "light": 0.166
+      },
+      "effects": {
+        "temperature": -0.045,
+        "heat_haze": 0.202,
+        "snow": 0.167,
+        "wind_intensity": 0.419,
+        "storm": 0.168,
+        "rain": 0.392,
+        "fog": 0.118,
+        "hour_shift": -0.36,
+        "luminosity": -0.046
+      }
+    },
+    "reposo": {
+      "poles": {
+        "heat": 0.126,
+        "cold": 0.045,
+        "calm": 0.358,
+        "darkness": 0.055
+      },
+      "effects": {
+        "temperature": 0.081,
+        "heat_haze": 0.088,
+        "snow": 0.022,
+        "wind_intensity": -0.286,
+        "fog": 0.072,
+        "letter_life": 0.358,
+        "hour_shift": -0.22,
+        "luminosity": -0.038
+      }
+    },
+    "respirar": {
+      "poles": {
+        "heat": 0.219,
+        "cold": 0.173,
+        "wind": 0.201,
+        "water": 0.121,
+        "calm": 0.501,
+        "darkness": 0.172,
+        "light": 0.202
+      },
+      "effects": {
+        "temperature": 0.046,
+        "heat_haze": 0.153,
+        "snow": 0.086,
+        "wind_intensity": -0.2,
+        "storm": 0.08,
+        "rain": 0.121,
+        "fog": 0.137,
+        "letter_life": 0.501,
+        "hour_shift": 0.12,
+        "luminosity": 0.041
+      }
+    },
+    "resplandor": {
+      "poles": {
+        "heat": 0.428,
+        "cold": 0.288,
+        "wind": 0.291,
+        "water": 0.234,
+        "calm": 0.354,
+        "darkness": 0.547,
+        "light": 0.784
+      },
+      "effects": {
+        "temperature": 0.14,
+        "heat_haze": 0.3,
+        "snow": 0.144,
+        "wind_intensity": 0.008,
+        "storm": 0.116,
+        "rain": 0.234,
+        "fog": 0.141,
+        "letter_life": 0.354,
+        "hour_shift": 0.948,
+        "luminosity": 0.244
+      }
+    },
+    "riachuelo": {
+      "poles": {
+        "heat": 0.153,
+        "cold": 0.205,
+        "wind": 0.151,
+        "water": 0.544,
+        "calm": 0.047,
+        "darkness": 0.216,
+        "light": 0.03
+      },
+      "effects": {
+        "temperature": -0.052,
+        "heat_haze": 0.107,
+        "snow": 0.102,
+        "wind_intensity": 0.113,
+        "storm": 0.06,
+        "rain": 0.544,
+        "fog": 0.173,
+        "letter_life": 0.047,
+        "hour_shift": -0.744,
+        "luminosity": -0.127
+      }
+    },
+    "ritmo": {
+      "poles": {
+        "wind": 0.02,
+        "calm": 0.1
+      },
+      "effects": {
+        "wind_intensity": -0.06,
+        "storm": 0.008,
+        "fog": 0.02,
+        "letter_life": 0.1
+      }
+    },
+    "roca": {
+      "poles": {
+        "heat": 0.178,
+        "cold": 0.307,
+        "wind": 0.041,
+        "water": 0.315,
+        "darkness": 0.25,
+        "light": 0.058
+      },
+      "effects": {
+        "temperature": -0.129,
+        "heat_haze": 0.125,
+        "snow": 0.153,
+        "wind_intensity": 0.041,
+        "storm": 0.016,
+        "rain": 0.315,
+        "fog": 0.095,
+        "hour_shift": -0.768,
+        "luminosity": -0.129
+      }
+    },
+    "rocío": {
+      "poles": {
+        "heat": 0.152,
+        "cold": 0.152,
+        "water": 0.212,
+        "light": 0.054
+      },
+      "effects": {
+        "temperature": 0.0,
+        "heat_haze": 0.106,
+        "snow": 0.076,
+        "rain": 0.212,
+        "fog": 0.064,
+        "hour_shift": 0.216,
+        "luminosity": 0.043
+      }
+    },
+    "rojo": {
+      "poles": {
+        "heat": 0.042,
+        "cold": 0.087,
+        "darkness": 0.001,
+        "light": 0.11
+      },
+      "effects": {
+        "temperature": -0.045,
+        "heat_haze": 0.029,
+        "snow": 0.043,
+        "hour_shift": 0.436,
+        "luminosity": 0.087
+      }
+    },
+    "rosa": {
+      "poles": {
+        "cold": 0.008,
+        "light": 0.142
+      },
+      "effects": {
+        "temperature": -0.008,
+        "snow": 0.004,
+        "hour_shift": 0.568,
+        "luminosity": 0.114
+      }
+    },
+    "rugir": {
+      "poles": {
+        "wind": 0.247
+      },
+      "effects": {
+        "wind_intensity": 0.247,
+        "storm": 0.099
+      }
+    },
+    "ruido": {
+      "poles": {
+        "heat": 0.238,
+        "cold": 0.142,
+        "wind": 0.362,
+        "water": 0.117,
+        "calm": 0.101,
+        "darkness": 0.15,
+        "light": 0.125
+      },
+      "effects": {
+        "temperature": 0.096,
+        "heat_haze": 0.167,
+        "snow": 0.071,
+        "wind_intensity": 0.281,
+        "storm": 0.145,
+        "rain": 0.117,
+        "fog": 0.055,
+        "letter_life": 0.101,
+        "hour_shift": -0.1,
+        "luminosity": -0.005
+      }
+    },
+    "ráfaga": {
+      "poles": {
+        "heat": 0.05,
+        "cold": 0.025,
+        "wind": 0.376,
+        "water": 0.142,
+        "light": 0.035
+      },
+      "effects": {
+        "temperature": 0.025,
+        "heat_haze": 0.035,
+        "snow": 0.013,
+        "wind_intensity": 0.376,
+        "storm": 0.15,
+        "rain": 0.142,
+        "fog": 0.043,
+        "hour_shift": 0.14,
+        "luminosity": 0.028
+      }
+    },
+    "rápido": {
+      "poles": {
+        "cold": 0.019,
+        "wind": 0.009,
+        "calm": 0.08
+      },
+      "effects": {
+        "temperature": -0.019,
+        "snow": 0.009,
+        "wind_intensity": -0.055,
+        "storm": 0.004,
+        "fog": 0.016,
+        "letter_life": 0.08
+      }
+    },
+    "río": {
+      "poles": {
+        "water": 0.429
+      },
+      "effects": {
+        "rain": 0.429,
+        "fog": 0.129
+      }
+    },
+    "secar": {
+      "poles": {
+        "heat": 0.306,
+        "cold": 0.168,
+        "water": 0.035,
+        "calm": 0.039
+      },
+      "effects": {
+        "temperature": 0.138,
+        "heat_haze": 0.214,
+        "snow": 0.084,
+        "rain": 0.035,
+        "fog": 0.018,
+        "wind_intensity": -0.031,
+        "letter_life": 0.039
+      }
+    },
+    "secreto": {
+      "poles": {
+        "darkness": 0.055
+      },
+      "effects": {
+        "hour_shift": -0.22,
+        "luminosity": -0.038
+      }
+    },
+    "sed": {
+      "poles": {
+        "water": 0.062
+      },
+      "effects": {
+        "rain": 0.062,
+        "fog": 0.019
+      }
+    },
+    "selva": {
+      "poles": {
+        "heat": 0.02,
+        "cold": 0.104,
+        "wind": 0.009,
+        "water": 0.18,
+        "darkness": 0.114
+      },
+      "effects": {
+        "temperature": -0.084,
+        "heat_haze": 0.014,
+        "snow": 0.052,
+        "wind_intensity": 0.009,
+        "storm": 0.004,
+        "rain": 0.18,
+        "fog": 0.054,
+        "hour_shift": -0.456,
+        "luminosity": -0.08
+      }
+    },
+    "semilla": {
+      "poles": {
+        "heat": 0.066,
+        "water": 0.009,
+        "calm": 0.015
+      },
+      "effects": {
+        "temperature": 0.066,
+        "heat_haze": 0.046,
+        "rain": 0.009,
+        "fog": 0.006,
+        "wind_intensity": -0.012,
+        "letter_life": 0.015
+      }
+    },
+    "sendero": {
+      "poles": {
+        "heat": 0.006,
+        "cold": 0.086,
+        "water": 0.143,
+        "calm": 0.143,
+        "darkness": 0.169,
+        "light": 0.063
+      },
+      "effects": {
+        "temperature": -0.08,
+        "heat_haze": 0.004,
+        "snow": 0.043,
+        "rain": 0.143,
+        "fog": 0.071,
+        "wind_intensity": -0.114,
+        "letter_life": 0.143,
+        "hour_shift": -0.424,
+        "luminosity": -0.068
+      }
+    },
+    "sentir": {
+      "poles": {
+        "heat": 0.08,
+        "cold": 0.029,
+        "wind": 0.103,
+        "calm": 0.363,
+        "darkness": 0.104,
+        "light": 0.164
+      },
+      "effects": {
+        "temperature": 0.051,
+        "heat_haze": 0.056,
+        "snow": 0.015,
+        "wind_intensity": -0.187,
+        "storm": 0.041,
+        "fog": 0.073,
+        "letter_life": 0.363,
+        "hour_shift": 0.24,
+        "luminosity": 0.058
+      }
+    },
+    "sepulcro": {
+      "poles": {
+        "darkness": 0.207
+      },
+      "effects": {
+        "hour_shift": -0.828,
+        "luminosity": -0.145
+      }
+    },
+    "sereno": {
+      "poles": {
+        "heat": 0.001,
+        "wind": 0.054,
+        "calm": 0.54,
+        "darkness": 0.157,
+        "light": 0.232
+      },
+      "effects": {
+        "temperature": 0.001,
+        "heat_haze": 0.001,
+        "wind_intensity": -0.378,
+        "storm": 0.022,
+        "fog": 0.108,
+        "letter_life": 0.54,
+        "hour_shift": 0.3,
+        "luminosity": 0.076
+      }
+    },
+    "serpiente": {
+      "poles": {
+        "heat": 0.313,
+        "cold": 0.237,
+        "wind": 0.157,
+        "water": 0.221,
+        "calm": 0.205,
+        "darkness": 0.371,
+        "light": 0.315
+      },
+      "effects": {
+        "temperature": 0.076,
+        "heat_haze": 0.219,
+        "snow": 0.118,
+        "wind_intensity": -0.007,
+        "storm": 0.063,
+        "rain": 0.221,
+        "fog": 0.107,
+        "letter_life": 0.205,
+        "hour_shift": -0.224,
+        "luminosity": -0.008
+      }
+    },
+    "silbar": {
+      "poles": {
+        "wind": 0.132
+      },
+      "effects": {
+        "wind_intensity": 0.132,
+        "storm": 0.053
+      }
+    },
+    "silencio": {
+      "poles": {
+        "heat": 0.092,
+        "cold": 0.079,
+        "wind": 0.237,
+        "calm": 0.467,
+        "darkness": 0.422,
+        "light": 0.156
+      },
+      "effects": {
+        "temperature": 0.013,
+        "heat_haze": 0.064,
+        "snow": 0.04,
+        "wind_intensity": -0.137,
+        "storm": 0.095,
+        "fog": 0.093,
+        "letter_life": 0.467,
+        "hour_shift": -1.0,
+        "luminosity": -0.171
+      }
+    },
+    "sofocante": {
+      "poles": {
+        "heat": 0.439,
+        "cold": 0.281,
+        "wind": 0.374,
+        "water": 0.262,
+        "calm": 0.276,
+        "darkness": 0.25,
+        "light": 0.187
+      },
+      "effects": {
+        "temperature": 0.158,
+        "heat_haze": 0.307,
+        "snow": 0.141,
+        "wind_intensity": 0.153,
+        "storm": 0.15,
+        "rain": 0.262,
+        "fog": 0.134,
+        "letter_life": 0.276,
+        "hour_shift": -0.252,
+        "luminosity": -0.025
+      }
+    },
+    "sol": {
+      "poles": {
+        "heat": 0.465,
+        "cold": 0.3,
+        "wind": 0.136,
+        "water": 0.241,
+        "calm": 0.123,
+        "darkness": 0.187,
+        "light": 0.47
+      },
+      "effects": {
+        "temperature": 0.165,
+        "heat_haze": 0.326,
+        "snow": 0.15,
+        "wind_intensity": 0.038,
+        "storm": 0.054,
+        "rain": 0.241,
+        "fog": 0.097,
+        "letter_life": 0.123,
+        "hour_shift": 1.0,
+        "luminosity": 0.245
+      }
+    },
+    "solar": {
+      "poles": {
+        "heat": 0.161,
+        "cold": 0.104,
+        "water": 0.0,
+        "darkness": 0.005,
+        "light": 0.158
+      },
+      "effects": {
+        "temperature": 0.057,
+        "heat_haze": 0.113,
+        "snow": 0.052,
+        "rain": 0.0,
+        "fog": 0.0,
+        "hour_shift": 0.612,
+        "luminosity": 0.123
+      }
+    },
+    "soledad": {
+      "poles": {
+        "wind": 0.037,
+        "water": 0.069,
+        "calm": 0.296,
+        "darkness": 0.335,
+        "light": 0.082
+      },
+      "effects": {
+        "wind_intensity": -0.2,
+        "storm": 0.015,
+        "rain": 0.069,
+        "fog": 0.08,
+        "letter_life": 0.296,
+        "hour_shift": -1.0,
+        "luminosity": -0.169
+      }
+    },
+    "soltar": {
+      "poles": {
+        "wind": 0.067
+      },
+      "effects": {
+        "wind_intensity": 0.067,
+        "storm": 0.027
+      }
+    },
+    "sombra": {
+      "poles": {
+        "heat": 0.339,
+        "cold": 0.331,
+        "wind": 0.212,
+        "water": 0.274,
+        "calm": 0.327,
+        "darkness": 0.571,
+        "light": 0.544
+      },
+      "effects": {
+        "temperature": 0.008,
+        "heat_haze": 0.237,
+        "snow": 0.166,
+        "wind_intensity": -0.05,
+        "storm": 0.085,
+        "rain": 0.274,
+        "fog": 0.148,
+        "letter_life": 0.327,
+        "hour_shift": -0.108,
+        "luminosity": 0.036
+      }
+    },
+    "sonido": {
+      "poles": {
+        "heat": 0.009,
+        "wind": 0.075,
+        "calm": 0.049,
+        "light": 0.168
+      },
+      "effects": {
+        "temperature": 0.009,
+        "heat_haze": 0.006,
+        "wind_intensity": 0.036,
+        "storm": 0.03,
+        "fog": 0.01,
+        "letter_life": 0.049,
+        "hour_shift": 0.672,
+        "luminosity": 0.134
+      }
+    },
+    "soplar": {
+      "poles": {
+        "heat": 0.189,
+        "cold": 0.157,
+        "wind": 0.311,
+        "water": 0.074,
+        "calm": 0.038,
+        "light": 0.055
+      },
+      "effects": {
+        "temperature": 0.032,
+        "heat_haze": 0.132,
+        "snow": 0.079,
+        "wind_intensity": 0.281,
+        "storm": 0.124,
+        "rain": 0.074,
+        "fog": 0.03,
+        "letter_life": 0.038,
+        "hour_shift": 0.22,
+        "luminosity": 0.044
+      }
+    },
+    "suave": {
+      "poles": {
+        "heat": 0.193,
+        "cold": 0.214,
+        "water": 0.016,
+        "calm": 0.333,
+        "light": 0.106
+      },
+      "effects": {
+        "temperature": -0.021,
+        "heat_haze": 0.135,
+        "snow": 0.107,
+        "rain": 0.016,
+        "fog": 0.071,
+        "wind_intensity": -0.266,
+        "letter_life": 0.333,
+        "hour_shift": 0.424,
+        "luminosity": 0.085
+      }
+    },
+    "suavidad": {
+      "poles": {
+        "heat": 0.167,
+        "cold": 0.121,
+        "water": 0.058,
+        "calm": 0.457,
+        "darkness": 0.003,
+        "light": 0.243
+      },
+      "effects": {
+        "temperature": 0.046,
+        "heat_haze": 0.117,
+        "snow": 0.06,
+        "rain": 0.058,
+        "fog": 0.109,
+        "wind_intensity": -0.366,
+        "letter_life": 0.457,
+        "hour_shift": 0.96,
+        "luminosity": 0.192
+      }
+    },
+    "sublime": {
+      "poles": {
+        "calm": 0.056,
+        "light": 0.064
+      },
+      "effects": {
+        "wind_intensity": -0.045,
+        "fog": 0.011,
+        "letter_life": 0.056,
+        "hour_shift": 0.256,
+        "luminosity": 0.051
+      }
+    },
+    "subterráneo": {
+      "poles": {
+        "heat": 0.024,
+        "cold": 0.141,
+        "water": 0.229,
+        "darkness": 0.274
+      },
+      "effects": {
+        "temperature": -0.117,
+        "heat_haze": 0.017,
+        "snow": 0.07,
+        "rain": 0.229,
+        "fog": 0.069,
+        "hour_shift": -1.0,
+        "luminosity": -0.192
+      }
+    },
+    "sudor": {
+      "poles": {
+        "heat": 0.342,
+        "cold": 0.202,
+        "wind": 0.088,
+        "water": 0.286,
+        "calm": 0.075,
+        "darkness": 0.045,
+        "light": 0.026
+      },
+      "effects": {
+        "temperature": 0.14,
+        "heat_haze": 0.239,
+        "snow": 0.101,
+        "wind_intensity": 0.028,
+        "storm": 0.035,
+        "rain": 0.286,
+        "fog": 0.101,
+        "letter_life": 0.075,
+        "hour_shift": -0.076,
+        "luminosity": -0.011
+      }
+    },
+    "sumergir": {
+      "poles": {
+        "heat": 0.129,
+        "cold": 0.149,
+        "wind": 0.022,
+        "water": 0.127,
+        "calm": 0.067,
+        "darkness": 0.145,
+        "light": 0.06
+      },
+      "effects": {
+        "temperature": -0.02,
+        "heat_haze": 0.09,
+        "snow": 0.074,
+        "wind_intensity": -0.032,
+        "storm": 0.009,
+        "rain": 0.127,
+        "fog": 0.052,
+        "letter_life": 0.067,
+        "hour_shift": -0.34,
+        "luminosity": -0.053
+      }
+    },
+    "suspiro": {
+      "poles": {
+        "wind": 0.219,
+        "calm": 0.242,
+        "darkness": 0.074,
+        "light": 0.027
+      },
+      "effects": {
+        "wind_intensity": 0.025,
+        "storm": 0.088,
+        "fog": 0.048,
+        "letter_life": 0.242,
+        "hour_shift": -0.188,
+        "luminosity": -0.03
+      }
+    },
+    "susurro": {
+      "poles": {
+        "wind": 0.185,
+        "water": 0.011,
+        "calm": 0.194,
+        "darkness": 0.086,
+        "light": 0.061
+      },
+      "effects": {
+        "wind_intensity": 0.03,
+        "storm": 0.074,
+        "rain": 0.011,
+        "fog": 0.042,
+        "letter_life": 0.194,
+        "hour_shift": -0.1,
+        "luminosity": -0.011
+      }
+    },
+    "sótano": {
+      "poles": {
+        "darkness": 0.224
+      },
+      "effects": {
+        "hour_shift": -0.896,
+        "luminosity": -0.157
+      }
+    },
+    "tallar": {
+      "poles": {
+        "light": 0.014
+      },
+      "effects": {
+        "hour_shift": 0.056,
+        "luminosity": 0.011
+      }
+    },
+    "techo": {
+      "poles": {
+        "heat": 0.162,
+        "cold": 0.209,
+        "water": 0.071,
+        "calm": 0.012,
+        "darkness": 0.25,
+        "light": 0.199
+      },
+      "effects": {
+        "temperature": -0.047,
+        "heat_haze": 0.113,
+        "snow": 0.104,
+        "rain": 0.071,
+        "fog": 0.024,
+        "wind_intensity": -0.01,
+        "letter_life": 0.012,
+        "hour_shift": -0.204,
+        "luminosity": -0.016
+      }
+    },
+    "tempestad": {
+      "poles": {
+        "heat": 0.35,
+        "cold": 0.262,
+        "wind": 0.677,
+        "water": 0.52,
+        "calm": 0.282,
+        "darkness": 0.338,
+        "light": 0.251
+      },
+      "effects": {
+        "temperature": 0.088,
+        "heat_haze": 0.245,
+        "snow": 0.131,
+        "wind_intensity": 0.451,
+        "storm": 0.271,
+        "rain": 0.52,
+        "fog": 0.212,
+        "letter_life": 0.282,
+        "hour_shift": -0.348,
+        "luminosity": -0.036
+      }
+    },
+    "ternura": {
+      "poles": {
+        "calm": 0.242,
+        "darkness": 0.025,
+        "light": 0.094
+      },
+      "effects": {
+        "wind_intensity": -0.194,
+        "fog": 0.048,
+        "letter_life": 0.242,
+        "hour_shift": 0.276,
+        "luminosity": 0.058
+      }
+    },
+    "terrible": {
+      "poles": {
+        "heat": 0.152,
+        "cold": 0.063,
+        "wind": 0.301,
+        "water": 0.11,
+        "calm": 0.112,
+        "darkness": 0.335,
+        "light": 0.097
+      },
+      "effects": {
+        "temperature": 0.089,
+        "heat_haze": 0.106,
+        "snow": 0.032,
+        "wind_intensity": 0.211,
+        "storm": 0.12,
+        "rain": 0.11,
+        "fog": 0.055,
+        "letter_life": 0.112,
+        "hour_shift": -0.952,
+        "luminosity": -0.157
+      }
+    },
+    "tibio": {
+      "poles": {
+        "heat": 0.148,
+        "cold": 0.114,
+        "water": 0.003,
+        "calm": 0.171
+      },
+      "effects": {
+        "temperature": 0.034,
+        "heat_haze": 0.104,
+        "snow": 0.057,
+        "rain": 0.003,
+        "fog": 0.035,
+        "wind_intensity": -0.137,
+        "letter_life": 0.171
+      }
+    },
+    "tiempo": {
+      "poles": {
+        "heat": 0.07,
+        "cold": 0.002,
+        "wind": 0.028,
+        "calm": 0.279,
+        "darkness": 0.094,
+        "light": 0.043
+      },
+      "effects": {
+        "temperature": 0.068,
+        "heat_haze": 0.049,
+        "snow": 0.001,
+        "wind_intensity": -0.195,
+        "storm": 0.011,
+        "fog": 0.056,
+        "letter_life": 0.279,
+        "hour_shift": -0.204,
+        "luminosity": -0.031
+      }
+    },
+    "tierra": {
+      "poles": {
+        "heat": 0.251,
+        "cold": 0.191,
+        "wind": 0.119,
+        "water": 0.379,
+        "calm": 0.196,
+        "darkness": 0.275,
+        "light": 0.138
+      },
+      "effects": {
+        "temperature": 0.06,
+        "heat_haze": 0.176,
+        "snow": 0.096,
+        "wind_intensity": -0.038,
+        "storm": 0.048,
+        "rain": 0.379,
+        "fog": 0.153,
+        "letter_life": 0.196,
+        "hour_shift": -0.548,
+        "luminosity": -0.082
+      }
+    },
+    "tiniebla": {
+      "poles": {
+        "heat": 0.127,
+        "cold": 0.139,
+        "wind": 0.186,
+        "water": 0.188,
+        "calm": 0.084,
+        "darkness": 0.435,
+        "light": 0.305
+      },
+      "effects": {
+        "temperature": -0.012,
+        "heat_haze": 0.089,
+        "snow": 0.07,
+        "wind_intensity": 0.119,
+        "storm": 0.074,
+        "rain": 0.188,
+        "fog": 0.073,
+        "letter_life": 0.084,
+        "hour_shift": -0.52,
+        "luminosity": -0.06
+      }
+    },
+    "tinta": {
+      "poles": {
+        "water": 0.035
+      },
+      "effects": {
+        "rain": 0.035,
+        "fog": 0.011
+      }
+    },
+    "tiritar": {
+      "poles": {
+        "heat": 0.044,
+        "cold": 0.14,
+        "calm": 0.011
+      },
+      "effects": {
+        "temperature": -0.096,
+        "heat_haze": 0.031,
+        "snow": 0.07,
+        "wind_intensity": -0.009,
+        "fog": 0.002,
+        "letter_life": 0.011
+      }
+    },
+    "tono": {
+      "poles": {
+        "calm": 0.012,
+        "light": 0.059
+      },
+      "effects": {
+        "wind_intensity": -0.01,
+        "fog": 0.002,
+        "letter_life": 0.012,
+        "hour_shift": 0.236,
+        "luminosity": 0.047
+      }
+    },
+    "tormenta": {
+      "poles": {
+        "heat": 0.301,
+        "cold": 0.27,
+        "wind": 0.676,
+        "water": 0.436,
+        "calm": 0.025,
+        "darkness": 0.218,
+        "light": 0.146
+      },
+      "effects": {
+        "temperature": 0.031,
+        "heat_haze": 0.211,
+        "snow": 0.135,
+        "wind_intensity": 0.656,
+        "storm": 0.27,
+        "rain": 0.436,
+        "fog": 0.136,
+        "letter_life": 0.025,
+        "hour_shift": -0.288,
+        "luminosity": -0.036
+      }
+    },
+    "tornado": {
+      "poles": {
+        "heat": 0.133,
+        "cold": 0.093,
+        "wind": 0.416,
+        "water": 0.09,
+        "darkness": 0.112,
+        "light": 0.057
+      },
+      "effects": {
+        "temperature": 0.04,
+        "heat_haze": 0.093,
+        "snow": 0.046,
+        "wind_intensity": 0.416,
+        "storm": 0.166,
+        "rain": 0.09,
+        "fog": 0.027,
+        "hour_shift": -0.22,
+        "luminosity": -0.033
+      }
+    },
+    "torrente": {
+      "poles": {
+        "heat": 0.335,
+        "cold": 0.226,
+        "wind": 0.302,
+        "water": 0.469,
+        "calm": 0.243,
+        "darkness": 0.337,
+        "light": 0.277
+      },
+      "effects": {
+        "temperature": 0.109,
+        "heat_haze": 0.234,
+        "snow": 0.113,
+        "wind_intensity": 0.108,
+        "storm": 0.121,
+        "rain": 0.469,
+        "fog": 0.189,
+        "letter_life": 0.243,
+        "hour_shift": -0.24,
+        "luminosity": -0.014
+      }
+    },
+    "tranquilo": {
+      "poles": {
+        "heat": 0.073,
+        "cold": 0.057,
+        "wind": 0.062,
+        "calm": 0.52,
+        "darkness": 0.086,
+        "light": 0.057
+      },
+      "effects": {
+        "temperature": 0.016,
+        "heat_haze": 0.051,
+        "snow": 0.029,
+        "wind_intensity": -0.354,
+        "storm": 0.025,
+        "fog": 0.104,
+        "letter_life": 0.52,
+        "hour_shift": -0.116,
+        "luminosity": -0.015
+      }
+    },
+    "trazo": {
+      "poles": {
+        "light": 0.035
+      },
+      "effects": {
+        "hour_shift": 0.14,
+        "luminosity": 0.028
+      }
+    },
+    "tristeza": {
+      "poles": {
+        "heat": 0.013,
+        "wind": 0.146,
+        "water": 0.08,
+        "calm": 0.28,
+        "darkness": 0.291,
+        "light": 0.102
+      },
+      "effects": {
+        "temperature": 0.013,
+        "heat_haze": 0.009,
+        "wind_intensity": -0.078,
+        "storm": 0.058,
+        "rain": 0.08,
+        "fog": 0.08,
+        "letter_life": 0.28,
+        "hour_shift": -0.756,
+        "luminosity": -0.122
+      }
+    },
+    "tronco": {
+      "poles": {
+        "heat": 0.134,
+        "cold": 0.171,
+        "wind": 0.003,
+        "water": 0.063,
+        "calm": 0.094,
+        "darkness": 0.147,
+        "light": 0.051
+      },
+      "effects": {
+        "temperature": -0.037,
+        "heat_haze": 0.094,
+        "snow": 0.086,
+        "wind_intensity": -0.072,
+        "storm": 0.001,
+        "rain": 0.063,
+        "fog": 0.038,
+        "letter_life": 0.094,
+        "hour_shift": -0.384,
+        "luminosity": -0.062
+      }
+    },
+    "tropical": {
+      "poles": {
+        "heat": 0.1,
+        "cold": 0.11,
+        "wind": 0.158,
+        "water": 0.099
+      },
+      "effects": {
+        "temperature": -0.01,
+        "heat_haze": 0.07,
+        "snow": 0.055,
+        "wind_intensity": 0.158,
+        "storm": 0.063,
+        "rain": 0.099,
+        "fog": 0.03
+      }
+    },
+    "trueno": {
+      "poles": {
+        "heat": 0.137,
+        "cold": 0.097,
+        "wind": 0.389,
+        "water": 0.104,
+        "darkness": 0.211,
+        "light": 0.18
+      },
+      "effects": {
+        "temperature": 0.04,
+        "heat_haze": 0.096,
+        "snow": 0.049,
+        "wind_intensity": 0.389,
+        "storm": 0.156,
+        "rain": 0.104,
+        "fog": 0.031,
+        "hour_shift": -0.124,
+        "luminosity": -0.004
+      }
+    },
+    "tundra": {
+      "poles": {
+        "cold": 0.294
+      },
+      "effects": {
+        "temperature": -0.294,
+        "snow": 0.147
+      }
+    },
+    "turbulencia": {
+      "poles": {
+        "heat": 0.062,
+        "cold": 0.036,
+        "wind": 0.26,
+        "water": 0.174,
+        "calm": 0.142,
+        "darkness": 0.101,
+        "light": 0.08
+      },
+      "effects": {
+        "temperature": 0.026,
+        "heat_haze": 0.043,
+        "snow": 0.018,
+        "wind_intensity": 0.146,
+        "storm": 0.104,
+        "rain": 0.174,
+        "fog": 0.081,
+        "letter_life": 0.142,
+        "hour_shift": -0.084,
+        "luminosity": -0.007
+      }
+    },
+    "turquesa": {
+      "poles": {
+        "cold": 0.046,
+        "water": 0.033,
+        "light": 0.174
+      },
+      "effects": {
+        "temperature": -0.046,
+        "snow": 0.023,
+        "rain": 0.033,
+        "fog": 0.01,
+        "hour_shift": 0.696,
+        "luminosity": 0.139
+      }
+    },
+    "témpano": {
+      "poles": {
+        "heat": 0.048,
+        "cold": 0.427,
+        "wind": 0.152,
+        "water": 0.217,
+        "darkness": 0.141
+      },
+      "effects": {
+        "temperature": -0.379,
+        "heat_haze": 0.034,
+        "snow": 0.213,
+        "wind_intensity": 0.152,
+        "storm": 0.061,
+        "rain": 0.217,
+        "fog": 0.065,
+        "hour_shift": -0.564,
+        "luminosity": -0.099
+      }
+    },
+    "túnel": {
+      "poles": {
+        "cold": 0.06,
+        "wind": 0.036,
+        "water": 0.139,
+        "darkness": 0.156
+      },
+      "effects": {
+        "temperature": -0.06,
+        "snow": 0.03,
+        "wind_intensity": 0.036,
+        "storm": 0.014,
+        "rain": 0.139,
+        "fog": 0.042,
+        "hour_shift": -0.624,
+        "luminosity": -0.109
+      }
+    },
+    "vacío": {
+      "poles": {
+        "heat": 0.152,
+        "cold": 0.224,
+        "wind": 0.172,
+        "water": 0.174,
+        "calm": 0.15,
+        "darkness": 0.469,
+        "light": 0.138
+      },
+      "effects": {
+        "temperature": -0.072,
+        "heat_haze": 0.106,
+        "snow": 0.112,
+        "wind_intensity": 0.052,
+        "storm": 0.069,
+        "rain": 0.174,
+        "fog": 0.082,
+        "letter_life": 0.15,
+        "hour_shift": -1.0,
+        "luminosity": -0.218
+      }
+    },
+    "valle": {
+      "poles": {
+        "cold": 0.021,
+        "water": 0.219,
+        "darkness": 0.039
+      },
+      "effects": {
+        "temperature": -0.021,
+        "snow": 0.011,
+        "rain": 0.219,
+        "fog": 0.066,
+        "hour_shift": -0.156,
+        "luminosity": -0.027
+      }
+    },
+    "vapor": {
+      "poles": {
+        "heat": 0.282,
+        "cold": 0.122,
+        "wind": 0.049,
+        "water": 0.204
+      },
+      "effects": {
+        "temperature": 0.16,
+        "heat_haze": 0.197,
+        "snow": 0.061,
+        "wind_intensity": 0.049,
+        "storm": 0.02,
+        "rain": 0.204,
+        "fog": 0.061
+      }
+    },
+    "vendaval": {
+      "poles": {
+        "heat": 0.108,
+        "cold": 0.061,
+        "wind": 0.503,
+        "water": 0.133,
+        "darkness": 0.002
+      },
+      "effects": {
+        "temperature": 0.047,
+        "heat_haze": 0.076,
+        "snow": 0.03,
+        "wind_intensity": 0.503,
+        "storm": 0.201,
+        "rain": 0.133,
+        "fog": 0.04,
+        "hour_shift": -0.008,
+        "luminosity": -0.001
+      }
+    },
+    "ventana": {
+      "poles": {
+        "cold": 0.018,
+        "darkness": 0.112,
+        "light": 0.145
+      },
+      "effects": {
+        "temperature": -0.018,
+        "snow": 0.009,
+        "hour_shift": 0.132,
+        "luminosity": 0.038
+      }
+    },
+    "ventisca": {
+      "poles": {
+        "heat": 0.352,
+        "cold": 0.468,
+        "wind": 0.527,
+        "water": 0.381,
+        "darkness": 0.169,
+        "light": 0.132
+      },
+      "effects": {
+        "temperature": -0.116,
+        "heat_haze": 0.246,
+        "snow": 0.234,
+        "wind_intensity": 0.527,
+        "storm": 0.211,
+        "rain": 0.381,
+        "fog": 0.114,
+        "hour_shift": -0.148,
+        "luminosity": -0.013
+      }
+    },
+    "ver": {
+      "poles": {
+        "light": 0.022
+      },
+      "effects": {
+        "hour_shift": 0.088,
+        "luminosity": 0.018
+      }
+    },
+    "verano": {
+      "poles": {
+        "heat": 0.104,
+        "cold": 0.101
+      },
+      "effects": {
+        "temperature": 0.003,
+        "heat_haze": 0.073,
+        "snow": 0.051
+      }
+    },
+    "verde": {
+      "poles": {
+        "heat": 0.173,
+        "cold": 0.215,
+        "water": 0.024,
+        "calm": 0.071,
+        "darkness": 0.079,
+        "light": 0.273
+      },
+      "effects": {
+        "temperature": -0.042,
+        "heat_haze": 0.121,
+        "snow": 0.107,
+        "rain": 0.024,
+        "fog": 0.021,
+        "wind_intensity": -0.057,
+        "letter_life": 0.071,
+        "hour_shift": 0.776,
+        "luminosity": 0.163
+      }
+    },
+    "vereda": {
+      "poles": {
+        "water": 0.02
+      },
+      "effects": {
+        "rain": 0.02,
+        "fog": 0.006
+      }
+    },
+    "verso": {
+      "poles": {
+        "darkness": 0.037
+      },
+      "effects": {
+        "hour_shift": -0.148,
+        "luminosity": -0.026
+      }
+    },
+    "vibración": {
+      "poles": {
+        "heat": 0.019,
+        "calm": 0.153,
+        "light": 0.125
+      },
+      "effects": {
+        "temperature": 0.019,
+        "heat_haze": 0.013,
+        "wind_intensity": -0.122,
+        "fog": 0.031,
+        "letter_life": 0.153,
+        "hour_shift": 0.5,
+        "luminosity": 0.1
+      }
+    },
+    "viejo": {
+      "poles": {
+        "darkness": 0.132
+      },
+      "effects": {
+        "hour_shift": -0.528,
+        "luminosity": -0.092
+      }
+    },
+    "viento": {
+      "poles": {
+        "heat": 0.458,
+        "cold": 0.474,
+        "wind": 0.648,
+        "water": 0.461,
+        "calm": 0.267,
+        "darkness": 0.224,
+        "light": 0.296
+      },
+      "effects": {
+        "temperature": -0.016,
+        "heat_haze": 0.321,
+        "snow": 0.237,
+        "wind_intensity": 0.434,
+        "storm": 0.259,
+        "rain": 0.461,
+        "fog": 0.192,
+        "letter_life": 0.267,
+        "hour_shift": 0.288,
+        "luminosity": 0.08
+      }
+    },
+    "violeta": {
+      "poles": {
+        "heat": 0.219,
+        "cold": 0.162,
+        "wind": 0.019,
+        "water": 0.05,
+        "calm": 0.102,
+        "darkness": 0.275,
+        "light": 0.418
+      },
+      "effects": {
+        "temperature": 0.057,
+        "heat_haze": 0.153,
+        "snow": 0.081,
+        "wind_intensity": -0.063,
+        "storm": 0.008,
+        "rain": 0.05,
+        "fog": 0.035,
+        "letter_life": 0.102,
+        "hour_shift": 0.572,
+        "luminosity": 0.142
+      }
+    },
+    "vivir": {
+      "poles": {
+        "calm": 0.171
+      },
+      "effects": {
+        "wind_intensity": -0.137,
+        "fog": 0.034,
+        "letter_life": 0.171
+      }
+    },
+    "volar": {
+      "poles": {
+        "cold": 0.001,
+        "wind": 0.085
+      },
+      "effects": {
+        "temperature": -0.001,
+        "snow": 0.001,
+        "wind_intensity": 0.085,
+        "storm": 0.034
+      }
+    },
+    "volcán": {
+      "poles": {
+        "heat": 0.225,
+        "cold": 0.198,
+        "wind": 0.161,
+        "water": 0.244,
+        "darkness": 0.104
+      },
+      "effects": {
+        "temperature": 0.027,
+        "heat_haze": 0.158,
+        "snow": 0.099,
+        "wind_intensity": 0.161,
+        "storm": 0.064,
+        "rain": 0.244,
+        "fog": 0.073,
+        "hour_shift": -0.416,
+        "luminosity": -0.073
+      }
+    },
+    "zorro": {
+      "poles": {
+        "cold": 0.097
+      },
+      "effects": {
+        "temperature": -0.097,
+        "snow": 0.049
+      }
+    },
+    "ámbar": {
+      "poles": {
+        "heat": 0.052,
+        "cold": 0.158,
+        "calm": 0.007,
+        "darkness": 0.1,
+        "light": 0.221
+      },
+      "effects": {
+        "temperature": -0.106,
+        "heat_haze": 0.036,
+        "snow": 0.079,
+        "wind_intensity": -0.006,
+        "fog": 0.001,
+        "letter_life": 0.007,
+        "hour_shift": 0.484,
+        "luminosity": 0.107
+      }
+    },
+    "árbol": {
+      "poles": {
+        "heat": 0.151,
+        "cold": 0.143,
+        "wind": 0.003,
+        "water": 0.096,
+        "calm": 0.076,
+        "darkness": 0.197,
+        "light": 0.111
+      },
+      "effects": {
+        "temperature": 0.008,
+        "heat_haze": 0.106,
+        "snow": 0.071,
+        "wind_intensity": -0.058,
+        "storm": 0.001,
+        "rain": 0.096,
+        "fog": 0.044,
+        "letter_life": 0.076,
+        "hour_shift": -0.344,
+        "luminosity": -0.049
+      }
+    },
+    "índigo": {
+      "poles": {
+        "light": 0.034
+      },
+      "effects": {
+        "hour_shift": 0.136,
+        "luminosity": 0.027
+      }
+    }
+  }
+}

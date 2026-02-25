@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text2Wind — Interfaz Espigadora</title>
+  <meta name="description"
+    content="Una experiencia web inmersiva donde las palabras se dibujan, respiran y se disuelven en el viento." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-bGbqhdNV.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cm_5DC_J.css">
+</head>
+
+<body>
+  <canvas id="world"></canvas>
+
+  <!-- Clock -->
+  <div id="clock" class="clock">--:--:--</div>
+
+  <!-- ═══ PARAMETERS PANEL (tabbed) ═══ -->
+  <div id="controls" class="panel hidden">
+    <div class="panel-header">
+      <span class="panel-title">Parámetros</span>
+      <button class="panel-close" data-close="controls">&times;</button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="tab-atmos">☁️ Clima</button>
+      <button class="tab" data-tab="tab-rhythm">🥁 Ritmo</button>
+      <button class="tab" data-tab="tab-drone">🎵 Drone</button>
+      <button class="tab" data-tab="tab-melody">🎹 Melod</button>
+      <button class="tab" data-tab="tab-auto">📖 Auto</button>
+    </div>
+
+    <div class="tab-content active" id="tab-atmos">
+      <div class="control-group"><label>Viento</label><input type="range" id="ctrl-wind" min="0" max="100"
+          value="20" /><span class="ctrl-value" data-for="ctrl-wind">20</span></div>
+      <div class="control-group"><label>Dirección</label><input type="range" id="ctrl-wind-dir" min="0" max="360"
+          value="90" /><span class="ctrl-value" data-for="ctrl-wind-dir">90°</span></div>
+      <div class="control-group"><label>Lluvia</label><input type="range" id="ctrl-rain" min="0" max="100"
+          value="0" /><span class="ctrl-value" data-for="ctrl-rain">0</span></div>
+      <div class="control-group"><label>Niebla</label><input type="range" id="ctrl-fog" min="0" max="100"
+          value="0" /><span class="ctrl-value" data-for="ctrl-fog">0</span></div>
+      <div class="control-group"><label>Temperatura</label><input type="range" id="ctrl-temp" min="-10" max="45"
+          value="20" /><span class="ctrl-value" data-for="ctrl-temp">20°C</span></div>
+      <div class="control-group"><label>Tormenta</label><input type="range" id="ctrl-storm" min="0" max="100"
+          value="0" /><span class="ctrl-value" data-for="ctrl-storm">0</span></div>
+      <div class="control-group"><label>Hora</label><input type="range" id="ctrl-hour" min="-1" max="24" step="0.1"
+          value="-1" /><span class="ctrl-value" data-for="ctrl-hour">Auto</span></div>
+    </div>
+
+    <div class="tab-content" id="tab-rhythm">
+      <div class="control-group control-toggle"><label>Activo</label><input type="checkbox" id="ctrl-rhythm-mute"
+          checked /></div>
+      <div class="control-group"><label>Volumen</label><input type="range" id="ctrl-rhythm-vol" min="-40" max="0"
+          value="-14" /><span class="ctrl-value" data-for="ctrl-rhythm-vol">-14 dB</span></div>
+      <div class="control-group"><label>Attack</label><input type="range" id="ctrl-rhythm-attack" min="0.001" max="0.5"
+          step="0.001" value="0.002" /><span class="ctrl-value" data-for="ctrl-rhythm-attack">0.002</span></div>
+      <div class="control-group"><label>Decay</label><input type="range" id="ctrl-rhythm-decay" min="0.01" max="1.0"
+          step="0.01" value="0.15" /><span class="ctrl-value" data-for="ctrl-rhythm-decay">0.15</span></div>
+      <div class="control-group"><label>Release</label><input type="range" id="ctrl-rhythm-release" min="0.01" max="2.0"
+          step="0.01" value="0.1" /><span class="ctrl-value" data-for="ctrl-rhythm-release">0.10</span></div>
+      <hr class="divider" />
+      <div class="control-group control-toggle"><label>Viento</label><input type="checkbox" id="ctrl-wind-mute"
+          checked /></div>
+      <div class="control-group"><label>Vol. viento</label><input type="range" id="ctrl-wind-vol" min="-50" max="-10"
+          value="-35" /><span class="ctrl-value" data-for="ctrl-wind-vol">-35 dB</span></div>
+    </div>
+
+    <div class="tab-content" id="tab-drone">
+      <div class="control-group control-toggle"><label>Activo</label><input type="checkbox" id="ctrl-drone-mute"
+          checked /></div>
+      <div class="control-group"><label>Volumen</label><input type="range" id="ctrl-drone-vol" min="-40" max="-5"
+          value="-22" /><span class="ctrl-value" data-for="ctrl-drone-vol">-22 dB</span></div>
+      <div class="control-group"><label>Filtro LP</label><input type="range" id="ctrl-drone-filter" min="50" max="2000"
+          step="10" value="400" /><span class="ctrl-value" data-for="ctrl-drone-filter">400 Hz</span></div>
+      <div class="control-group"><label>Attack</label><input type="range" id="ctrl-drone-attack" min="0.5" max="10"
+          step="0.1" value="4" /><span class="ctrl-value" data-for="ctrl-drone-attack">4.0s</span></div>
+      <div class="control-group"><label>Release</label><input type="range" id="ctrl-drone-release" min="1" max="15"
+          step="0.5" value="6" /><span class="ctrl-value" data-for="ctrl-drone-release">6.0s</span></div>
+      <div class="control-group"><label>Onda</label>
+        <select id="ctrl-drone-wave">
+          <option value="sine" selected>Sine</option>
+          <option value="triangle">Triangle</option>
+          <option value="fatsine">Fat Sine</option>
+          <option value="fatsawtooth">Fat Saw</option>
+        </select>
+      </div>
+      <p class="hint">Reacciona a la hora y temperatura.</p>
+    </div>
+
+    <div class="tab-content" id="tab-melody">
+      <div class="control-group control-toggle"><label>Activo</label><input type="checkbox" id="ctrl-melody-mute"
+          checked /></div>
+      <div class="control-group"><label>Volumen</label><input type="range" id="ctrl-melody-vol" min="-40" max="0"
+          value="-16" /><span class="ctrl-value" data-for="ctrl-melody-vol">-16 dB</span></div>
+      <div class="control-group"><label>Modo</label>
+        <select id="ctrl-melody-mode">
+          <option value="random" selected>Random (escala)</option>
+          <option value="piano">Piano (QWERTY)</option>
+        </select>
+      </div>
+      <div class="control-group"><label>Onda</label>
+        <select id="ctrl-melody-wave">
+          <option value="triangle" selected>Triangle</option>
+          <option value="sine">Sine</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+        </select>
+      </div>
+      <div class="control-group"><label>Attack</label><input type="range" id="ctrl-melody-attack" min="0.001" max="2.0"
+          step="0.001" value="0.05" /><span class="ctrl-value" data-for="ctrl-melody-attack">0.050</span></div>
+      <div class="control-group"><label>Decay</label><input type="range" id="ctrl-melody-decay" min="0.05" max="3.0"
+          step="0.05" value="0.6" /><span class="ctrl-value" data-for="ctrl-melody-decay">0.60</span></div>
+      <div class="control-group"><label>Release</label><input type="range" id="ctrl-melody-release" min="0.1" max="5.0"
+          step="0.1" value="1.5" /><span class="ctrl-value" data-for="ctrl-melody-release">1.5</span></div>
+      <div class="control-group"><label>Reverb</label><input type="range" id="ctrl-melody-reverb" min="0" max="1"
+          step="0.05" value="0.35" /><span class="ctrl-value" data-for="ctrl-melody-reverb">0.35</span></div>
+      <p class="hint">Escala: pentatónica → frigia (tormenta) → lidia (calor).</p>
+    </div>
+
+    <!-- Tab: Auto-typewriter -->
+    <div class="tab-content" id="tab-auto">
+      <input type="file" id="file-import" accept=".txt,.md,.text" style="display:none" />
+      <button id="btn-file-import" class="file-import-btn">📂 Importar archivo .txt</button>
+      <p id="auto-status" class="hint" style="margin-bottom:8px">Sin archivo</p>
+      <div class="control-group"><label>Velocidad</label><input type="range" id="ctrl-auto-bpm" min="10" max="400"
+          value="120" /><span class="ctrl-value" data-for="ctrl-auto-bpm">120 BPM</span></div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <button id="btn-auto-play" class="file-import-btn" style="flex:1">▶ Reproducir</button>
+        <button id="btn-auto-stop" class="file-import-btn" style="flex:0.6">⏹ Stop</button>
+      </div>
+      <p class="hint">Importá un .txt y el texto se escribe solo al BPM elegido.</p>
+    </div>
+  </div>
+
+  <!-- ═══ SHORTCUTS PANEL ═══ -->
+  <div id="panel-shortcuts" class="panel panel-small hidden">
+    <div class="panel-header">
+      <span class="panel-title">Atajos</span>
+      <button class="panel-close" data-close="panel-shortcuts">&times;</button>
+    </div>
+    <div class="shortcut-list">
+      <div class="shortcut-row"><kbd>Click</kbd><span>Posicionar escritura</span></div>
+      <div class="shortcut-row"><kbd>Enter</kbd><span>Erosionar línea + buscar palabra</span></div>
+      <div class="shortcut-row"><kbd>Backspace</kbd><span>Erosionar última letra</span></div>
+      <div class="shortcut-row"><kbd>F</kbd><span>Pantalla completa</span></div>
+      <div class="shortcut-row"><kbd>F11</kbd><span>Modo performance</span></div>
+      <div class="shortcut-row"><kbd>Esc</kbd><span>Cerrar panel / salir fullscreen</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT PANEL ═══ -->
+  <div id="panel-about" class="panel panel-about hidden">
+    <div class="panel-header">
+      <span class="panel-title">¿Qué es esto?</span>
+      <button class="panel-close" data-close="panel-about">&times;</button>
+    </div>
+    <div class="about-content">
+      <p class="about-quote">"Nada es realmente un desecho si se mira con la atención adecuada."</p>
+      <p class="about-author">— Agnès Varda, <em>Los espigadores y la espigadora</em> (2000)</p>
+
+      <h3>Text2Wind</h3>
+      <p>Una interfaz espigadora: las palabras que escribís nacen como tipografía viva, respiran en un paisaje
+        atmosférico sincronizado con la hora real, y eventualmente se disuelven en viento, sonido y silencio.</p>
+
+      <h3>Cómo funciona</h3>
+      <p>Cada letra tiene un ciclo de vida: <strong>nacimiento → reposo → erosión → disolución</strong>. El cursor actúa
+        como una vela que protege las letras del olvido. Cuando te alejás, el viento se las lleva.</p>
+
+      <h3>Palabras semánticas</h3>
+      <p>360 palabras en español están mapeadas a efectos ambientales. Escribir <em>"lluvia"</em> nubla el cielo.
+        <em>"Silencio"</em> detiene el viento. <em>"Memoria"</em> revela huellas del pasado.
+      </p>
+
+      <h3>3 capas de sonido</h3>
+      <p><strong>Ritmo:</strong> percusión generada por la erosión de letras.<br />
+        <strong>Drone:</strong> tono continuo que cambia con la hora y el clima.<br />
+        <strong>Melodía:</strong> notas que nacen al teclear (modo random o piano QWERTY).
+      </p>
+
+      <p class="about-link"><a href="https://github.com/vlasvlasvlas/text2wind" target="_blank" rel="noopener">GitHub
+          ↗</a></p>
+    </div>
+  </div>
+
+  <!-- ═══ Floating buttons ═══ -->
+  <div class="floating-bar">
+    <button id="btn-about" class="floating-btn" title="¿Qué es esto?">❓</button>
+    <button id="btn-shortcuts" class="floating-btn" title="Atajos">⌨️</button>
+    <button id="btn-fullscreen" class="floating-btn" title="Pantalla completa">⛶</button>
+    <button id="btn-capture" class="floating-btn" title="Capturar">📷</button>
+    <button id="btn-sound" class="floating-btn" title="Sonido">🔇</button>
+    <button id="btn-controls" class="floating-btn" title="Parámetros">⚙️</button>
+  </div>
+
+  <!-- Intro overlay -->
+  <div id="intro" class="intro">
+    <div class="intro-content">
+      <h1>Text2Wind</h1>
+      <p class="intro-sub">Escribe. Observa.</p>
+      <p class="intro-hint">Click para comenzar</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

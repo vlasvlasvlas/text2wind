@@ -1,0 +1,307 @@
+{
+    "poles": {
+        "heat": {
+            "emoji": "🔥",
+            "label": "Calor",
+            "affects": {
+                "temperature": 1.0,
+                "heat_haze": 0.7
+            },
+            "seeds": [
+                "fuego",
+                "sol",
+                "verano",
+                "desierto",
+                "fiebre",
+                "calor",
+                "llama",
+                "ardiente",
+                "incendio",
+                "brasa",
+                "horno",
+                "abrasador",
+                "sofocante",
+                "tropical",
+                "lava",
+                "ceniza",
+                "candente",
+                "quemar",
+                "hervir",
+                "sudor"
+            ]
+        },
+        "cold": {
+            "emoji": "❄️",
+            "label": "Frío",
+            "affects": {
+                "temperature": -1.0,
+                "snow": 0.5
+            },
+            "seeds": [
+                "hielo",
+                "nieve",
+                "invierno",
+                "frío",
+                "escarcha",
+                "glaciar",
+                "congelar",
+                "helado",
+                "polar",
+                "gélido",
+                "tundra",
+                "blanco",
+                "cristal",
+                "témpano",
+                "neblina",
+                "aliento",
+                "tiritar",
+                "páramo"
+            ]
+        },
+        "wind": {
+            "emoji": "💨",
+            "label": "Viento",
+            "affects": {
+                "wind_intensity": 1.0,
+                "storm": 0.4
+            },
+            "seeds": [
+                "viento",
+                "tormenta",
+                "huracán",
+                "ráfaga",
+                "vendaval",
+                "ciclón",
+                "tornado",
+                "brisa",
+                "soplar",
+                "ventisca",
+                "tempestad",
+                "borrasca",
+                "remolino",
+                "turbulencia",
+                "oleaje",
+                "azote",
+                "silbar",
+                "rugir",
+                "grito",
+                "escape",
+                "huida",
+                "correr",
+                "caos"
+            ]
+        },
+        "water": {
+            "emoji": "🌧️",
+            "label": "Agua",
+            "affects": {
+                "rain": 1.0,
+                "fog": 0.3
+            },
+            "seeds": [
+                "lluvia",
+                "agua",
+                "mar",
+                "océano",
+                "río",
+                "lágrima",
+                "diluvio",
+                "gota",
+                "charco",
+                "inundación",
+                "cascada",
+                "arroyo",
+                "manantial",
+                "rocío",
+                "humedad",
+                "vapor",
+                "niebla",
+                "llovizna",
+                "torrente",
+                "marea",
+                "ola",
+                "naufragio",
+                "sumergir",
+                "ahogar",
+                "sed"
+            ]
+        },
+        "calm": {
+            "emoji": "🌿",
+            "label": "Calma",
+            "affects": {
+                "wind_intensity": -0.8,
+                "fog": 0.2,
+                "letter_life": 1.0
+            },
+            "seeds": [
+                "paz",
+                "calma",
+                "reposo",
+                "jardín",
+                "respirar",
+                "lento",
+                "musgo",
+                "tranquilo",
+                "sereno",
+                "quietud",
+                "silencio",
+                "meditación",
+                "contemplar",
+                "descanso",
+                "suave",
+                "tibio",
+                "armonía",
+                "equilibrio",
+                "pluma",
+                "suspiro",
+                "cuna",
+                "abrazo",
+                "caricia",
+                "espera"
+            ]
+        },
+        "darkness": {
+            "emoji": "🌑",
+            "label": "Oscuridad",
+            "affects": {
+                "hour_shift": -4.0,
+                "luminosity": -0.7
+            },
+            "seeds": [
+                "noche",
+                "sombra",
+                "oscuro",
+                "oscuridad",
+                "olvido",
+                "profundo",
+                "cueva",
+                "ceguera",
+                "abismo",
+                "vacío",
+                "negro",
+                "tiniebla",
+                "penumbra",
+                "eclipse",
+                "crepúsculo",
+                "ocaso",
+                "apagar",
+                "enterrar",
+                "secreto",
+                "cripta",
+                "sótano",
+                "pozo",
+                "fondo"
+            ]
+        },
+        "light": {
+            "emoji": "☀️",
+            "label": "Luz",
+            "affects": {
+                "hour_shift": 4.0,
+                "luminosity": 0.8
+            },
+            "seeds": [
+                "amanecer",
+                "luz",
+                "brillo",
+                "aurora",
+                "alba",
+                "sol",
+                "dorado",
+                "resplandor",
+                "destello",
+                "fulgor",
+                "luminoso",
+                "claro",
+                "radiante",
+                "centelleo",
+                "chispa",
+                "estrella",
+                "faro",
+                "espejo",
+                "reflejo",
+                "mirada",
+                "revelación",
+                "despertar",
+                "abrir",
+                "nacer"
+            ]
+        }
+    },
+    "special_words": {
+        "espigar": {
+            "effect": "gleaning_mode",
+            "description": "Partículas muertas se levantan del suelo y se reorganizan"
+        },
+        "espiga": {
+            "effect": "gleaning_mode",
+            "description": "Activa modo espigueo"
+        },
+        "memoria": {
+            "effect": "palimpsest_reveal",
+            "description": "El palimpsesto se hace visible brevemente"
+        },
+        "recuerdo": {
+            "effect": "palimpsest_reveal",
+            "description": "Huellas de texto pasado brillan"
+        },
+        "silencio": {
+            "effect": "suspension",
+            "description": "Todo se detiene. Suspensión contemplativa."
+        },
+        "reloj": {
+            "effect": "time_lapse",
+            "description": "El cielo avanza 6 horas rápidamente"
+        },
+        "tiempo": {
+            "effect": "time_lapse",
+            "description": "Time-lapse suave del cielo"
+        },
+        "corazón": {
+            "effect": "heart_formation",
+            "description": "Las partículas forman brevemente un corazón (la papa de Varda)"
+        },
+        "mano": {
+            "effect": "hand_cursor",
+            "description": "El cursor se hace visible como mano temblorosa"
+        },
+        "varda": {
+            "effect": "full_reveal",
+            "description": "Todo el palimpsesto se revela + modo espigueo + suspensión"
+        },
+        "desecho": {
+            "effect": "gleaning_mode",
+            "description": "Lo descartado se levanta"
+        },
+        "basura": {
+            "effect": "gleaning_mode",
+            "description": "Los restos tipográficos cobran vida"
+        },
+        "obsoleto": {
+            "effect": "rapid_aging",
+            "description": "La interfaz envejece rápidamente"
+        },
+        "muerte": {
+            "effect": "erosion_burst",
+            "description": "Todas las letras activas entran en erosión simultánea"
+        },
+        "nacer": {
+            "effect": "grass_bloom",
+            "description": "Hierba brota instantáneamente de los restos"
+        },
+        "papa": {
+            "effect": "heart_formation",
+            "description": "Referencia a la papa-corazón de Varda"
+        }
+    },
+    "config": {
+        "similarity_threshold": 0.35,
+        "max_words_per_pole": 500,
+        "min_word_frequency": 100,
+        "languages": [
+            "es"
+        ],
+        "model": "es_core_news_lg"
+    }
+}

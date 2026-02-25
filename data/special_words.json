@@ -1,0 +1,66 @@
+{
+  "espigar": {
+    "effect": "gleaning_mode",
+    "description": "Partículas muertas se levantan del suelo y se reorganizan"
+  },
+  "espiga": {
+    "effect": "gleaning_mode",
+    "description": "Activa modo espigueo"
+  },
+  "memoria": {
+    "effect": "palimpsest_reveal",
+    "description": "El palimpsesto se hace visible brevemente"
+  },
+  "recuerdo": {
+    "effect": "palimpsest_reveal",
+    "description": "Huellas de texto pasado brillan"
+  },
+  "silencio": {
+    "effect": "suspension",
+    "description": "Todo se detiene. Suspensión contemplativa."
+  },
+  "reloj": {
+    "effect": "time_lapse",
+    "description": "El cielo avanza 6 horas rápidamente"
+  },
+  "tiempo": {
+    "effect": "time_lapse",
+    "description": "Time-lapse suave del cielo"
+  },
+  "corazón": {
+    "effect": "heart_formation",
+    "description": "Las partículas forman brevemente un corazón (la papa de Varda)"
+  },
+  "mano": {
+    "effect": "hand_cursor",
+    "description": "El cursor se hace visible como mano temblorosa"
+  },
+  "varda": {
+    "effect": "full_reveal",
+    "description": "Todo el palimpsesto se revela + modo espigueo + suspensión"
+  },
+  "desecho": {
+    "effect": "gleaning_mode",
+    "description": "Lo descartado se levanta"
+  },
+  "basura": {
+    "effect": "gleaning_mode",
+    "description": "Los restos tipográficos cobran vida"
+  },
+  "obsoleto": {
+    "effect": "rapid_aging",
+    "description": "La interfaz envejece rápidamente"
+  },
+  "muerte": {
+    "effect": "erosion_burst",
+    "description": "Todas las letras activas entran en erosión simultánea"
+  },
+  "nacer": {
+    "effect": "grass_bloom",
+    "description": "Hierba brota instantáneamente de los restos"
+  },
+  "papa": {
+    "effect": "heart_formation",
+    "description": "Referencia a la papa-corazón de Varda"
+  }
+}
