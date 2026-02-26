@@ -99,6 +99,29 @@ class Text2Wind {
         // Intro
         document.getElementById('intro').addEventListener('click', () => this.startApp());
 
+        // Paste (Ctrl+V)
+        window.addEventListener('paste', e => {
+            if (!this.started) return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+            e.preventDefault();
+            const text = (e.clipboardData || window.clipboardData).getData('text');
+            if (!text) return;
+            const state = this.getState();
+            for (const char of text) {
+                if (char === '\n') {
+                    this.text.checkWord(state);
+                    this.text.newLine();
+                } else if (char === ' ') {
+                    this.text.addLetter(' ', state);
+                    this.text.checkWord(state);
+                } else if (char.length === 1) {
+                    this.text.addLetter(char, state);
+                    this.text.wordBuffer += char.toLowerCase();
+                    this.sound.onKey({ key: char }, this.weather);
+                }
+            }
+        });
+
         console.log('🌾 Text2Wind initialized');
     }
 
