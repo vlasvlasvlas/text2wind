@@ -81,6 +81,11 @@ export class UI {
             CONFIG.TEXT.FONT_FAMILY = v;
         });
 
+        this.wireSlider('ctrl-font-size', v => {
+            CONFIG.TEXT.FONT_SIZE = v;
+            CONFIG.TEXT.LINE_HEIGHT = Math.round(v * 1.5);
+        }, v => v + 'px');
+
         // ═══ RHYTHM TAB ═══
         this.wireToggle('ctrl-rhythm-mute', checked => sound.setParam('rhythm', 'muted', !checked));
         this.wireSlider('ctrl-rhythm-vol', v => sound.setParam('rhythm', 'volume', v), v => v + ' dB');
