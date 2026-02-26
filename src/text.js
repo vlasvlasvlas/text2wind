@@ -18,8 +18,7 @@ const PHASE = {
     DEAD: 'dead',
 };
 
-const STROKE_CHARS = ['.', ':', '*', 'o', '+', '#'];
-
+const STROKE_DIR_CHARS = ['-', '\\', '|', '/', '-', '\\', '|', '/'];
 export class TextEngine {
     constructor() {
         this.letters = [];
@@ -29,6 +28,7 @@ export class TextEngine {
         this.wordBuffer = '';
         this.lineStartX = 100;
         this.lastStrokeSoundAt = 0;
+        this.lastStrokeAngle = null;
     }
 
     init(state) { }
@@ -42,6 +42,7 @@ export class TextEngine {
         this.writeX = x;
         this.writeY = y;
         this.lineStartX = x;
+        this.lastStrokeAngle = null;
         // Check pending word
         if (this.wordBuffer.length > 0) {
             this.checkWord(state);
@@ -226,8 +227,28 @@ export class TextEngine {
     }
 
     addStrokePoint(x, y, state, intensity = 0.4) {
-        const i = clamp(Math.round(clamp(intensity, 0, 1) * (STROKE_CHARS.length - 1)), 0, STROKE_CHARS.length - 1);
-        const char = STROKE_CHARS[i];
+        const dx = intensity?.dx ?? 0;
+        const dy = intensity?.dy ?? 0;
+        const speed = Math.abs(intensity?.speed ?? 0);
+        let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        if (!Number.isFinite(angle)) angle = 0;
+        const octant = ((Math.round(angle / 45) % 8) + 8) % 8;
+        let char = STROKE_DIR_CHARS[octant];
+
+        let curveDelta = 0;
+        if (this.lastStrokeAngle !== null) {
+            curveDelta = Math.abs(angle - this.lastStrokeAngle);
+            if (curveDelta > 180) curveDelta = 360 - curveDelta;
+        }
+        this.lastStrokeAngle = angle;
+
+        if (curveDelta > 75) char = 'o';
+        else if (curveDelta > 35) char = '+';
+        else if (speed < 10) char = '.';
+        else if (speed < 18) char = ':';
+        else if (speed > 70) char = '#';
+        else if (speed > 45 && char === '-') char = '=';
+
         const letter = this._createLetter(char, x, y, 0.55);
         letter.scale = 0.8 + Math.random() * 0.25;
         this.letters.push(letter);
@@ -238,8 +259,11 @@ export class TextEngine {
         this.cursorBlink = 0;
 
         const now = Date.now();
-        if (state?.sound && state?.weather && now - this.lastStrokeSoundAt > 65) {
-            state.sound.onKey({ key: char }, state.weather);
+        if (state?.sound && state?.weather && now - this.lastStrokeSoundAt > 55) {
+            const played = state.sound.playGestureTone?.(octant, clamp(speed / 75, 0, 1));
+            if (!played) {
+                state.sound.onKey?.({ key: 'q' }, state.weather);
+            }
             this.lastStrokeSoundAt = now;
         }
     }

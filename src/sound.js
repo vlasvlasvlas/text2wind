@@ -437,6 +437,23 @@ export class SoundEngine {
         return this.enabled;
     }
 
+    playGestureTone(index = 0, intensity = 0.5) {
+        if (!this.enabled || !this.melodySynth || !this.Tone) return false;
+        if (this.params.melody.muted) return false;
+
+        const degrees = [0, 2, 4, 5, 7, 9, 11, 12];
+        const octaveIndex = ((Math.round(index) % degrees.length) + degrees.length) % degrees.length;
+        const midiNote = 60 + degrees[octaveIndex];
+        const freq = 440 * Math.pow(2, (midiNote - 69) / 12);
+        const duration = 0.07 + clamp(intensity, 0, 1) * 0.09;
+        try {
+            this.melodySynth.triggerAttackRelease(freq, duration, this._now());
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
     onKey(e, weather) {
         if (!this.enabled || !this.melodySynth || !this.Tone) return;
         const key = e.key;

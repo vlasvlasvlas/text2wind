@@ -76,8 +76,8 @@ class Text2Wind {
         window.addEventListener('resize', this.resize);
         await this.semantic.load();
 
-        // Pre-warm sound module/assets so first user gesture has minimal latency.
-        this.sound.init().catch(err => console.warn('Sound prewarm failed:', err));
+        // Pre-warm sound module/assets so first user gesture only needs audio unlock.
+        await this.sound.init().catch(err => console.warn('Sound prewarm failed:', err));
 
         const state = this.getState();
         this.sky.init(state);
@@ -219,17 +219,32 @@ class Text2Wind {
         this.cursor.update(e.clientX, e.clientY);
     }
 
+    async ensureSoundEnabledFromGesture() {
+        if (this.sound?.enabled) return true;
+        try {
+            await this.sound.enable();
+            const btn = document.getElementById('btn-sound');
+            if (btn) btn.textContent = '🔊';
+            return !!this.sound?.enabled;
+        } catch (e) {
+            const btn = document.getElementById('btn-sound');
+            if (btn) btn.textContent = '🔇';
+            return false;
+        }
+    }
+
     isMobileInput() {
         return window.matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints || 0) > 0;
     }
 
-    onPointerDown(e) {
+    async onPointerDown(e) {
         if (!this.isMobileInput() || e.pointerType === 'mouse') return;
         if (e.target !== this.canvas) return;
         if (!this.started) this.startApp();
         if (!this.started) return;
 
         if (e.cancelable) e.preventDefault();
+        await this.ensureSoundEnabledFromGesture();
         const x = e.clientX;
         const y = e.clientY;
         const state = this.getState();
@@ -269,12 +284,14 @@ class Text2Wind {
 
         const steps = Math.max(1, Math.floor(dist / spacing));
         const state = this.getState();
-        const intensity = Math.min(1, dist / 80);
+        const stepDx = dx / steps;
+        const stepDy = dy / steps;
+        const stepSpeed = dist / steps;
         for (let i = 1; i <= steps; i++) {
             const t = i / steps;
             const px = this.strokeInput.lastX + dx * t;
             const py = this.strokeInput.lastY + dy * t;
-            this.text.addStrokePoint(px, py, state, intensity);
+            this.text.addStrokePoint(px, py, state, { dx: stepDx, dy: stepDy, speed: stepSpeed });
         }
         this.strokeInput.lastX = x;
         this.strokeInput.lastY = y;
@@ -295,8 +312,7 @@ class Text2Wind {
         const dist = Math.hypot(dx, dy);
         if (dist > spacing * 0.5) {
             const state = this.getState();
-            const intensity = Math.min(1, dist / 80);
-            this.text.addStrokePoint(x, y, state, intensity);
+            this.text.addStrokePoint(x, y, state, { dx, dy, speed: dist });
         }
 
         this.strokeInput.active = false;
