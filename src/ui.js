@@ -113,6 +113,10 @@ export class UI {
         this.wireSlider('ctrl-melody-release', v => sound.setParam('melody', 'release', v), v => v.toFixed(1));
         this.wireSlider('ctrl-melody-reverb', v => sound.setParam('melody', 'reverb', v), v => v.toFixed(2));
 
+        // Populate scale selector dynamically from scales.json
+        this.wireSelect('ctrl-melody-scale', v => sound.setScale(v));
+        this.populateScaleSelector(sound);
+
         // ═══ AUTO-TYPEWRITER ═══
         this.wireFileImport();
         this.wireSlider('ctrl-auto-bpm', v => {
@@ -165,6 +169,38 @@ export class UI {
     wireSelect(id, onChange) {
         const sel = document.getElementById(id);
         if (sel) sel.addEventListener('change', () => onChange(sel.value));
+    }
+
+    populateScaleSelector(sound) {
+        const sel = document.getElementById('ctrl-melody-scale');
+        if (!sel) return;
+
+        const populate = () => {
+            const scales = sound.getAvailableScales();
+            scales.forEach(({ key, label }) => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = label;
+                sel.appendChild(opt);
+            });
+        };
+
+        // Scales load async, wait briefly then populate
+        if (sound.scalesLoaded) {
+            populate();
+        } else {
+            const check = setInterval(() => {
+                if (sound.scalesLoaded) {
+                    clearInterval(check);
+                    populate();
+                }
+            }, 100);
+            // Timeout fallback
+            setTimeout(() => {
+                clearInterval(check);
+                if (sel.options.length <= 1) populate();
+            }, 3000);
+        }
     }
 
     wireFileImport() {

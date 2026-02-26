@@ -15,27 +15,29 @@
 
 import { clamp, lerp } from './utils/math.js';
 
-// ── Musical scales ──
-const SCALES = {
-    aeolian: [0, 2, 3, 5, 7, 8, 10],
-    dorian: [0, 2, 3, 5, 7, 9, 10],
-    pentatonic: [0, 2, 4, 7, 9],
-    phrygian: [0, 1, 3, 5, 7, 8, 10],
-    lydian: [0, 2, 4, 6, 7, 9, 11],
-    chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+// ── Fallback scales (used if JSON fails to load) ──
+const FALLBACK_SCALES = {
+    pentatonic: { label: 'Pentatónica Mayor', notes: [0, 2, 4, 7, 9], baseOctave: 4 },
+    aeolian: { label: 'Menor Natural (Eólica)', notes: [0, 2, 3, 5, 7, 8, 10], baseOctave: 4 },
+    dorian: { label: 'Dórica', notes: [0, 2, 3, 5, 7, 9, 10], baseOctave: 4 },
+    phrygian: { label: 'Frigia', notes: [0, 1, 3, 5, 7, 8, 10], baseOctave: 4 },
+    lydian: { label: 'Lidia', notes: [0, 2, 4, 6, 7, 9, 11], baseOctave: 4 },
+    chromatic: { label: 'Cromática', notes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], baseOctave: 4 },
 };
 
-// ── QWERTY piano mapping ──
-// Bottom row (ZXCV...) = C3-B3, Middle row (ASDF...) = C4-B4, Top row (QWER...) = C5-B5
-const PIANO_MAP = {
-    // Lower octave (C3 = MIDI 48)
+const FALLBACK_PIANO_MAP = {
     'z': 48, 's': 49, 'x': 50, 'd': 51, 'c': 52, 'v': 53, 'g': 54,
     'b': 55, 'h': 56, 'n': 57, 'j': 58, 'm': 59,
-    // Middle octave (C4 = MIDI 60)
     'q': 60, '2': 61, 'w': 62, '3': 63, 'e': 64, 'r': 65, '5': 66,
     't': 67, '6': 68, 'y': 69, '7': 70, 'u': 71,
-    // Upper octave (C5 = MIDI 72)
     'i': 72, '9': 73, 'o': 74, '0': 75, 'p': 76,
+};
+
+const FALLBACK_WEATHER_MAP = {
+    default: 'pentatonic',
+    storm: 'phrygian',
+    cold: 'aeolian',
+    hot: 'lydian',
 };
 
 // ── Hour → root note mapping ──
@@ -80,8 +82,15 @@ export class SoundEngine {
             },
         };
 
+        // Scale data (loaded from JSON)
+        this.scalesData = FALLBACK_SCALES;
+        this.pianoMap = FALLBACK_PIANO_MAP;
+        this.weatherScaleMap = FALLBACK_WEATHER_MAP;
+        this.scalesLoaded = false;
+
         // Current musical state
         this.currentScale = 'pentatonic';
+        this.scaleMode = 'auto';   // 'auto' = weather-driven, or a scale key name
         this.droneFreq = 65.41;
         this.lastNoteTime = 0;
         this.noteIndex = 0;
@@ -108,6 +117,41 @@ export class SoundEngine {
             console.warn('⚠️ Tone.js not available, sound disabled');
             return;
         }
+        await this.loadScales();
+    }
+
+    async loadScales() {
+        try {
+            const resp = await fetch('/data/scales.json');
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            const data = await resp.json();
+            if (data.scales) this.scalesData = data.scales;
+            if (data.pianoMappings?.default?.keys) this.pianoMap = data.pianoMappings.default.keys;
+            if (data.weatherScaleMap) this.weatherScaleMap = data.weatherScaleMap;
+            this.scalesLoaded = true;
+            console.log(`🎵 Scales loaded: ${Object.keys(this.scalesData).length} scales`);
+        } catch (e) {
+            console.warn('⚠️ Could not load scales.json, using fallback scales', e);
+        }
+    }
+
+    getAvailableScales() {
+        return Object.entries(this.scalesData).map(([key, val]) => ({
+            key,
+            label: val.label || key,
+        }));
+    }
+
+    setScale(scaleName) {
+        this.scaleMode = scaleName; // 'auto' or a scale key
+        if (scaleName !== 'auto' && this.scalesData[scaleName]) {
+            this.currentScale = scaleName;
+        }
+    }
+
+    _getScaleNotes(scaleName) {
+        const s = this.scalesData[scaleName];
+        return s ? s.notes : [0, 2, 4, 7, 9]; // fallback to pentatonic
     }
 
     async enable() {
@@ -302,15 +346,17 @@ export class SoundEngine {
 
         if (this.params.melody.mode === 'piano') {
             // QWERTY piano layout
-            midiNote = PIANO_MAP[key.toLowerCase()];
+            midiNote = this.pianoMap[key.toLowerCase()];
             if (midiNote === undefined) return; // Not a piano key
         } else {
             // Random/scale-based mapping
-            const scale = SCALES[this.currentScale];
+            const scaleNotes = this._getScaleNotes(this.currentScale);
+            const baseOctave = (this.scalesData[this.currentScale]?.baseOctave ?? 4);
+            const baseMidi = (baseOctave + 1) * 12; // octave 4 → MIDI 60
             const charCode = key.toLowerCase().charCodeAt(0);
-            const scaleIndex = charCode % scale.length;
-            const octaveOffset = Math.floor((charCode % 26) / scale.length);
-            midiNote = 60 + scale[scaleIndex] + octaveOffset * 12;
+            const scaleIndex = charCode % scaleNotes.length;
+            const octaveOffset = Math.floor((charCode % 26) / scaleNotes.length);
+            midiNote = baseMidi + scaleNotes[scaleIndex] + octaveOffset * 12;
         }
 
         const freq = 440 * Math.pow(2, (midiNote - 69) / 12);
@@ -336,10 +382,10 @@ export class SoundEngine {
     onLetterErosion(letter) {
         if (!this.enabled || !this.rhythmSynth || this.params.rhythm.muted) return;
 
-        const scale = SCALES[this.currentScale];
+        const scaleNotes = this._getScaleNotes(this.currentScale);
         const charCode = (letter.char || 'a').toLowerCase().charCodeAt(0);
-        const scaleIndex = charCode % scale.length;
-        const midiNote = 36 + scale[scaleIndex];
+        const scaleIndex = charCode % scaleNotes.length;
+        const midiNote = 36 + scaleNotes[scaleIndex];
         const freq = 440 * Math.pow(2, (midiNote - 69) / 12);
 
         try {
@@ -412,12 +458,15 @@ export class SoundEngine {
             }
         }
 
-        // Scale shifts with weather
-        const storm = weather.get('storm') / 100;
-        const temp = weather.get('temperature');
-        if (storm > 0.5) this.currentScale = 'phrygian';
-        else if (temp < 5) this.currentScale = 'aeolian';
-        else if (temp > 30) this.currentScale = 'lydian';
-        else this.currentScale = 'pentatonic';
+        // Scale shifts with weather (only when scaleMode is 'auto')
+        if (this.scaleMode === 'auto') {
+            const storm = weather.get('storm') / 100;
+            const temp = weather.get('temperature');
+            const wm = this.weatherScaleMap;
+            if (storm > 0.5) this.currentScale = wm.storm || 'phrygian';
+            else if (temp < 5) this.currentScale = wm.cold || 'aeolian';
+            else if (temp > 30) this.currentScale = wm.hot || 'lydian';
+            else this.currentScale = wm.default || 'pentatonic';
+        }
     }
 }

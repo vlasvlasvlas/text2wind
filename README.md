@@ -43,13 +43,15 @@ Text2Wind transpone el gesto del **espigueo** de Varda a una interfaz digital:
 - 🥁 **Ritmo**: percusión generada por la erosión de letras + clicks al teclear
 - 🎵 **Drone**: tono FM continuo que cambia con la hora del día, temperatura y clima
 - 🎹 **Melodía**: notas al teclear con dos modos:
-  - **Random**: notas basadas en la escala musical activa (pentatónica, frigia, lidia…)
+  - **Random**: notas basadas en la escala musical activa, seleccionable desde la UI o automática por clima
   - **Piano QWERTY**: el teclado mapeado como un piano (Z-M = C3, Q-P = C5)
+- 🎼 **18 escalas musicales** configurables desde `data/scales.json` (pentatónica, blues, hirajōshi, húngara menor, etc.)
 - Cada capa tiene controles independientes de **volumen, mute, waveform, ADSR, reverb**
-- La escala musical cambia con el clima: pentatónica → frigia (tormenta) → lidia (calor)
+- La escala musical puede ser fija o cambiar automáticamente con el clima
 
 ### Interacción
 - 🖱️ **Click para posicionar**: el cursor de escritura queda fijo donde hacés click
+- 📋 **Pegar texto (Ctrl+V / Cmd+V)**: pegá texto del portapapeles — todas las letras aparecen de golpe con su sonido
 - 🧠 **360 palabras en español** mapeadas semánticamente a efectos ambientales
 - ⭐ **16 palabras especiales** con efectos únicos vinculados a Varda
 - 📖 **Auto-typewriter**: importá un archivo `.txt` (UTF-8) y se escribe solo al BPM elegido (10–400)
@@ -59,7 +61,7 @@ Text2Wind transpone el gesto del **espigueo** de Varda a una interfaz digital:
 
 ### UI
 - 🕐 **Reloj** sincronizado con la hora del sistema
-- ⚙️ **Panel de parámetros** con 5 tabs: Clima · Ritmo · Drone · Melodía · Auto
+- ⚙️ **Panel de parámetros** con 6 tabs: Clima · Texto · Ritmo · Drone · Melodía · Auto
 - ❓ **Panel "¿Qué es esto?"** con la teoría, concepto de Varda y link a GitHub
 - ⌨️ **Panel de atajos** de teclado
 - ⛶ **Botón de pantalla completa** (solo por botón, no por tecla)
@@ -117,6 +119,7 @@ python tools/generate_dictionary.py --test
 |--------|------|
 | Iniciar | Click en la pantalla de inicio |
 | Escribir | Teclear — las letras aparecen donde hiciste click |
+| Pegar texto | `Ctrl+V` / `Cmd+V` — todas las letras aparecen al instante con sonido |
 | Posicionar cursor | Click en el canvas (queda fijo ahí) |
 | Erosionar línea | `Enter` — las letras se disuelven en cascada |
 | Pantalla completa | Botón ⛶ en la barra flotante |
@@ -136,14 +139,15 @@ python tools/generate_dictionary.py --test
 
 El texto importado se escribe automáticamente, caracter por caracter, con sonido y detección semántica. Soporta archivos con acentos y caracteres especiales (UTF-8).
 
-### Controles de texto (tab Clima)
+### Controles de texto (tab ✍️ Texto)
 
 | Control | Rango | Default | Descripción |
 |---------|-------|---------|-------------|
-| Persistencia | 2 – 120s | 15s | Cuánto tiempo permanecen las letras antes de erosionarse |
+| Persistencia | 2 – 120s | 8s | Cuánto tiempo permanecen las letras antes de erosionarse |
 | Explosión | 5 – 200 | 60 | Cantidad de partículas que genera cada letra al morir |
 | Color | 0 – 360° | Auto | Hue del color de las letras (0 = automático según hora) |
 | Tipografía | dropdown | JetBrains Mono | Fuente monospace — compatible con ASCII art |
+| Tamaño | 12 – 72px | 28px | Tamaño de la tipografía (el interlineado se ajusta automáticamente) |
 
 #### Tipografías disponibles
 
@@ -225,6 +229,7 @@ text2wind/
 │       └── noise.js        # Implementación Perlin noise
 │
 ├── data/
+│   ├── scales.json         # 18 escalas musicales configurables + mapeos de teclado
 │   ├── semantic_dict.json  # Diccionario semántico (360 palabras → efectos)
 │   └── special_words.json  # 16 palabras especiales (Varda, memoria, etc.)
 │
@@ -300,6 +305,7 @@ Cada capa de sonido es independientemente configurable desde la UI:
 |-----------|-------|---------|-------------|
 | Volumen | -40 a 0 dB | -16 dB | Volumen de notas |
 | Modo | Random / Piano | Random | Mapeo de teclas a notas |
+| Escala | Auto + 18 escalas | Auto (clima) | Escala musical activa |
 | Onda | triangle / sine / square / sawtooth | triangle | Forma de onda |
 | Attack | 0.001 – 2.0s | 0.05s | Ataque de nota |
 | Decay | 0.05 – 3.0s | 0.60s | Decaimiento |
@@ -310,7 +316,9 @@ Cada capa de sonido es independientemente configurable desde la UI:
 
 ## Escalas musicales
 
-La escala activa cambia automáticamente con el clima:
+Las escalas se cargan desde `data/scales.json`. Desde la UI (tab 🎹 Melod → **Escala**) se puede seleccionar una escala fija o dejar en **Auto (clima)** para que cambie con el tiempo.
+
+### Modo Auto (clima)
 
 | Condición | Escala | Carácter |
 |-----------|--------|----------|
@@ -318,6 +326,45 @@ La escala activa cambia automáticamente con el clima:
 | Tormenta > 50% | Frigia | Tenso, oscuro |
 | Temperatura < 5°C | Eólica | Melancólico |
 | Temperatura > 30°C | Lidia | Luminoso, expansivo |
+
+### Escalas disponibles (18)
+
+| Escala | Intervalos | Carácter |
+|--------|-----------|----------|
+| Pentatónica Mayor | 0 2 4 7 9 | Sereno, universal |
+| Pentatónica Menor | 0 3 5 7 10 | Blues, melancólico |
+| Mayor (Jónica) | 0 2 4 5 7 9 11 | Brillante, estable |
+| Menor Natural (Eólica) | 0 2 3 5 7 8 10 | Melancólico |
+| Dórica | 0 2 3 5 7 9 10 | Jazz, modal |
+| Frigia | 0 1 3 5 7 8 10 | Tenso, flamenco |
+| Lidia | 0 2 4 6 7 9 11 | Luminoso, expansivo |
+| Mixolidia | 0 2 4 5 7 9 10 | Rock, dominante |
+| Blues | 0 3 5 6 7 10 | Blues clásico |
+| Cromática | 0-11 (12 notas) | Atonal, experimental |
+| Tono Entero | 0 2 4 6 8 10 | Onírico, Debussy |
+| Hirajōshi | 0 2 3 7 8 | Japonesa, etérea |
+| In-Sen | 0 1 5 7 10 | Japonesa, oscura |
+| Húngara Menor | 0 2 3 6 7 8 11 | Gitana, dramática |
+| Menor Armónica | 0 2 3 5 7 8 11 | Clásica, tensión |
+| Menor Melódica | 0 2 3 5 7 9 11 | Jazz moderno |
+| Disminuida | 0 2 3 5 6 8 9 11 | Simétrica, tensa |
+| Aumentada | 0 3 4 7 8 11 | Simétrica, etérea |
+
+### Agregar escalas propias
+
+Editá `data/scales.json` y agregá una entrada bajo `"scales"`:
+
+```json
+"miEscala": {
+  "label": "Mi Escala Custom",
+  "notes": [0, 2, 5, 7, 10],
+  "baseOctave": 4
+}
+```
+
+- `notes`: intervalos en semitonos desde la raíz (0 = tónica)
+- `baseOctave`: octava base MIDI (4 = C4 / MIDI 60)
+- La escala aparece automáticamente en el selector de la UI
 
 La nota raíz del drone cambia con la hora del día: C2 (medianoche) → E2 (mañana) → A2 (mediodía) → D2 (noche).
 

@@ -1,0 +1,280 @@
+{
+    "_meta": {
+        "description": "Text2Wind — Configurable scales and key mappings",
+        "version": "1.0.0",
+        "howToAdd": "Add a new entry under 'scales' with a unique key, a 'label' (displayed in UI), 'notes' (semitone intervals from root), and 'baseOctave' (MIDI octave). For piano mappings, add entries under 'pianoMappings'."
+    },
+    "scales": {
+        "pentatonic": {
+            "label": "Pentatónica Mayor",
+            "notes": [
+                0,
+                2,
+                4,
+                7,
+                9
+            ],
+            "baseOctave": 4
+        },
+        "minorPentatonic": {
+            "label": "Pentatónica Menor",
+            "notes": [
+                0,
+                3,
+                5,
+                7,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "major": {
+            "label": "Mayor (Jónica)",
+            "notes": [
+                0,
+                2,
+                4,
+                5,
+                7,
+                9,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "aeolian": {
+            "label": "Menor Natural (Eólica)",
+            "notes": [
+                0,
+                2,
+                3,
+                5,
+                7,
+                8,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "dorian": {
+            "label": "Dórica",
+            "notes": [
+                0,
+                2,
+                3,
+                5,
+                7,
+                9,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "phrygian": {
+            "label": "Frigia",
+            "notes": [
+                0,
+                1,
+                3,
+                5,
+                7,
+                8,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "lydian": {
+            "label": "Lidia",
+            "notes": [
+                0,
+                2,
+                4,
+                6,
+                7,
+                9,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "mixolydian": {
+            "label": "Mixolidia",
+            "notes": [
+                0,
+                2,
+                4,
+                5,
+                7,
+                9,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "blues": {
+            "label": "Blues",
+            "notes": [
+                0,
+                3,
+                5,
+                6,
+                7,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "chromatic": {
+            "label": "Cromática",
+            "notes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "wholetone": {
+            "label": "Tono Entero",
+            "notes": [
+                0,
+                2,
+                4,
+                6,
+                8,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "hirajoshi": {
+            "label": "Hirajōshi",
+            "notes": [
+                0,
+                2,
+                3,
+                7,
+                8
+            ],
+            "baseOctave": 4
+        },
+        "insen": {
+            "label": "In-Sen",
+            "notes": [
+                0,
+                1,
+                5,
+                7,
+                10
+            ],
+            "baseOctave": 4
+        },
+        "hungarianMinor": {
+            "label": "Húngara Menor",
+            "notes": [
+                0,
+                2,
+                3,
+                6,
+                7,
+                8,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "harmonicMinor": {
+            "label": "Menor Armónica",
+            "notes": [
+                0,
+                2,
+                3,
+                5,
+                7,
+                8,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "melodicMinor": {
+            "label": "Menor Melódica",
+            "notes": [
+                0,
+                2,
+                3,
+                5,
+                7,
+                9,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "diminished": {
+            "label": "Disminuida",
+            "notes": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                11
+            ],
+            "baseOctave": 4
+        },
+        "augmented": {
+            "label": "Aumentada",
+            "notes": [
+                0,
+                3,
+                4,
+                7,
+                8,
+                11
+            ],
+            "baseOctave": 4
+        }
+    },
+    "pianoMappings": {
+        "default": {
+            "label": "QWERTY estándar",
+            "keys": {
+                "z": 48,
+                "s": 49,
+                "x": 50,
+                "d": 51,
+                "c": 52,
+                "v": 53,
+                "g": 54,
+                "b": 55,
+                "h": 56,
+                "n": 57,
+                "j": 58,
+                "m": 59,
+                "q": 60,
+                "2": 61,
+                "w": 62,
+                "3": 63,
+                "e": 64,
+                "r": 65,
+                "5": 66,
+                "t": 67,
+                "6": 68,
+                "y": 69,
+                "7": 70,
+                "u": 71,
+                "i": 72,
+                "9": 73,
+                "o": 74,
+                "0": 75,
+                "p": 76
+            }
+        }
+    },
+    "weatherScaleMap": {
+        "default": "pentatonic",
+        "storm": "phrygian",
+        "cold": "aeolian",
+        "hot": "lydian"
+    }
+}
