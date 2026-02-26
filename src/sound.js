@@ -329,9 +329,9 @@ export class SoundEngine {
         }
     }
 
-    toggle() {
+    async toggle() {
         if (this.enabled) { this.disable(); return false; }
-        else { this.enable(); return true; }
+        else { await this.enable(); return true; }
     }
 
     // ── Key input → Melody layer ──
