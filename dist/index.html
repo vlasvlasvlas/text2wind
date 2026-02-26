@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap"
     rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-CLgnWSiz.js"></script>
+  <script type="module" crossorigin src="./assets/index-DrEPVG67.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Cm_5DC_J.css">
 </head>
 
@@ -30,6 +30,7 @@
     </div>
     <div class="tabs">
       <button class="tab active" data-tab="tab-atmos">☁️ Clima</button>
+      <button class="tab" data-tab="tab-text">✍️ Texto</button>
       <button class="tab" data-tab="tab-rhythm">🥁 Ritmo</button>
       <button class="tab" data-tab="tab-drone">🎵 Drone</button>
       <button class="tab" data-tab="tab-melody">🎹 Melod</button>
@@ -51,9 +52,12 @@
           value="0" /><span class="ctrl-value" data-for="ctrl-storm">0</span></div>
       <div class="control-group"><label>Hora</label><input type="range" id="ctrl-hour" min="-1" max="24" step="0.1"
           value="-1" /><span class="ctrl-value" data-for="ctrl-hour">Auto</span></div>
-      <hr class="divider" />
+    </div>
+
+    <!-- Tab: Texto -->
+    <div class="tab-content" id="tab-text">
       <div class="control-group"><label>Persistencia</label><input type="range" id="ctrl-persist" min="2" max="120"
-          step="1" value="15" /><span class="ctrl-value" data-for="ctrl-persist">15s</span></div>
+          step="1" value="8" /><span class="ctrl-value" data-for="ctrl-persist">8s</span></div>
       <div class="control-group"><label>Explosión</label><input type="range" id="ctrl-explosion" min="5" max="200"
           step="5" value="60" /><span class="ctrl-value" data-for="ctrl-explosion">60</span></div>
       <div class="control-group"><label>Color</label><input type="range" id="ctrl-ink-hue" min="0" max="360" step="1"
@@ -69,8 +73,8 @@
           <option value="monospace">System Mono</option>
         </select>
       </div>
-      <p class="hint">Persistencia: segundos. Explosión: partículas/letra. Color 0 = auto. Tipografías monospace para
-        ASCII art.</p>
+      <p class="hint">Persistencia = segundos que vive el texto. Explosión = partículas/letra. Color 0 = auto (hora).
+        Tipografías monospace para ASCII art.</p>
     </div>
 
     <div class="tab-content" id="tab-rhythm">

@@ -31,10 +31,11 @@ export const CONFIG = {
         INK_COLOR_DAY: [0.15, 0.12, 0.10],
         INK_COLOR_NIGHT: [0.85, 0.80, 0.72],
         BIRTH_DURATION: 400,       // ms for letter to "draw" itself
-        LIFE_MIN: 8000,            // ms minimum before erosion begins
-        LIFE_MAX: 25000,           // ms random extra life
+        LIFE_MIN: 8000,            // ms minimum before erosion begins (slider: 8s)
+        LIFE_MAX: 16000,           // ms random extra life (slider: 8 * 2000)
         EROSION_DURATION: 4000,    // ms for full erosion
-        PARTICLES_PER_LETTER: 60,
+        PARTICLES_PER_LETTER: 60,  // particles on death (slider: 60)
+        _hueOverride: 0,           // 0 = auto (hour-based), 1-360 = custom hue
     },
 
     // Wind

@@ -261,7 +261,6 @@ export class SoundEngine {
         if (!this.enabled || !this.melodySynth) return;
         const key = e.key;
         if (key.length !== 1) return;
-        if (key === ' ') return; // Space = typing only, no sound
         if (this.params.melody.muted) return;
 
         let midiNote;
