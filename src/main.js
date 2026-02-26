@@ -107,6 +107,7 @@ class Text2Wind {
         this.canvas.addEventListener('pointermove', this.onPointerMove, { passive: false });
         window.addEventListener('pointerup', this.onPointerUp, { passive: false });
         window.addEventListener('pointercancel', this.onPointerUp, { passive: false });
+        this.canvas.addEventListener('touchstart', () => this.sound.primeFromGesture?.(), { passive: true });
 
         // Canvas click
         this.canvas.addEventListener('click', e => {
@@ -117,7 +118,9 @@ class Text2Wind {
         });
 
         // Intro
-        document.getElementById('intro').addEventListener('click', () => this.startApp());
+        const introEl = document.getElementById('intro');
+        introEl.addEventListener('click', () => this.startApp());
+        introEl.addEventListener('touchstart', () => this.sound.primeFromGesture?.(), { passive: true });
 
         // Paste (Cmd+V / Ctrl+V)
         document.addEventListener('paste', e => {
@@ -150,6 +153,7 @@ class Text2Wind {
             this.started = true;
             this.running = true;
             document.getElementById('intro').classList.add('hidden');
+            this.sound.primeFromGesture?.();
             this.lastTime = performance.now();
             requestAnimationFrame(this.loop);
 
@@ -220,6 +224,7 @@ class Text2Wind {
     }
 
     async ensureSoundEnabledFromGesture() {
+        this.sound.primeFromGesture?.();
         if (this.sound?.enabled) return true;
         try {
             await this.sound.enable();
@@ -244,6 +249,7 @@ class Text2Wind {
         if (!this.started) return;
 
         if (e.cancelable) e.preventDefault();
+        this.sound.primeFromGesture?.();
         await this.ensureSoundEnabledFromGesture();
         const x = e.clientX;
         const y = e.clientY;
