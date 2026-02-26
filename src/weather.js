@@ -11,16 +11,18 @@ import { clamp, lerp } from './utils/math.js';
 
 export class Weather {
     constructor() {
+        const weatherDefaults = CONFIG.DEFAULTS.weather;
+
         // Current values (smoothly interpolated)
         this.current = {
-            wind: CONFIG.WIND.DEFAULT_INTENSITY,
-            windDir: CONFIG.WIND.DEFAULT_DIRECTION,
-            rain: 0,
-            fog: 0,
-            temperature: 20,
-            storm: 0,
-            snow: 0,
-            hourOverride: -1,   // -1 = use real time
+            wind: weatherDefaults.wind,
+            windDir: weatherDefaults.windDir,
+            rain: weatherDefaults.rain,
+            fog: weatherDefaults.fog,
+            temperature: weatherDefaults.temperature,
+            storm: weatherDefaults.storm,
+            snow: weatherDefaults.snow,
+            hourOverride: weatherDefaults.hourOverride, // -1 = use real time
         };
 
         // Target values (what we're interpolating toward)

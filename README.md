@@ -229,6 +229,7 @@ text2wind/
 │       └── noise.js        # Implementación Perlin noise
 │
 ├── data/
+│   ├── runtime_defaults.json # Defaults globales de arranque (clima/texto/sonido/UI)
 │   ├── scales.json         # 18 escalas musicales configurables + mapeos de teclado
 │   ├── semantic_dict.json  # Diccionario semántico (360 palabras → efectos)
 │   └── special_words.json  # 16 palabras especiales (Varda, memoria, etc.)
@@ -311,6 +312,20 @@ Cada capa de sonido es independientemente configurable desde la UI:
 | Decay | 0.05 – 3.0s | 0.60s | Decaimiento |
 | Release | 0.1 – 5.0s | 1.5s | Release |
 | Reverb | 0 – 1 | 0.35 | Wet del reverb |
+
+---
+
+## Defaults de arranque
+
+Los valores iniciales de sliders, clima y parámetros de sonido se centralizan en `data/runtime_defaults.json`.
+
+- `weather`: estado inicial atmosférico (viento, lluvia, temperatura, hora override, etc.)
+- `text`: persistencia, explosión de partículas, tipografía, tamaño y color por hue
+- `sound.layers`: volúmenes, mute, ADSR, waveform y modo por capa
+- `sound.masterLinear`: ganancia maestra inicial
+- `autoTypewriter.bpm`: BPM inicial del auto-typewriter
+
+Esto evita desalineaciones entre UI y motor: al arrancar, los controles se hidratan desde ese JSON y se aplican al engine.
 
 ---
 

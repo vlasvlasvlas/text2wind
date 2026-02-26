@@ -50,19 +50,34 @@ class Text2Wind {
         this.autoText = null;
         this.autoIndex = 0;
         this.autoTimer = 0;
-        this.autoBPM = 120;
+        this.autoBPM = CONFIG.AUTO.DEFAULT_BPM;
         this.autoPlaying = false;
+        this.strokeInput = {
+            active: false,
+            pointerId: null,
+            startX: 0,
+            startY: 0,
+            lastX: 0,
+            lastY: 0,
+            moved: false,
+        };
 
         this.resize = this.resize.bind(this);
         this.loop = this.loop.bind(this);
         this.onKey = this.onKey.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
+        this.onPointerDown = this.onPointerDown.bind(this);
+        this.onPointerMove = this.onPointerMove.bind(this);
+        this.onPointerUp = this.onPointerUp.bind(this);
     }
 
     async init() {
         this.resize();
         window.addEventListener('resize', this.resize);
         await this.semantic.load();
+
+        // Pre-warm sound module/assets so first user gesture has minimal latency.
+        this.sound.init().catch(err => console.warn('Sound prewarm failed:', err));
 
         const state = this.getState();
         this.sky.init(state);
@@ -88,9 +103,14 @@ class Text2Wind {
                 this.cursor.update(e.touches[0].clientX, e.touches[0].clientY);
             }
         });
+        this.canvas.addEventListener('pointerdown', this.onPointerDown, { passive: false });
+        this.canvas.addEventListener('pointermove', this.onPointerMove, { passive: false });
+        window.addEventListener('pointerup', this.onPointerUp, { passive: false });
+        window.addEventListener('pointercancel', this.onPointerUp, { passive: false });
 
         // Canvas click
         this.canvas.addEventListener('click', e => {
+            if (this.isMobileInput()) return;
             if (!this.started) { this.startApp(); return; }
             if (e.target !== this.canvas) return;
             this.text.onCanvasClick(e.clientX, e.clientY, this.getState());
@@ -133,10 +153,13 @@ class Text2Wind {
             this.lastTime = performance.now();
             requestAnimationFrame(this.loop);
 
-            // Auto-enable sound (browser allows audio after user click)
-            this.sound.toggle().then(on => {
+            // Ensure sound is ON by default after first user gesture.
+            this.sound.enable().then(() => {
                 const btn = document.getElementById('btn-sound');
-                if (btn) btn.textContent = on ? '🔊' : '🔇';
+                if (btn) btn.textContent = '🔊';
+            }).catch(() => {
+                const btn = document.getElementById('btn-sound');
+                if (btn) btn.textContent = '🔇';
             });
         }
     }
@@ -158,6 +181,7 @@ class Text2Wind {
         this.canvas.height = window.innerHeight * dpr;
         this.canvas.style.width = window.innerWidth + 'px';
         this.canvas.style.height = window.innerHeight + 'px';
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.scale(dpr, dpr);
         const state = this.getState();
         this.sky.resize(state);
@@ -186,13 +210,98 @@ class Text2Wind {
         // Don't capture if UI is focused
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
 
+        this.sound.onKey(e, this.weather);
         this.text.onKey(e, this.getState());
         this.modes.onKey(e);
-        this.sound.onKey(e, this.weather);
     }
 
     onMouseMove(e) {
         this.cursor.update(e.clientX, e.clientY);
+    }
+
+    isMobileInput() {
+        return window.matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints || 0) > 0;
+    }
+
+    onPointerDown(e) {
+        if (!this.isMobileInput() || e.pointerType === 'mouse') return;
+        if (e.target !== this.canvas) return;
+        if (!this.started) this.startApp();
+        if (!this.started) return;
+
+        if (e.cancelable) e.preventDefault();
+        const x = e.clientX;
+        const y = e.clientY;
+        const state = this.getState();
+        this.cursor.update(x, y);
+        this.text.onCanvasClick(x, y, state);
+
+        this.strokeInput.active = true;
+        this.strokeInput.pointerId = e.pointerId;
+        this.strokeInput.startX = x;
+        this.strokeInput.startY = y;
+        this.strokeInput.lastX = x;
+        this.strokeInput.lastY = y;
+        this.strokeInput.moved = false;
+        this.canvas.setPointerCapture?.(e.pointerId);
+    }
+
+    onPointerMove(e) {
+        if (!this.strokeInput.active || e.pointerId !== this.strokeInput.pointerId) return;
+        if (!this.isMobileInput() || e.pointerType === 'mouse') return;
+
+        if (e.cancelable) e.preventDefault();
+        const x = e.clientX;
+        const y = e.clientY;
+        this.cursor.update(x, y);
+
+        const startDx = x - this.strokeInput.startX;
+        const startDy = y - this.strokeInput.startY;
+        if (Math.hypot(startDx, startDy) > 6) {
+            this.strokeInput.moved = true;
+        }
+
+        const spacing = this.text.getStrokeSpacing();
+        const dx = x - this.strokeInput.lastX;
+        const dy = y - this.strokeInput.lastY;
+        const dist = Math.hypot(dx, dy);
+        if (dist < spacing) return;
+
+        const steps = Math.max(1, Math.floor(dist / spacing));
+        const state = this.getState();
+        const intensity = Math.min(1, dist / 80);
+        for (let i = 1; i <= steps; i++) {
+            const t = i / steps;
+            const px = this.strokeInput.lastX + dx * t;
+            const py = this.strokeInput.lastY + dy * t;
+            this.text.addStrokePoint(px, py, state, intensity);
+        }
+        this.strokeInput.lastX = x;
+        this.strokeInput.lastY = y;
+    }
+
+    onPointerUp(e) {
+        if (!this.strokeInput.active || e.pointerId !== this.strokeInput.pointerId) return;
+        if (!this.isMobileInput() || e.pointerType === 'mouse') return;
+
+        if (e.cancelable) e.preventDefault();
+        const x = e.clientX;
+        const y = e.clientY;
+        this.cursor.update(x, y);
+
+        const spacing = this.text.getStrokeSpacing();
+        const dx = x - this.strokeInput.lastX;
+        const dy = y - this.strokeInput.lastY;
+        const dist = Math.hypot(dx, dy);
+        if (dist > spacing * 0.5) {
+            const state = this.getState();
+            const intensity = Math.min(1, dist / 80);
+            this.text.addStrokePoint(x, y, state, intensity);
+        }
+
+        this.strokeInput.active = false;
+        this.strokeInput.pointerId = null;
+        this.canvas.releasePointerCapture?.(e.pointerId);
     }
 
     // ── Auto-typewriter ──

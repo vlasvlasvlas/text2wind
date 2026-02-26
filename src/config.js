@@ -2,7 +2,13 @@
    TEXT2WIND — Configuration
    ====================================== */
 
+import runtimeDefaults from '../data/runtime_defaults.json';
+
+const textPersistenceMs = runtimeDefaults.text.persistenceSeconds * 1000;
+
 export const CONFIG = {
+    DEFAULTS: runtimeDefaults,
+
     // Canvas
     PIXEL_RATIO: Math.min(window.devicePixelRatio, 2),
 
@@ -23,25 +29,25 @@ export const CONFIG = {
 
     // Text
     TEXT: {
-        FONT_FAMILY: "'JetBrains Mono', monospace",
-        FONT_SIZE: 28,
-        LINE_HEIGHT: 42,
+        FONT_FAMILY: runtimeDefaults.text.fontFamily,
+        FONT_SIZE: runtimeDefaults.text.fontSize,
+        LINE_HEIGHT: runtimeDefaults.text.lineHeight,
         MAX_CHARS_PER_LINE: 60,
         MAX_LINES: 20,
         INK_COLOR_DAY: [0.15, 0.12, 0.10],
         INK_COLOR_NIGHT: [0.85, 0.80, 0.72],
         BIRTH_DURATION: 400,       // ms for letter to "draw" itself
-        LIFE_MIN: 8000,            // ms minimum before erosion begins (slider: 8s)
-        LIFE_MAX: 16000,           // ms random extra life (slider: 8 * 2000)
+        LIFE_MIN: textPersistenceMs,
+        LIFE_MAX: textPersistenceMs * 2,
         EROSION_DURATION: 4000,    // ms for full erosion
-        PARTICLES_PER_LETTER: 60,  // particles on death (slider: 60)
-        _hueOverride: 0,           // 0 = auto (hour-based), 1-360 = custom hue
+        PARTICLES_PER_LETTER: runtimeDefaults.text.particlesPerLetter,
+        _hueOverride: runtimeDefaults.text.inkHueOverride, // 0 = auto (hour-based), 1-360 = custom hue
     },
 
     // Wind
     WIND: {
-        DEFAULT_INTENSITY: 20,
-        DEFAULT_DIRECTION: 90,     // degrees, 0=up, 90=right
+        DEFAULT_INTENSITY: runtimeDefaults.weather.wind,
+        DEFAULT_DIRECTION: runtimeDefaults.weather.windDir, // degrees, 0=up, 90=right
         NOISE_SCALE: 0.003,
         NOISE_SPEED: 0.0004,
         TURBULENCE_OCTAVES: 3,
@@ -65,11 +71,12 @@ export const CONFIG = {
 
     // Sound
     SOUND: {
-        MASTER_VOLUME: -12,        // dB
-        DRONE_VOLUME: -20,
-        KEY_VOLUME: -18,
-        WIND_VOLUME: -24,
-        RAIN_VOLUME: -20,
+        MASTER_LINEAR: runtimeDefaults.sound.masterLinear,
+    },
+
+    // Auto typewriter
+    AUTO: {
+        DEFAULT_BPM: runtimeDefaults.autoTypewriter.bpm,
     },
 
     // Cursor / Candle

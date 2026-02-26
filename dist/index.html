@@ -12,8 +12,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap"
     rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-BNWe68qN.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CsMBXtDF.css">
+  <script type="module" crossorigin src="./assets/index-BXYmCmsQ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BnVPgITM.css">
 </head>
 
 <body>
@@ -73,6 +73,8 @@
           <option value="monospace">System Mono</option>
         </select>
       </div>
+      <div class="control-group"><label>Tamaño</label><input type="range" id="ctrl-font-size" min="12" max="72" step="1"
+          value="28" /><span class="ctrl-value" data-for="ctrl-font-size">28px</span></div>
       <p class="hint">Persistencia = segundos que vive el texto. Explosión = partículas/letra. Color 0 = auto (hora).
         Tipografías monospace para ASCII art.</p>
     </div>
@@ -126,6 +128,11 @@
         <select id="ctrl-melody-mode">
           <option value="random" selected>Random (escala)</option>
           <option value="piano">Piano (QWERTY)</option>
+        </select>
+      </div>
+      <div class="control-group"><label>Escala</label>
+        <select id="ctrl-melody-scale">
+          <option value="auto" selected>Auto (clima)</option>
         </select>
       </div>
       <div class="control-group"><label>Onda</label>

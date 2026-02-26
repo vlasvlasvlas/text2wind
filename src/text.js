@@ -18,15 +18,17 @@ const PHASE = {
     DEAD: 'dead',
 };
 
+const STROKE_CHARS = ['.', ':', '*', 'o', '+', '#'];
+
 export class TextEngine {
     constructor() {
         this.letters = [];
         this.writeX = 100;
         this.writeY = 100;
         this.cursorBlink = 0;
-        this.lineHeight = CONFIG.TEXT.LINE_HEIGHT;
         this.wordBuffer = '';
         this.lineStartX = 100;
+        this.lastStrokeSoundAt = 0;
     }
 
     init(state) { }
@@ -45,6 +47,30 @@ export class TextEngine {
             this.checkWord(state);
         }
         this.wordBuffer = '';
+    }
+
+    getStrokeSpacing() {
+        return Math.max(8, Math.round(CONFIG.TEXT.FONT_SIZE * 0.35));
+    }
+
+    _createLetter(char, x, y, lifeScale = 1) {
+        return {
+            char,
+            x,
+            y,
+            phase: PHASE.BIRTH,
+            birthTimer: 0,
+            lifeTimer: 0,
+            erosionTimer: 0,
+            maxLife: (CONFIG.TEXT.LIFE_MIN + randomRange(0, CONFIG.TEXT.LIFE_MAX)) * lifeScale,
+            maxErosion: CONFIG.TEXT.EROSION_DURATION,
+            opacity: 0,
+            scale: 1,
+            vx: 0, vy: 0,
+            contemplated: false,
+            contemplateTime: 0,
+            shakex: 0, shakey: 0,
+        };
     }
 
     onKey(e, state) {
@@ -96,7 +122,7 @@ export class TextEngine {
 
     accelerateErosion(state) {
         const currentY = this.writeY;
-        const threshold = this.lineHeight * 0.6;
+        const threshold = CONFIG.TEXT.LINE_HEIGHT * 0.6;
         let count = 0;
 
         for (const l of this.letters) {
@@ -188,23 +214,7 @@ export class TextEngine {
             this.newLine();
         }
 
-        const letter = {
-            char,
-            x: this.writeX,
-            y: this.writeY,
-            phase: PHASE.BIRTH,
-            birthTimer: 0,
-            lifeTimer: 0,
-            erosionTimer: 0,
-            maxLife: CONFIG.TEXT.LIFE_MIN + randomRange(0, CONFIG.TEXT.LIFE_MAX),
-            maxErosion: CONFIG.TEXT.EROSION_DURATION,
-            opacity: 0,
-            scale: 1,
-            vx: 0, vy: 0,
-            contemplated: false,
-            contemplateTime: 0,
-            shakex: 0, shakey: 0,
-        };
+        const letter = this._createLetter(char, this.writeX, this.writeY, 1);
 
         this.letters.push(letter);
 
@@ -215,13 +225,32 @@ export class TextEngine {
         this.cursorBlink = 0;
     }
 
+    addStrokePoint(x, y, state, intensity = 0.4) {
+        const i = clamp(Math.round(clamp(intensity, 0, 1) * (STROKE_CHARS.length - 1)), 0, STROKE_CHARS.length - 1);
+        const char = STROKE_CHARS[i];
+        const letter = this._createLetter(char, x, y, 0.55);
+        letter.scale = 0.8 + Math.random() * 0.25;
+        this.letters.push(letter);
+
+        this.writeX = x;
+        this.writeY = y;
+        this.lineStartX = x;
+        this.cursorBlink = 0;
+
+        const now = Date.now();
+        if (state?.sound && state?.weather && now - this.lastStrokeSoundAt > 65) {
+            state.sound.onKey({ key: char }, state.weather);
+            this.lastStrokeSoundAt = now;
+        }
+    }
+
     newLine() {
         this.writeX = this.lineStartX;
-        this.writeY += this.lineHeight;
+        this.writeY += CONFIG.TEXT.LINE_HEIGHT;
 
         const maxY = window.innerHeight - 60;
         if (this.writeY > maxY) {
-            const shift = this.lineHeight;
+            const shift = CONFIG.TEXT.LINE_HEIGHT;
             this.writeY -= shift;
             for (const l of this.letters) l.y -= shift;
         }

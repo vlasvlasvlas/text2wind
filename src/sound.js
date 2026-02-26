@@ -8,24 +8,33 @@
    Layer 3: MELODY — Two modes:
      - "random": scale-based from char
      - "piano": QWERTY mapped as keyboard
-   
+
    All layers independently parametrizable
    (volume, mute, waveform, attack/release)
    ====================================== */
 
+import { CONFIG } from './config.js';
 import { clamp, lerp } from './utils/math.js';
 
-// ── Fallback scales (used if JSON fails to load) ──
-const FALLBACK_SCALES = {
-    pentatonic: { label: 'Pentatónica Mayor', notes: [0, 2, 4, 7, 9], baseOctave: 4 },
-    aeolian: { label: 'Menor Natural (Eólica)', notes: [0, 2, 3, 5, 7, 8, 10], baseOctave: 4 },
-    dorian: { label: 'Dórica', notes: [0, 2, 3, 5, 7, 9, 10], baseOctave: 4 },
-    phrygian: { label: 'Frigia', notes: [0, 1, 3, 5, 7, 8, 10], baseOctave: 4 },
-    lydian: { label: 'Lidia', notes: [0, 2, 4, 6, 7, 9, 11], baseOctave: 4 },
-    chromatic: { label: 'Cromática', notes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], baseOctave: 4 },
+const SCALES = {
+    aeolian: [0, 2, 3, 5, 7, 8, 10],
+    dorian: [0, 2, 3, 5, 7, 9, 10],
+    pentatonic: [0, 2, 4, 7, 9],
+    phrygian: [0, 1, 3, 5, 7, 8, 10],
+    lydian: [0, 2, 4, 6, 7, 9, 11],
+    chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 };
 
-const FALLBACK_PIANO_MAP = {
+const SCALE_LABELS = {
+    aeolian: 'Menor Natural (Eólica)',
+    dorian: 'Dórica',
+    pentatonic: 'Pentatónica',
+    phrygian: 'Frigia',
+    lydian: 'Lidia',
+    chromatic: 'Cromática',
+};
+
+const PIANO_MAP = {
     'z': 48, 's': 49, 'x': 50, 'd': 51, 'c': 52, 'v': 53, 'g': 54,
     'b': 55, 'h': 56, 'n': 57, 'j': 58, 'm': 59,
     'q': 60, '2': 61, 'w': 62, '3': 63, 'e': 64, 'r': 65, '5': 66,
@@ -33,69 +42,69 @@ const FALLBACK_PIANO_MAP = {
     'i': 72, '9': 73, 'o': 74, '0': 75, 'p': 76,
 };
 
-const FALLBACK_WEATHER_MAP = {
+const WEATHER_SCALE_MAP = {
     default: 'pentatonic',
     storm: 'phrygian',
     cold: 'aeolian',
     hot: 'lydian',
 };
 
-// ── Hour → root note mapping ──
 const HOUR_ROOTS = {
     0: 'C2', 4: 'D2', 6: 'E2', 8: 'G2',
     12: 'A2', 16: 'F2', 18: 'E2', 20: 'D2', 22: 'C2',
 };
-
-// ── Waveform presets ──
-const RHYTHM_WAVES = ['membrane', 'metal', 'noise'];
-const MELODY_WAVES = ['triangle', 'sine', 'square', 'sawtooth', 'fmsine'];
-const DRONE_WAVES = ['sine', 'triangle', 'fatsine', 'fatsawtooth'];
 
 export class SoundEngine {
     constructor() {
         this.initialized = false;
         this.enabled = false;
         this.Tone = null;
+        this.initPromise = null;
+        const runtimeSound = CONFIG.DEFAULTS?.sound || {};
+        const runtimeLayers = runtimeSound.layers || {};
 
-        // Layer params (controllable from UI)
         this.params = {
             rhythm: {
                 volume: -14, muted: false,
-                waveform: 'membrane',  // membrane | metal | noise
+                waveform: 'membrane',
                 attack: 0.002, decay: 0.15, release: 0.1,
+                ...(runtimeLayers.rhythm || {}),
             },
             drone: {
                 volume: -22, muted: false,
                 waveform: 'sine',
                 attack: 4, release: 6,
                 filterFreq: 400,
+                ...(runtimeLayers.drone || {}),
             },
             melody: {
                 volume: -16, muted: false,
                 waveform: 'triangle',
-                attack: 0.05, decay: 0.6, release: 1.5,
-                mode: 'random', // 'random' | 'piano'
+                attack: 0.005, decay: 0.6, release: 1.5,
+                mode: 'random',
                 reverb: 0.35,
+                ...(runtimeLayers.melody || {}),
             },
             wind: {
                 volume: -35, muted: false,
+                ...(runtimeLayers.wind || {}),
             },
         };
 
-        // Scale data (loaded from JSON)
-        this.scalesData = FALLBACK_SCALES;
-        this.pianoMap = FALLBACK_PIANO_MAP;
-        this.weatherScaleMap = FALLBACK_WEATHER_MAP;
+        this.masterLevel = CONFIG.SOUND?.MASTER_LINEAR ?? 0.8;
+        this.scaleMode = runtimeSound.scaleMode || 'auto';
         this.scalesLoaded = false;
-
-        // Current musical state
-        this.currentScale = 'pentatonic';
-        this.scaleMode = 'auto';   // 'auto' = weather-driven, or a scale key name
+        this.scalesData = Object.fromEntries(
+            Object.entries(SCALES).map(([key, notes]) => [key, { label: SCALE_LABELS[key] || key, notes }])
+        );
+        const initialScale = runtimeSound.initialScale || 'pentatonic';
+        this.currentScale = this.scalesData[initialScale] ? initialScale : 'pentatonic';
+        this.pianoMap = { ...PIANO_MAP };
+        this.weatherScaleMap = { ...WEATHER_SCALE_MAP };
         this.droneFreq = 65.41;
         this.lastNoteTime = 0;
         this.noteIndex = 0;
 
-        // Tone.js nodes
         this.rhythmSynth = null;
         this.rhythmNoiseSynth = null;
         this.droneSynth = null;
@@ -103,6 +112,8 @@ export class SoundEngine {
         this.melodySynth = null;
         this.windNoise = null;
         this.windGain = null;
+        this.melodyDryGain = null;
+        this.melodyFxSendGain = null;
         this.masterGain = null;
         this.reverb = null;
         this.delay = null;
@@ -111,16 +122,37 @@ export class SoundEngine {
     }
 
     async init() {
-        try {
-            this.Tone = await import('tone');
-        } catch (e) {
-            console.warn('⚠️ Tone.js not available, sound disabled');
+        if (this.Tone) {
             return;
         }
-        await this.loadScales();
+        if (this.initPromise) {
+            await this.initPromise;
+            return;
+        }
+
+        this.initPromise = (async () => {
+            try {
+                this.Tone = await import('tone');
+
+                // Lowest practical scheduling delay for interactive typing.
+                this._tuneAudioContextForRealtime();
+
+                // Async config load; never block audio startup.
+                void this.loadScales();
+            } catch (e) {
+                console.warn('⚠️ Tone.js not available, sound disabled');
+                this.Tone = null;
+                this.scalesLoaded = true;
+            } finally {
+                this.initPromise = null;
+            }
+        })();
+
+        await this.initPromise;
     }
 
     async loadScales() {
+        if (this.scalesLoaded) return;
         try {
             const resp = await fetch('/data/scales.json');
             if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -128,47 +160,30 @@ export class SoundEngine {
             if (data.scales) this.scalesData = data.scales;
             if (data.pianoMappings?.default?.keys) this.pianoMap = data.pianoMappings.default.keys;
             if (data.weatherScaleMap) this.weatherScaleMap = data.weatherScaleMap;
-            this.scalesLoaded = true;
-            console.log(`🎵 Scales loaded: ${Object.keys(this.scalesData).length} scales`);
+            const preferredScale = this.scaleMode === 'auto' ? this.currentScale : this.scaleMode;
+            if (preferredScale && this.scalesData[preferredScale]) {
+                this.currentScale = preferredScale;
+            }
         } catch (e) {
-            console.warn('⚠️ Could not load scales.json, using fallback scales', e);
+            // Keep fallbacks silently for performance path.
+        } finally {
+            this.scalesLoaded = true;
         }
     }
 
-    getAvailableScales() {
-        return Object.entries(this.scalesData).map(([key, val]) => ({
-            key,
-            label: val.label || key,
-        }));
-    }
-
-    setScale(scaleName) {
-        this.scaleMode = scaleName; // 'auto' or a scale key
-        if (scaleName !== 'auto' && this.scalesData[scaleName]) {
-            this.currentScale = scaleName;
-        }
-    }
-
-    _getScaleNotes(scaleName) {
-        const s = this.scalesData[scaleName];
-        return s ? s.notes : [0, 2, 4, 7, 9]; // fallback to pentatonic
-    }
-
-    async enable() {
-        if (!this.Tone) {
-            await this.init();
-            if (!this.Tone) return;
-        }
+    buildAudioGraph() {
+        if (!this.Tone || this.initialized) return;
 
         const Tone = this.Tone;
-        await Tone.start();
 
-        // Master FX chain
         this.reverb = new Tone.Reverb({ decay: 6, wet: this.params.melody.reverb }).toDestination();
         this.delay = new Tone.FeedbackDelay({ delayTime: '8n', feedback: 0.2, wet: 0.15 }).connect(this.reverb);
-        this.masterGain = new Tone.Gain(0.8).connect(this.delay);
+        this.masterGain = new Tone.Gain(0).toDestination();
+        this.masterGain.connect(this.delay);
+        // Zero-latency dry path for typed notes.
+        this.melodyDryGain = new Tone.Gain(0).toDestination();
+        this.melodyFxSendGain = new Tone.Gain(0).connect(this.masterGain);
 
-        // ─── LAYER 1: RHYTHM ───
         this.rhythmSynth = new Tone.MembraneSynth({
             pitchDecay: 0.08, octaves: 3,
             envelope: { attack: this.params.rhythm.attack, decay: this.params.rhythm.decay, sustain: 0, release: this.params.rhythm.release },
@@ -181,7 +196,6 @@ export class SoundEngine {
             volume: this.params.rhythm.volume - 8,
         }).connect(this.masterGain);
 
-        // ─── LAYER 2: DRONE ───
         this.droneFilter = new Tone.Filter({
             frequency: this.params.drone.filterFreq,
             type: 'lowpass', rolloff: -24,
@@ -198,9 +212,7 @@ export class SoundEngine {
                 volume: this.params.drone.volume,
             },
         }).connect(this.droneFilter);
-        this.startDrone();
 
-        // Wind noise
         this.windNoise = new Tone.Noise('brown').start();
         this.windFilter = new Tone.AutoFilter({
             frequency: 0.15, baseFrequency: 60, octaves: 3,
@@ -208,7 +220,6 @@ export class SoundEngine {
         this.windGain = new Tone.Gain(Tone.dbToGain(this.params.wind.volume)).connect(this.windFilter);
         this.windNoise.connect(this.windGain);
 
-        // ─── LAYER 3: MELODY ───
         this.melodySynth = new Tone.PolySynth(Tone.Synth, {
             maxPolyphony: 8,
             voice0: {
@@ -216,9 +227,10 @@ export class SoundEngine {
                 envelope: { attack: this.params.melody.attack, decay: this.params.melody.decay, sustain: 0.15, release: this.params.melody.release },
                 volume: this.params.melody.volume,
             },
-        }).connect(this.masterGain);
+        });
+        this.melodySynth.connect(this.melodyDryGain);
+        this.melodySynth.connect(this.melodyFxSendGain);
 
-        // Thunder + Rain
         this.thunderSynth = new Tone.NoiseSynth({
             noise: { type: 'brown' },
             envelope: { attack: 0.02, decay: 2, sustain: 0, release: 1 },
@@ -232,8 +244,69 @@ export class SoundEngine {
         }).connect(this.masterGain);
 
         this.initialized = true;
+        this.applyAllParams();
+    }
+
+    getAvailableScales() {
+        return Object.entries(this.scalesData).map(([key, scale]) => ({
+            key,
+            label: scale?.label || SCALE_LABELS[key] || key,
+        }));
+    }
+
+    setScale(scaleName) {
+        this.scaleMode = scaleName;
+        if (scaleName !== 'auto' && this.scalesData[scaleName]) {
+            this.currentScale = scaleName;
+        }
+    }
+
+    _tuneAudioContextForRealtime() {
+        if (!this.Tone) return;
+        const contexts = [this.Tone.getContext?.(), this.Tone.context].filter(Boolean);
+        for (const ctx of contexts) {
+            try { ctx.lookAhead = 0; } catch (e) { }
+            try { ctx.updateInterval = 0.01; } catch (e) { }
+            try { ctx.latencyHint = 'interactive'; } catch (e) { }
+        }
+    }
+
+    _getMelodyFxSend() {
+        if (this.params.melody.muted) return 0;
+        return clamp(this.params.melody.reverb * 0.2, 0, 0.25);
+    }
+
+    _now() {
+        return this.Tone?.immediate ? this.Tone.immediate() : undefined;
+    }
+
+    _getScale(scaleName) {
+        const scale = this.scalesData[scaleName];
+        if (Array.isArray(scale)) return scale;
+        return scale?.notes || SCALES.pentatonic;
+    }
+
+    async enable() {
+        await this.init();
+        if (!this.Tone) return;
+
+        await this.Tone.start();
+        this._tuneAudioContextForRealtime();
+        if (!this.initialized) {
+            try {
+                this.buildAudioGraph();
+            } catch (e) {
+                console.error('⚠️ Sound graph init failed', e);
+                return;
+            }
+        }
+
         this.enabled = true;
-        console.log('🔊 Sound: 3 layers active (rhythm + drone + melody)');
+        if (this.masterGain) this.masterGain.gain.value = this.masterLevel;
+        if (this.melodyDryGain) this.melodyDryGain.gain.value = this.params.melody.muted ? 0 : 1;
+        if (this.melodyFxSendGain) this.melodyFxSendGain.gain.value = this._getMelodyFxSend();
+        if (!this.params.drone.muted) this.startDrone();
+        this.applyAllParams();
     }
 
     startDrone() {
@@ -241,16 +314,30 @@ export class SoundEngine {
         try {
             const root = this.Tone.Frequency(this.droneFreq).toNote();
             const fifth = this.Tone.Frequency(this.droneFreq * 1.5).toNote();
-            this.droneSynth.triggerAttack([root, fifth]);
+            this.droneSynth.triggerAttack([root, fifth], this._now());
         } catch (e) { }
     }
 
-    // ── Parameter updates from UI ──
-
     setParam(layer, param, value) {
         if (!this.params[layer]) return;
+        const prevValue = this.params[layer][param];
         this.params[layer][param] = value;
         this.applyParams(layer);
+
+        if (layer === 'drone' && param === 'muted' && prevValue !== value && this.droneSynth) {
+            if (value) {
+                try { this.droneSynth.releaseAll(); } catch (e) { }
+            } else if (this.enabled) {
+                this.startDrone();
+            }
+        }
+    }
+
+    applyAllParams() {
+        this.applyParams('rhythm');
+        this.applyParams('drone');
+        this.applyParams('melody');
+        this.applyParams('wind');
     }
 
     applyParams(layer) {
@@ -266,7 +353,7 @@ export class SoundEngine {
                                 attack: this.params.rhythm.attack,
                                 decay: this.params.rhythm.decay,
                                 release: this.params.rhythm.release,
-                            }
+                            },
                         });
                     } catch (e) { }
                 }
@@ -285,12 +372,12 @@ export class SoundEngine {
                                     attack: this.params.drone.attack,
                                     release: this.params.drone.release,
                                 },
-                            }
+                            },
                         });
                     } catch (e) { }
-                    if (this.droneFilter) {
-                        this.droneFilter.frequency.rampTo(this.params.drone.filterFreq, 1);
-                    }
+                }
+                if (this.droneFilter) {
+                    this.droneFilter.frequency.value = this.params.drone.filterFreq;
                 }
                 break;
             case 'melody':
@@ -305,18 +392,24 @@ export class SoundEngine {
                                     decay: this.params.melody.decay,
                                     release: this.params.melody.release,
                                 },
-                            }
+                            },
                         });
                     } catch (e) { }
-                    if (this.reverb) {
-                        this.reverb.wet.rampTo(this.params.melody.reverb, 0.5);
-                    }
+                }
+                if (this.reverb) {
+                    this.reverb.wet.value = this.params.melody.reverb;
+                }
+                if (this.melodyDryGain) {
+                    this.melodyDryGain.gain.value = this.params.melody.muted ? 0 : 1;
+                }
+                if (this.melodyFxSendGain) {
+                    this.melodyFxSendGain.gain.value = this._getMelodyFxSend();
                 }
                 break;
             case 'wind':
                 if (this.windGain) {
                     const vol = this.params.wind.muted ? -80 : this.params.wind.volume;
-                    this.windGain.gain.rampTo(this.Tone.dbToGain(vol), 0.3);
+                    this.windGain.gain.value = this.Tone.dbToGain(vol);
                 }
                 break;
         }
@@ -324,20 +417,28 @@ export class SoundEngine {
 
     disable() {
         this.enabled = false;
+        if (this.masterGain) this.masterGain.gain.value = 0;
+        if (this.melodyDryGain) this.melodyDryGain.gain.value = 0;
+        if (this.melodyFxSendGain) this.melodyFxSendGain.gain.value = 0;
         if (this.droneSynth) {
             try { this.droneSynth.releaseAll(); } catch (e) { }
+        }
+        if (this.melodySynth) {
+            try { this.melodySynth.releaseAll(); } catch (e) { }
         }
     }
 
     async toggle() {
-        if (this.enabled) { this.disable(); return false; }
-        else { await this.enable(); return true; }
+        if (this.enabled) {
+            this.disable();
+            return false;
+        }
+        await this.enable();
+        return this.enabled;
     }
 
-    // ── Key input → Melody layer ──
-
     onKey(e, weather) {
-        if (!this.enabled || !this.melodySynth) return;
+        if (!this.enabled || !this.melodySynth || !this.Tone) return;
         const key = e.key;
         if (key.length !== 1) return;
         if (this.params.melody.muted) return;
@@ -345,31 +446,25 @@ export class SoundEngine {
         let midiNote;
 
         if (this.params.melody.mode === 'piano') {
-            // QWERTY piano layout
             midiNote = this.pianoMap[key.toLowerCase()];
-            if (midiNote === undefined) return; // Not a piano key
+            if (midiNote === undefined) return;
         } else {
-            // Random/scale-based mapping
-            const scaleNotes = this._getScaleNotes(this.currentScale);
-            const baseOctave = (this.scalesData[this.currentScale]?.baseOctave ?? 4);
-            const baseMidi = (baseOctave + 1) * 12; // octave 4 → MIDI 60
+            const scale = this._getScale(this.currentScale);
             const charCode = key.toLowerCase().charCodeAt(0);
-            const scaleIndex = charCode % scaleNotes.length;
-            const octaveOffset = Math.floor((charCode % 26) / scaleNotes.length);
-            midiNote = baseMidi + scaleNotes[scaleIndex] + octaveOffset * 12;
+            const scaleIndex = charCode % scale.length;
+            const octaveOffset = Math.floor((charCode % 26) / scale.length);
+            midiNote = 60 + scale[scaleIndex] + octaveOffset * 12;
         }
 
         const freq = 440 * Math.pow(2, (midiNote - 69) / 12);
         try {
-            const note = this.Tone.Frequency(freq).toNote();
-            this.melodySynth.triggerAttackRelease(note, '8n');
+            this.melodySynth.triggerAttackRelease(freq, 0.12, this._now());
         } catch (err) { }
 
-        // Rhythm tick on keystroke
-        if (!this.params.rhythm.muted) {
+        if (!this.params.rhythm.muted && this.rhythmNoiseSynth) {
             const now = Date.now();
             if (now - this.lastNoteTime > 50) {
-                try { this.rhythmNoiseSynth.triggerAttackRelease('32n'); } catch (err) { }
+                try { this.rhythmNoiseSynth.triggerAttackRelease('32n', this._now()); } catch (err) { }
                 this.lastNoteTime = now;
             }
         }
@@ -377,19 +472,17 @@ export class SoundEngine {
         this.noteIndex++;
     }
 
-    // ── Letter erosion → Rhythm layer ──
-
     onLetterErosion(letter) {
-        if (!this.enabled || !this.rhythmSynth || this.params.rhythm.muted) return;
+        if (!this.enabled || !this.rhythmSynth || this.params.rhythm.muted || !this.Tone) return;
 
-        const scaleNotes = this._getScaleNotes(this.currentScale);
+        const scale = this._getScale(this.currentScale);
         const charCode = (letter.char || 'a').toLowerCase().charCodeAt(0);
-        const scaleIndex = charCode % scaleNotes.length;
-        const midiNote = 36 + scaleNotes[scaleIndex];
+        const scaleIndex = charCode % scale.length;
+        const midiNote = 36 + scale[scaleIndex];
         const freq = 440 * Math.pow(2, (midiNote - 69) / 12);
 
         try {
-            this.rhythmSynth.triggerAttackRelease(freq, '16n');
+            this.rhythmSynth.triggerAttackRelease(freq, 0.08, this._now());
         } catch (err) { }
     }
 
@@ -397,7 +490,7 @@ export class SoundEngine {
         if (!this.enabled || !this.thunderSynth) return;
         try {
             this.thunderSynth.volume.value = -12 + intensity * 8;
-            this.thunderSynth.triggerAttackRelease('2n');
+            this.thunderSynth.triggerAttackRelease('2n', this._now());
         } catch (err) { }
     }
 
@@ -415,27 +508,25 @@ export class SoundEngine {
             this.droneFreq = newFreq;
             try {
                 this.droneSynth.releaseAll();
-                setTimeout(() => this.startDrone(), 100);
+                setTimeout(() => this.startDrone(), 40);
             } catch (e) { }
         }
 
-        // Filter responds to temperature
         const temp = weather.get('temperature');
         const baseFilter = this.params.drone.filterFreq;
         const tempFilter = lerp(Math.max(baseFilter * 0.3, 100), baseFilter, clamp((temp + 10) / 55, 0, 1));
         if (this.droneFilter) {
-            this.droneFilter.frequency.rampTo(tempFilter, 2);
+            this.droneFilter.frequency.value = tempFilter;
         }
 
-        // Storm resonance
         const storm = weather.get('storm') / 100;
         if (this.droneFilter) {
-            this.droneFilter.Q.rampTo(storm * 8, 1);
+            this.droneFilter.Q.value = storm * 8;
         }
     }
 
     update(dt, state) {
-        if (!this.enabled || !this.initialized) return;
+        if (!this.enabled || !this.initialized || !this.Tone) return;
 
         const weather = state.weather;
         const windIntensity = weather.get('wind') / 100;
@@ -444,21 +535,18 @@ export class SoundEngine {
 
         this.updateDrone(hour, weather);
 
-        // Wind noise volume (combined with wind.muted)
-        if (this.windGain && this.Tone && !this.params.wind.muted) {
+        if (this.windGain && !this.params.wind.muted) {
             const baseVol = this.params.wind.volume;
             const windVol = baseVol + windIntensity * 15;
-            this.windGain.gain.rampTo(this.Tone.dbToGain(windVol), 0.5);
+            this.windGain.gain.value = this.Tone.dbToGain(windVol);
         }
 
-        // Rain drops
         if (rainIntensity > 0.1 && this.rainSynth && !this.params.rhythm.muted) {
             if (Math.random() < rainIntensity * 0.04) {
-                try { this.rainSynth.triggerAttackRelease('64n'); } catch (err) { }
+                try { this.rainSynth.triggerAttackRelease('64n', this._now()); } catch (err) { }
             }
         }
 
-        // Scale shifts with weather (only when scaleMode is 'auto')
         if (this.scaleMode === 'auto') {
             const storm = weather.get('storm') / 100;
             const temp = weather.get('temperature');

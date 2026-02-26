@@ -12,6 +12,7 @@ export class UI {
     constructor() {
         this.performanceMode = false;
         this.app = null;
+        this.pendingScaleSelection = 'auto';
     }
 
     init(state, weather, sound, app) {
@@ -51,6 +52,8 @@ export class UI {
                 document.getElementById(tab.dataset.tab)?.classList.add('active');
             });
         });
+
+        this.syncControlsFromRuntime();
 
         // ═══ ATMOSPHERE TAB ═══
         this.wireSlider('ctrl-wind', v => weather.set('wind', v));
@@ -148,6 +151,74 @@ export class UI {
         if (el) el.addEventListener('click', handler);
     }
 
+    setControlValue(id, value) {
+        const el = document.getElementById(id);
+        if (!el || value === undefined || value === null) return;
+        const strValue = String(value);
+        if (el.tagName === 'SELECT') {
+            const hasOption = Array.from(el.options).some(opt => opt.value === strValue);
+            if (!hasOption) return;
+        }
+        el.value = strValue;
+    }
+
+    setControlChecked(id, checked) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.checked = !!checked;
+    }
+
+    syncControlsFromRuntime() {
+        const weather = this.weather.current;
+        const sound = this.sound.params;
+
+        // Atmosphere
+        this.setControlValue('ctrl-wind', weather.wind);
+        this.setControlValue('ctrl-wind-dir', weather.windDir);
+        this.setControlValue('ctrl-rain', weather.rain);
+        this.setControlValue('ctrl-fog', weather.fog);
+        this.setControlValue('ctrl-temp', weather.temperature);
+        this.setControlValue('ctrl-storm', weather.storm);
+        this.setControlValue('ctrl-hour', weather.hourOverride);
+
+        // Text
+        this.setControlValue('ctrl-persist', Math.max(2, Math.round(CONFIG.TEXT.LIFE_MIN / 1000)));
+        this.setControlValue('ctrl-explosion', CONFIG.TEXT.PARTICLES_PER_LETTER);
+        this.setControlValue('ctrl-ink-hue', CONFIG.TEXT._hueOverride || 0);
+        this.setControlValue('ctrl-font', CONFIG.TEXT.FONT_FAMILY);
+        this.setControlValue('ctrl-font-size', CONFIG.TEXT.FONT_SIZE);
+
+        // Sound
+        this.setControlChecked('ctrl-rhythm-mute', !sound.rhythm.muted);
+        this.setControlValue('ctrl-rhythm-vol', sound.rhythm.volume);
+        this.setControlValue('ctrl-rhythm-attack', sound.rhythm.attack);
+        this.setControlValue('ctrl-rhythm-decay', sound.rhythm.decay);
+        this.setControlValue('ctrl-rhythm-release', sound.rhythm.release);
+
+        this.setControlChecked('ctrl-wind-mute', !sound.wind.muted);
+        this.setControlValue('ctrl-wind-vol', sound.wind.volume);
+
+        this.setControlChecked('ctrl-drone-mute', !sound.drone.muted);
+        this.setControlValue('ctrl-drone-vol', sound.drone.volume);
+        this.setControlValue('ctrl-drone-filter', sound.drone.filterFreq);
+        this.setControlValue('ctrl-drone-attack', sound.drone.attack);
+        this.setControlValue('ctrl-drone-release', sound.drone.release);
+        this.setControlValue('ctrl-drone-wave', sound.drone.waveform);
+
+        this.setControlChecked('ctrl-melody-mute', !sound.melody.muted);
+        this.setControlValue('ctrl-melody-vol', sound.melody.volume);
+        this.setControlValue('ctrl-melody-mode', sound.melody.mode);
+        this.setControlValue('ctrl-melody-wave', sound.melody.waveform);
+        this.setControlValue('ctrl-melody-attack', sound.melody.attack);
+        this.setControlValue('ctrl-melody-decay', sound.melody.decay);
+        this.setControlValue('ctrl-melody-release', sound.melody.release);
+        this.setControlValue('ctrl-melody-reverb', sound.melody.reverb);
+        this.pendingScaleSelection = this.sound.scaleMode || 'auto';
+
+        // Auto
+        this.setControlValue('ctrl-auto-bpm', this.app?.autoBPM ?? CONFIG.AUTO.DEFAULT_BPM);
+    }
+
     wireSlider(id, onChange, formatValue) {
         const slider = document.getElementById(id);
         const display = document.querySelector(`[data-for="${id}"]`);
@@ -163,12 +234,18 @@ export class UI {
 
     wireToggle(id, onChange) {
         const cb = document.getElementById(id);
-        if (cb) cb.addEventListener('change', () => onChange(cb.checked));
+        if (!cb) return;
+        const update = () => onChange(cb.checked);
+        cb.addEventListener('change', update);
+        update();
     }
 
     wireSelect(id, onChange) {
         const sel = document.getElementById(id);
-        if (sel) sel.addEventListener('change', () => onChange(sel.value));
+        if (!sel) return;
+        const update = () => onChange(sel.value);
+        sel.addEventListener('change', update);
+        update();
     }
 
     populateScaleSelector(sound) {
@@ -177,12 +254,18 @@ export class UI {
 
         const populate = () => {
             const scales = sound.getAvailableScales();
+            const existing = new Set(Array.from(sel.options).map(opt => opt.value));
             scales.forEach(({ key, label }) => {
+                if (existing.has(key)) return;
                 const opt = document.createElement('option');
                 opt.value = key;
                 opt.textContent = label;
                 sel.appendChild(opt);
             });
+            const desired = this.pendingScaleSelection || sound.scaleMode || 'auto';
+            const hasDesired = Array.from(sel.options).some(opt => opt.value === desired);
+            sel.value = hasDesired ? desired : 'auto';
+            sound.setScale(sel.value);
         };
 
         // Scales load async, wait briefly then populate

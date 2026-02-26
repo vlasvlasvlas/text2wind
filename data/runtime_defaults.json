@@ -1,0 +1,60 @@
+{
+  "weather": {
+    "wind": 20,
+    "windDir": 90,
+    "rain": 0,
+    "fog": 0,
+    "temperature": 20,
+    "storm": 0,
+    "snow": 0,
+    "hourOverride": -1
+  },
+  "text": {
+    "fontFamily": "'JetBrains Mono', monospace",
+    "fontSize": 28,
+    "lineHeight": 42,
+    "persistenceSeconds": 8,
+    "particlesPerLetter": 60,
+    "inkHueOverride": 0
+  },
+  "sound": {
+    "masterLinear": 0.8,
+    "scaleMode": "auto",
+    "initialScale": "pentatonic",
+    "layers": {
+      "rhythm": {
+        "volume": -14,
+        "muted": false,
+        "waveform": "membrane",
+        "attack": 0.002,
+        "decay": 0.15,
+        "release": 0.1
+      },
+      "drone": {
+        "volume": -22,
+        "muted": false,
+        "waveform": "sine",
+        "attack": 4,
+        "release": 6,
+        "filterFreq": 400
+      },
+      "melody": {
+        "volume": -16,
+        "muted": false,
+        "waveform": "triangle",
+        "attack": 0.005,
+        "decay": 0.6,
+        "release": 1.5,
+        "mode": "random",
+        "reverb": 0.35
+      },
+      "wind": {
+        "volume": -35,
+        "muted": false
+      }
+    }
+  },
+  "autoTypewriter": {
+    "bpm": 120
+  }
+}
