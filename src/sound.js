@@ -216,6 +216,15 @@ export class SoundEngine {
             case 'rhythm':
                 if (this.rhythmSynth) {
                     this.rhythmSynth.volume.value = this.params.rhythm.muted ? -Infinity : this.params.rhythm.volume;
+                    try {
+                        this.rhythmSynth.set({
+                            envelope: {
+                                attack: this.params.rhythm.attack,
+                                decay: this.params.rhythm.decay,
+                                release: this.params.rhythm.release,
+                            }
+                        });
+                    } catch (e) { }
                 }
                 if (this.rhythmNoiseSynth) {
                     this.rhythmNoiseSynth.volume.value = this.params.rhythm.muted ? -Infinity : this.params.rhythm.volume - 8;
@@ -224,6 +233,17 @@ export class SoundEngine {
             case 'drone':
                 if (this.droneSynth) {
                     this.droneSynth.volume.value = this.params.drone.muted ? -Infinity : this.params.drone.volume;
+                    try {
+                        this.droneSynth.set({
+                            voice0: {
+                                oscillator: { type: this.params.drone.waveform },
+                                envelope: {
+                                    attack: this.params.drone.attack,
+                                    release: this.params.drone.release,
+                                },
+                            }
+                        });
+                    } catch (e) { }
                     if (this.droneFilter) {
                         this.droneFilter.frequency.rampTo(this.params.drone.filterFreq, 1);
                     }
@@ -232,6 +252,21 @@ export class SoundEngine {
             case 'melody':
                 if (this.melodySynth) {
                     this.melodySynth.volume.value = this.params.melody.muted ? -Infinity : this.params.melody.volume;
+                    try {
+                        this.melodySynth.set({
+                            voice0: {
+                                oscillator: { type: this.params.melody.waveform + '8' },
+                                envelope: {
+                                    attack: this.params.melody.attack,
+                                    decay: this.params.melody.decay,
+                                    release: this.params.melody.release,
+                                },
+                            }
+                        });
+                    } catch (e) { }
+                    if (this.reverb) {
+                        this.reverb.wet.rampTo(this.params.melody.reverb, 0.5);
+                    }
                 }
                 break;
             case 'wind':

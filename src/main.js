@@ -99,10 +99,10 @@ class Text2Wind {
         // Intro
         document.getElementById('intro').addEventListener('click', () => this.startApp());
 
-        // Paste (Ctrl+V)
-        window.addEventListener('paste', e => {
+        // Paste (Cmd+V / Ctrl+V)
+        document.addEventListener('paste', e => {
             if (!this.started) return;
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
             e.preventDefault();
             const text = (e.clipboardData || window.clipboardData).getData('text');
             if (!text) return;
