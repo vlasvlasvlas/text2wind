@@ -29,6 +29,10 @@ Text2Wind transpone el gesto del **espigueo** de Varda a una interfaz digital:
 - 💨 **Campo de viento** basado en Perlin noise con turbulencias orgánicas
 - 🌫️ **Partículas de viento** (polvo/polen) que visualizan la dirección y fuerza del viento
 - ✍️ **Tipografía viva** con ciclo de vida: nacimiento → reposo → erosión → disolución
+- 🎨 **Color de texto** configurable por hue (0–360°) o automático según hora
+- 🔤 **Tipografía seleccionable**: JetBrains Mono, Courier New, Fira Code, Source Code Pro, Ubuntu Mono, IBM Plex Mono — todas monospace para soporte ASCII art
+- ⏱️ **Persistencia configurable**: cuántos segundos permanece el texto visible (2–120s)
+- 💥 **Explosión configurable**: cantidad de partículas por letra al erosionarse (5–200)
 - 🌧️ **Clima parametrizable**: viento, dirección, lluvia, niebla, tormenta, temperatura
 - ⚡ **Efectos meteorológicos**: lluvia con gotas, relámpagos, niebla volumétrica
 - 🕯️ **Cursor-vela** con estela de luciérnagas: tu atención protege las letras del olvido
@@ -45,19 +49,21 @@ Text2Wind transpone el gesto del **espigueo** de Varda a una interfaz digital:
 - La escala musical cambia con el clima: pentatónica → frigia (tormenta) → lidia (calor)
 
 ### Interacción
+- 🖱️ **Click para posicionar**: el cursor de escritura queda fijo donde hacés click
 - 🧠 **360 palabras en español** mapeadas semánticamente a efectos ambientales
 - ⭐ **16 palabras especiales** con efectos únicos vinculados a Varda
-- 📖 **Auto-typewriter**: importá un archivo `.txt` y se escribe solo al BPM elegido (10–400)
+- 📖 **Auto-typewriter**: importá un archivo `.txt` (UTF-8) y se escribe solo al BPM elegido (10–400)
 - 🎭 **Modo performance** (F11) para instalación/galería sin UI
 - 📷 **Captura de pantalla** como PNG
+- ⚠️ **Sin shortcuts de letras**: todas las teclas se usan para escribir, sin conflictos
 
 ### UI
 - 🕐 **Reloj** sincronizado con la hora del sistema
 - ⚙️ **Panel de parámetros** con 5 tabs: Clima · Ritmo · Drone · Melodía · Auto
-- ❓ **Panel "¿Qué es esto?"** con la teoría y link a GitHub
+- ❓ **Panel "¿Qué es esto?"** con la teoría, concepto de Varda y link a GitHub
 - ⌨️ **Panel de atajos** de teclado
-- ⛶ **Botón de pantalla completa**
-- Barra de botones flotantes con acceso rápido a cada panel
+- ⛶ **Botón de pantalla completa** (solo por botón, no por tecla)
+- 6 botones flotantes: ❓ About · ⌨️ Atajos · ⛶ Fullscreen · 📷 Captura · 🔇 Sonido · ⚙️ Params
 
 ---
 
@@ -111,14 +117,15 @@ python tools/generate_dictionary.py --test
 |--------|------|
 | Iniciar | Click en la pantalla de inicio |
 | Escribir | Teclear — las letras aparecen donde hiciste click |
-| Posicionar cursor | Click en el canvas |
+| Posicionar cursor | Click en el canvas (queda fijo ahí) |
 | Erosionar línea | `Enter` — las letras se disuelven en cascada |
-| Borrar última letra | `Backspace` — erosión instantánea |
 | Pantalla completa | Botón ⛶ en la barra flotante |
-| Modo performance | `F11` — oculta toda la UI |
+| Modo performance | `F11` — oculta toda la UI + fullscreen |
 | Cerrar panel | `Escape` |
 | Capturar imagen | Botón 📷 |
 | Activar sonido | Botón 🔇/🔊 |
+
+> **Nota:** Todas las teclas de letras, espacio y backspace se usan exclusivamente para escribir. No hay shortcuts que conflictúen con la escritura.
 
 ### Auto-typewriter
 
@@ -127,7 +134,28 @@ python tools/generate_dictionary.py --test
 3. Ajustá el **BPM** (velocidad de tipeo: 10–400)
 4. **▶ Reproducir** / **⏸ Pausar** / **⏹ Stop**
 
-El texto importado se escribe automáticamente, caracter por caracter, con sonido y detección semántica.
+El texto importado se escribe automáticamente, caracter por caracter, con sonido y detección semántica. Soporta archivos con acentos y caracteres especiales (UTF-8).
+
+### Controles de texto (tab Clima)
+
+| Control | Rango | Default | Descripción |
+|---------|-------|---------|-------------|
+| Persistencia | 2 – 120s | 15s | Cuánto tiempo permanecen las letras antes de erosionarse |
+| Explosión | 5 – 200 | 60 | Cantidad de partículas que genera cada letra al morir |
+| Color | 0 – 360° | Auto | Hue del color de las letras (0 = automático según hora) |
+| Tipografía | dropdown | JetBrains Mono | Fuente monospace — compatible con ASCII art |
+
+#### Tipografías disponibles
+
+| Fuente | Característica |
+|--------|----------------|
+| JetBrains Mono | Moderna, excelente legibilidad |
+| Courier New | Clásica, presente en todos los sistemas |
+| Fira Code | Ligaduras de código |
+| Source Code Pro | Adobe, profesional |
+| Ubuntu Mono | Linux, compacta |
+| IBM Plex Mono | Corporativa, elegante |
+| System Mono | Monospace del sistema operativo |
 
 ### Palabras especiales
 

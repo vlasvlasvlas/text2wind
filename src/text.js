@@ -333,7 +333,8 @@ export class TextEngine {
 
     render(ctx, w, h, state) {
         const hour = state.weather.getCurrentHour();
-        const ink = this.getInkColor(hour);
+        const hueOverride = CONFIG.TEXT._hueOverride || 0;
+        const ink = hueOverride > 0 ? this.hueToRGB(hueOverride, hour) : this.getInkColor(hour);
 
         ctx.font = `${CONFIG.TEXT.FONT_SIZE}px ${CONFIG.TEXT.FONT_FAMILY}`;
         ctx.textBaseline = 'top';
@@ -360,5 +361,27 @@ export class TextEngine {
             ctx.fillStyle = `rgba(${ink[0]},${ink[1]},${ink[2]},0.5)`;
             ctx.fillRect(this.writeX, this.writeY, 2, CONFIG.TEXT.FONT_SIZE);
         }
+    }
+
+    hueToRGB(hue, hour) {
+        // Brightness adapts to day/night
+        const isNight = hour < 6 || hour > 20;
+        const lightness = isNight ? 0.78 : 0.25;
+        const saturation = 0.6;
+        const h = hue / 360;
+        const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
+        const p = 2 * lightness - q;
+        const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1; if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+        };
+        return [
+            Math.round(hue2rgb(p, q, h + 1 / 3) * 255),
+            Math.round(hue2rgb(p, q, h) * 255),
+            Math.round(hue2rgb(p, q, h - 1 / 3) * 255)
+        ];
     }
 }

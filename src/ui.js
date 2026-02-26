@@ -6,6 +6,8 @@
    Auto-typewriter with BPM control.
    ====================================== */
 
+import { CONFIG } from './config.js';
+
 export class UI {
     constructor() {
         this.performanceMode = false;
@@ -60,6 +62,24 @@ export class UI {
         this.wireSlider('ctrl-hour', v => {
             weather.set('hourOverride', v < 0 ? -1 : v);
         }, v => v < 0 ? 'Auto' : `${Math.floor(v)}:${String(Math.floor((v % 1) * 60)).padStart(2, '0')}`);
+
+        // ── Text controls ──
+        this.wireSlider('ctrl-persist', v => {
+            CONFIG.TEXT.LIFE_MIN = v * 1000;
+            CONFIG.TEXT.LIFE_MAX = v * 2000;
+        }, v => v + 's');
+
+        this.wireSlider('ctrl-explosion', v => {
+            CONFIG.TEXT.PARTICLES_PER_LETTER = v;
+        }, v => v);
+
+        this.wireSlider('ctrl-ink-hue', v => {
+            CONFIG.TEXT._hueOverride = v; // 0 = auto
+        }, v => v === 0 ? 'Auto' : v + '°');
+
+        this.wireSelect('ctrl-font', v => {
+            CONFIG.TEXT.FONT_FAMILY = v;
+        });
 
         // ═══ RHYTHM TAB ═══
         this.wireToggle('ctrl-rhythm-mute', checked => sound.setParam('rhythm', 'muted', !checked));

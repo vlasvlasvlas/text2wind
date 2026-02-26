@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap"
     rel="stylesheet" />
-  <script type="module" crossorigin src="./assets/index-bGbqhdNV.js"></script>
+  <script type="module" crossorigin src="./assets/index-CLgnWSiz.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Cm_5DC_J.css">
 </head>
 
@@ -51,6 +51,26 @@
           value="0" /><span class="ctrl-value" data-for="ctrl-storm">0</span></div>
       <div class="control-group"><label>Hora</label><input type="range" id="ctrl-hour" min="-1" max="24" step="0.1"
           value="-1" /><span class="ctrl-value" data-for="ctrl-hour">Auto</span></div>
+      <hr class="divider" />
+      <div class="control-group"><label>Persistencia</label><input type="range" id="ctrl-persist" min="2" max="120"
+          step="1" value="15" /><span class="ctrl-value" data-for="ctrl-persist">15s</span></div>
+      <div class="control-group"><label>Explosión</label><input type="range" id="ctrl-explosion" min="5" max="200"
+          step="5" value="60" /><span class="ctrl-value" data-for="ctrl-explosion">60</span></div>
+      <div class="control-group"><label>Color</label><input type="range" id="ctrl-ink-hue" min="0" max="360" step="1"
+          value="0" /><span class="ctrl-value" data-for="ctrl-ink-hue">Auto</span></div>
+      <div class="control-group"><label>Tipografía</label>
+        <select id="ctrl-font">
+          <option value="'JetBrains Mono', monospace" selected>JetBrains Mono</option>
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="'Fira Code', monospace">Fira Code</option>
+          <option value="'Source Code Pro', monospace">Source Code Pro</option>
+          <option value="'Ubuntu Mono', monospace">Ubuntu Mono</option>
+          <option value="'IBM Plex Mono', monospace">IBM Plex Mono</option>
+          <option value="monospace">System Mono</option>
+        </select>
+      </div>
+      <p class="hint">Persistencia: segundos. Explosión: partículas/letra. Color 0 = auto. Tipografías monospace para
+        ASCII art.</p>
     </div>
 
     <div class="tab-content" id="tab-rhythm">
@@ -147,8 +167,6 @@
     <div class="shortcut-list">
       <div class="shortcut-row"><kbd>Click</kbd><span>Posicionar escritura</span></div>
       <div class="shortcut-row"><kbd>Enter</kbd><span>Erosionar línea + buscar palabra</span></div>
-      <div class="shortcut-row"><kbd>Backspace</kbd><span>Erosionar última letra</span></div>
-      <div class="shortcut-row"><kbd>F</kbd><span>Pantalla completa</span></div>
       <div class="shortcut-row"><kbd>F11</kbd><span>Modo performance</span></div>
       <div class="shortcut-row"><kbd>Esc</kbd><span>Cerrar panel / salir fullscreen</span></div>
     </div>
