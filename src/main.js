@@ -109,6 +109,12 @@ class Text2Wind {
             document.getElementById('intro').classList.add('hidden');
             this.lastTime = performance.now();
             requestAnimationFrame(this.loop);
+
+            // Auto-enable sound (browser allows audio after user click)
+            this.sound.toggle().then(on => {
+                const btn = document.getElementById('btn-sound');
+                if (btn) btn.textContent = on ? '🔊' : '🔇';
+            });
         }
     }
 
