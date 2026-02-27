@@ -1,5 +1,6 @@
 # Text2Wind — Interfaz Espigadora
 
+![Text2Wind Screenshot](./screenshot.png)
 > *"Nada es realmente un desecho si se mira con la atención adecuada."*
 > — Agnès Varda, *Los espigadores y la espigadora* (2000)
 
