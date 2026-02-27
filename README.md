@@ -142,6 +142,10 @@ python tools/generate_dictionary.py --test
 3. Ajustá el **BPM** (velocidad de tipeo: 10–400)
 4. **▶ Reproducir** / **⏸ Pausar** / **⏹ Stop**
 
+📝 **Archivos de prueba incluidos**: Dentro de la carpeta `data/txts/` agregamos dos archivos listos para probar cómo funciona este modo de autocompletado y cómo reacciona a los saltos de línea/símbolos:
+- `monkey.txt`: Todos los insultos y respuestas clásicas de Monkey Island (ideal para probar los acentos invertidos y tipeo fluido).
+- `ascii.txt`: Un dibujo en ASCII art de un escarabajo para ver cómo el auto-typewriter dibuja renglón por renglón usando símbolos espaciados.
+
 El texto importado se escribe automáticamente, caracter por caracter, con sonido y detección semántica. Soporta archivos con acentos y caracteres especiales (UTF-8).
 
 ### Controles de texto (tab ✍️ Texto)
@@ -236,10 +240,12 @@ text2wind/
 │       └── noise.js        # Implementación Perlin noise
 │
 ├── data/
+│   ├── txts/                 # Archivos de texto de prueba para el Auto-typewriter (monkey.txt, ascii.txt)
 │   ├── runtime_defaults.json # Defaults globales de arranque (clima/texto/sonido/UI)
 │   ├── scales.json         # 18 escalas musicales configurables + mapeos de teclado
 │   ├── semantic_dict.json  # Diccionario semántico (360 palabras → efectos)
-│   └── special_words.json  # 16 palabras especiales (Varda, memoria, etc.)
+│   ├── special_words.json  # 16 palabras especiales (Varda, memoria, etc.)
+│   └── ascii_art.js        # Diccionario de figuras ASCII inyectables
 │
 └── tools/
     ├── generate_dictionary.py  # Generador CLI del diccionario con spaCy
