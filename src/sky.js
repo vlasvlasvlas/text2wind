@@ -130,6 +130,9 @@ export class Sky {
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
+        // Sun / Moon glow
+        this.renderCelestialGlow(ctx, w, h, hour);
+
         // Stars
         const nightness = this.getNightness(hour);
         if (nightness > 0.05) {
@@ -155,6 +158,59 @@ export class Sky {
         if (hour < 18) return 0;
         if (hour < 20) return (hour - 18) / 2;
         return 1;
+    }
+
+    renderCelestialGlow(ctx, w, h, hour) {
+        if (CONFIG.SKY && CONFIG.SKY.GLOW_ENABLED === false) return;
+
+        ctx.save();
+        const nightness = this.getNightness(hour);
+        const cx = w * 0.5;
+
+        if (nightness < 1) {
+            // Sun glow (daytime)
+            const sunIntensity = 1 - nightness;
+            const cy = h * lerp(0.8, 0.2, Math.sin((hour - 6) / 12 * Math.PI)); // Arc
+            const radius = Math.min(w, h) * 0.8;
+
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+            grad.addColorStop(0, `rgba(255, 240, 210, ${sunIntensity * 0.4})`);
+            grad.addColorStop(0.3, `rgba(255, 220, 180, ${sunIntensity * 0.15})`);
+            grad.addColorStop(1, 'rgba(255, 200, 150, 0)');
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+        }
+
+        if (nightness > 0) {
+            // Moon glow (nighttime) - greatly dimmed to match user request
+            const moonIntensity = nightness * 0.3; // Much dimmer
+            const moonX = w * 0.7; // Right side
+            const cy = h * lerp(0.5, 0.2, nightness);
+            const radius = Math.min(w, h) * 0.6;
+
+            const grad = ctx.createRadialGradient(moonX, cy, 0, moonX, cy, radius);
+            grad.addColorStop(0, `rgba(200, 220, 255, ${moonIntensity * 0.10})`);
+            grad.addColorStop(0.5, `rgba(180, 200, 255, ${moonIntensity * 0.03})`);
+            grad.addColorStop(1, 'rgba(150, 180, 255, 0)');
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            // Subtle moon crescent suggestion
+            ctx.beginPath();
+            ctx.arc(moonX, cy, w * 0.03, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${moonIntensity * 0.2})`;
+            ctx.fill();
+
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(moonX - w * 0.008, cy - w * 0.008, w * 0.03, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,1)';
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+        }
+        ctx.restore();
     }
 
     renderStars(ctx, w, h, nightness, fog) {

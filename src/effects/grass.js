@@ -18,6 +18,12 @@ export class GrassEffect {
     init(state) { }
 
     update(dt, state) {
+        if (!CONFIG.GRASS.ENABLED) {
+            // Trim blades away immediately if disabled
+            if (this.blades.length > 0) this.blades.length = 0;
+            return;
+        }
+
         // Track text activity
         const textLetters = state.text.letters?.length || 0;
         if (textLetters > 0) {
@@ -28,9 +34,11 @@ export class GrassEffect {
         const shouldGrow = idleTime > CONFIG.GRASS.IDLE_THRESHOLD;
 
         if (shouldGrow && this.blades.length < CONFIG.GRASS.MAX_BLADES) {
-            // Grow new blades near dead letter positions
+            // Grow new blades near dead letter positions OR along the bottom edge
             const memory = state.memory;
-            if (memory.traces.length > 0) {
+            const useMemoryTrace = memory.traces.length > 0 && Math.random() < 0.6; // 60% chance to use memory trace if available
+
+            if (useMemoryTrace) {
                 const trace = memory.traces[Math.floor(Math.random() * memory.traces.length)];
                 this.blades.push({
                     x: trace.x + randomRange(-15, 15),
@@ -65,7 +73,7 @@ export class GrassEffect {
     }
 
     render(ctx, w, h, state) {
-        if (this.blades.length === 0) return;
+        if (!CONFIG.GRASS.ENABLED || this.blades.length === 0) return;
 
         const time = Date.now() * 0.001;
         const windIntensity = state.weather.get('wind') / 100;

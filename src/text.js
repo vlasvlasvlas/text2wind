@@ -10,6 +10,7 @@
 
 import { CONFIG } from './config.js';
 import { randomRange, distance, clamp, easeOutCubic } from './utils/math.js';
+import { ASCII_ART } from '../data/ascii_art.js';
 
 const PHASE = {
     BIRTH: 'birth',
@@ -141,12 +142,27 @@ export class TextEngine {
 
     checkWord(state) {
         if (this.wordBuffer.length >= 2) {
-            const word = this.wordBuffer.trim();
+            const word = this.wordBuffer.trim().toLowerCase();
             if (word) {
+                // Check normal semantic words
                 const result = state.semantic.lookup(word);
                 if (result) {
                     state.weather.applySemanticEffects(result.effects, word);
                     if (result.special) this.triggerSpecialEffect(result.special, state);
+                    this.markWordForContemplation(word);
+                    // Audible cue: chime when keyword recognized
+                    state.sound?.playSemanticChime?.(!!result.special);
+                }
+
+                // Check ASCII Art map
+                if (ASCII_ART[word]) {
+                    this.spawnAsciiArt(ASCII_ART[word], state);
+                    state.sound?.playSemanticChime?.(true); // Special chime
+                }
+
+                // Check Apotheosis
+                if (word === 'posnetes') {
+                    this.triggerApotheosis(state);
                     this.markWordForContemplation(word);
                 }
             }
@@ -173,8 +189,12 @@ export class TextEngine {
                     { spread: window.innerWidth * 0.4, life: 5000, velocityScale: -2 });
                 break;
             case 'palimpsest_reveal': state.memory.reveal(3000); break;
-            case 'suspension': state.modes.triggerSuspension(5000); break;
-            case 'time_lapse': state.weather.triggerTimeLapse(6); break;
+            case 'suspension':
+                state.modes.triggerSuspension(5000);
+                state.weather.semanticPush.letter_life += 2.0;
+                state.weather.semanticPush.hour_shift -= 0.5;
+                break;
+            case 'time_lapse': state.weather.triggerTimeLapse(24); break;
             case 'heart_formation': this.emitHeartParticles(state); break;
             case 'erosion_burst': this.erodeAllLetters(state); break;
             case 'rapid_aging': state.memory.accelerateAging(5000); break;
@@ -183,6 +203,114 @@ export class TextEngine {
                 state.modes.triggerSuspension(8000);
                 break;
         }
+    }
+
+    spawnAsciiArt(artString, state) {
+        // Move writing position down for the art
+        this.newLine();
+
+        const startX = this.writeX;
+        let pX = startX;
+        let pY = this.writeY;
+
+        const lines = artString.split('\n');
+        const ctx = state.ctx;
+        ctx.font = `${CONFIG.TEXT.FONT_SIZE}px ${CONFIG.TEXT.FONT_FAMILY}`;
+        const spaceWidth = ctx.measureText(' ').width;
+
+        // Briefly speed up birth time to reveal the shape faster
+        const originalBirth = CONFIG.TEXT.BIRTH_DURATION;
+        CONFIG.TEXT.BIRTH_DURATION = 100;
+
+        for (const line of lines) {
+            pX = startX;
+            for (const char of line) {
+                if (char !== ' ') {
+                    const letter = this._createLetter(char, pX, pY, 1.5);
+                    letter.opacity = 0; // Starts invisible
+                    // Slight variation in life so it erodes organically
+                    letter.maxLife *= randomRange(0.8, 1.2);
+                    this.letters.push(letter);
+                }
+                pX += (char === ' ') ? spaceWidth : (ctx.measureText(char).width + 2);
+            }
+            pY += CONFIG.TEXT.LINE_HEIGHT;
+        }
+
+        // Restore setting
+        setTimeout(() => CONFIG.TEXT.BIRTH_DURATION = originalBirth, 500);
+
+        // Update active writing pos to end of art
+        this.writeX = startX;
+        this.writeY = pY;
+        this.lineStartX = startX;
+    }
+
+    triggerApotheosis(state) {
+        // 1. Massive particle explosion (rainbow colors)
+        const cx = window.innerWidth * 0.5;
+        const cy = window.innerHeight * 0.5;
+        const colors = [
+            [255, 50, 50], [255, 150, 50], [255, 255, 50],
+            [50, 255, 50], [50, 255, 255], [50, 50, 255], [255, 50, 255]
+        ];
+
+        // Emit rings of particles
+        for (let r = 0; r < 5; r++) {
+            const numSparks = 100 + r * 50;
+            const spread = 50 + r * 150;
+            const color = colors[r % colors.length];
+
+            setTimeout(() => {
+                state.particles.emit(cx, cy, numSparks, {
+                    spread: spread,
+                    life: 6000 + r * 1000,
+                    color: color,
+                    sizeMin: 2,
+                    sizeMax: 6,
+                    velocityScale: 3 + r
+                });
+            }, r * 200); // Stagger rings
+        }
+
+        // 2. Clear all existing letters violently
+        this.erodeAllLetters(state);
+
+        // 3. Audio cue: huge chord sweep / dramatic sound
+        if (state.sound) {
+            // Force play a very dramatic major chord spread across octaves
+            state.sound.synth.melody.triggerAttackRelease(["C2", "G2", "C3", "E3", "G3", "C4", "E4", "G4", "B4", "C5", "E5"], "4n");
+
+            // Turn on all effects max for a moment
+            const oldReverb = state.sound.params.melody.reverb;
+            const oldDelayTime = state.sound.params.melody.delayTime;
+
+            state.sound.setParam('melody', 'reverb', 1.0);
+            state.sound.setParam('melody', 'delayTime', 0.8);
+            state.sound.setParam('melody', 'delayFeedback', 0.8);
+            state.sound.setParam('melody', 'delayWet', 0.8);
+            state.sound.setParam('melody', 'delayEnabled', true);
+            state.sound.setParam('melody', 'reverbEnabled', true);
+
+            // Restore sound after 5 seconds
+            setTimeout(() => {
+                state.sound.setParam('melody', 'reverb', oldReverb);
+                state.sound.setParam('melody', 'delayTime', oldDelayTime);
+                state.sound.setParam('melody', 'delayFeedback', 0.2);
+                state.sound.setParam('melody', 'delayWet', 0.2);
+            }, 5000);
+        }
+
+        // 4. Force storm, max wind, max bugs briefly
+        state.weather.set('storm', 100);
+        state.weather.set('wind', 100);
+        CONFIG.BUGS.INTENSITY = 100;
+
+        setTimeout(() => {
+            state.weather.set('storm', 0);
+            state.weather.set('wind', 20);
+            CONFIG.BUGS.INTENSITY = 50;
+        }, 12000); // 12 seconds of chaos
     }
 
     emitHeartParticles(state) {

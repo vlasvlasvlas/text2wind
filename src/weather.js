@@ -58,8 +58,8 @@ export class Weather {
             hour = this.current.hourOverride;
         }
 
-        // Apply semantic hour shift
-        hour += this.semanticPush.hour_shift * 2;
+        // Apply semantic hour shift (strong multiplier so words like "noche" are noticeable)
+        hour += this.semanticPush.hour_shift * 8;
 
         // Time lapse
         if (this.timeLapse) {
@@ -101,10 +101,10 @@ export class Weather {
         const currentHour = this.getCurrentHour();
         this.timeLapse = {
             startHour: currentHour,
-            targetHour: (currentHour + hoursForward) % 24,
+            targetHour: currentHour + hoursForward,
             currentHour: currentHour,
             progress: 0,
-            duration: 5000, // 5 seconds for the lapse
+            duration: 2500, // Very fast 2.5 second lapse
         };
     }
 
@@ -118,9 +118,9 @@ export class Weather {
         }
         this.current.hourOverride = this.target.hourOverride;
 
-        // Decay semantic push
+        // Decay semantic push (hour_shift decays slower for lasting effect)
         for (const key in this.semanticPush) {
-            this.semanticPush[key] *= 0.999;
+            this.semanticPush[key] *= key === 'hour_shift' ? 0.9985 : 0.999;
         }
 
         // Update time lapse

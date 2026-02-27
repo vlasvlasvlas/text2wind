@@ -24,36 +24,40 @@ Text2Wind transpone el gesto del **espigueo** de Varda a una interfaz digital:
 ## Características
 
 ### Visuales
-- 🌅 **Cielo procedural** sincronizado con la hora real (amanecer, día, atardecer, noche, estrellas)
+- 🌅 **Cielo procedural** sincronizado con la hora real (brillo cálido del sol de día, halo lunar de noche, estrellas)
 - ☁️ **Nubes orgánicas** renderizadas con gradientes radiales y animación de ruido
 - 💨 **Campo de viento** basado en Perlin noise con turbulencias orgánicas
 - 🌫️ **Partículas de viento** (polvo/polen) que visualizan la dirección y fuerza del viento
+- 🪲 **Bichos atmosféricos**: Luciérnagas de noche y cigarras de día, con densidad y visibilidad configurable
 - ✍️ **Tipografía viva** con ciclo de vida: nacimiento → reposo → erosión → disolución
 - 🎨 **Color de texto** configurable por hue (0–360°) o automático según hora
+- 📸 **Arte ASCII**: Inyección generativa de figuras ASCII al tipear palabras mapeadas, sujetas a físicas de viento y erosión
 - 🔤 **Tipografía seleccionable**: JetBrains Mono, Courier New, Fira Code, Source Code Pro, Ubuntu Mono, IBM Plex Mono — todas monospace para soporte ASCII art
 - ⏱️ **Persistencia configurable**: cuántos segundos permanece el texto visible (2–120s)
 - 💥 **Explosión configurable**: cantidad de partículas por letra al erosionarse (5–200)
 - 🌧️ **Clima parametrizable**: viento, dirección, lluvia, niebla, tormenta, temperatura
 - ⚡ **Efectos meteorológicos**: lluvia con gotas, relámpagos, niebla volumétrica
 - 🕯️ **Cursor-vela** con estela de luciérnagas: tu atención protege las letras del olvido
-- 🌿 **Hierba que crece** sobre el texto abandonado
-- 📜 **Palimpsesto digital**: huellas invisibles de texto pasado, revelables
+- 🌿 **Hierba que crece** sobre el texto abandonado y los bordes (densidad configurable)
+- 📜 **Palimpsesto digital**: huellas invisibles de texto pasado (con switch de apagado y control de retención)
 
 ### Sonido — 3 Capas Generativas
 - 🥁 **Ritmo**: percusión generada por la erosión de letras + clicks al teclear
-- 🎵 **Drone**: tono FM continuo que cambia con la hora del día, temperatura y clima
+- 🎵 **Drone**: tono FM continuo y evolutivo que cambia de forma fluida con la hora exacta del día, temperatura y clima
 - 🎹 **Melodía**: notas al teclear con dos modos:
   - **Random**: notas basadas en la escala musical activa, seleccionable desde la UI o automática por clima
   - **Piano QWERTY**: el teclado mapeado como un piano (Z-M = C3, Q-P = C5)
 - 🎼 **18 escalas musicales** configurables desde `data/scales.json` (pentatónica, blues, hirajōshi, húngara menor, etc.)
-- Cada capa tiene controles independientes de **volumen, mute, waveform, ADSR, reverb**
+- 🔔 **Feedback Semántico**: Un arpegio luminoso ("chime") suena exclusivamente al descubrir una palabra clave oculta
+- 📱 **Soporte Móvil**: Desbloqueo de contexto de audio sincrónico para total compatibilidad con Safari iOS y Android
+- Cada capa tiene controles independientes de **volumen, mute, waveform, ADSR, reverb y delay**
 - La escala musical puede ser fija o cambiar automáticamente con el clima
 
 ### Interacción
 - 🖱️ **Click para posicionar**: el cursor de escritura queda fijo donde hacés click
 - 📋 **Pegar texto (Ctrl+V / Cmd+V)**: pegá texto del portapapeles — todas las letras aparecen de golpe con su sonido
-- 🧠 **360 palabras en español** mapeadas semánticamente a efectos ambientales
-- ⭐ **16 palabras especiales** con efectos únicos vinculados a Varda
+- 🧠 **Motor Semántico Inclusivo**: Ignora acentos para buscar coincidencias (`corazon` dispara lo mismo que `corazón`)
+- ⭐ **16+ palabras especiales** con efectos únicos de cámara, partículas, y eventos apoteósicos
 - 📖 **Auto-typewriter**: importá un archivo `.txt` (UTF-8) y se escribe solo al BPM elegido (10–400)
 - 🎭 **Modo performance** (F11) para instalación/galería sin UI
 - 📷 **Captura de pantalla** como PNG
@@ -168,12 +172,14 @@ El texto importado se escribe automáticamente, caracter por caracter, con sonid
 | *espigar* / *espiga* / *desecho* / *basura* | Partículas muertas se levantan del suelo |
 | *memoria* / *recuerdo* | El palimpsesto se hace visible |
 | *silencio* | Todo se detiene — suspensión contemplativa |
-| *reloj* / *tiempo* | Time-lapse del cielo (6 horas) |
+| *reloj* / *tiempo* | Time-lapse hiperrápido (ciclo de 24h en 2.5s) |
 | *corazón* / *papa* | Partículas forman un corazón (la papa de Varda) |
 | *varda* | Revelación total + suspensión |
 | *muerte* | Erosión simultánea de todas las letras |
 | *obsoleto* | La interfaz envejece rápidamente |
 | *nacer* | Hierba brota de los restos tipográficos |
+| *escarabajo* (o mapeadas en ASCII) | Inyecta un dibujo tipográfico 2D (ASCII art) destructible |
+| *posnetes* | Evento Apoteósico: Acordes masivos, tormenta, enjambre de bichos, polarización y caos total |
 
 ### Modo Piano QWERTY
 

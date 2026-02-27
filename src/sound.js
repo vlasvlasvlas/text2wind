@@ -83,6 +83,11 @@ export class SoundEngine {
                 attack: 0.005, decay: 0.6, release: 1.5,
                 mode: 'random',
                 reverb: 0.35,
+                reverbEnabled: true,
+                delayTime: 0.25,
+                delayFeedback: 0.2,
+                delayWet: 0.15,
+                delayEnabled: true,
                 ...(runtimeLayers.melody || {}),
             },
             wind: {
@@ -177,7 +182,11 @@ export class SoundEngine {
         const Tone = this.Tone;
 
         this.reverb = new Tone.Reverb({ decay: 6, wet: this.params.melody.reverb }).toDestination();
-        this.delay = new Tone.FeedbackDelay({ delayTime: '8n', feedback: 0.2, wet: 0.15 }).connect(this.reverb);
+        this.delay = new Tone.FeedbackDelay({
+            delayTime: this.params.melody.delayTime,
+            feedback: this.params.melody.delayFeedback,
+            wet: this.params.melody.delayWet,
+        }).connect(this.reverb);
         this.masterGain = new Tone.Gain(0).toDestination();
         this.masterGain.connect(this.delay);
         // Zero-latency dry path for typed notes.
@@ -273,7 +282,10 @@ export class SoundEngine {
 
     _getMelodyFxSend() {
         if (this.params.melody.muted) return 0;
-        return clamp(this.params.melody.reverb * 0.2, 0, 0.25);
+        const reverbLevel = this.params.melody.reverbEnabled ? this.params.melody.reverb : 0;
+        const delayLevel = this.params.melody.delayEnabled ? this.params.melody.delayWet : 0;
+        const fxLevel = Math.max(reverbLevel, delayLevel);
+        return clamp(fxLevel * 0.7, 0, 0.8);
     }
 
     _now() {
@@ -441,7 +453,12 @@ export class SoundEngine {
                     } catch (e) { }
                 }
                 if (this.reverb) {
-                    this.reverb.wet.value = this.params.melody.reverb;
+                    this.reverb.wet.value = this.params.melody.reverbEnabled ? this.params.melody.reverb : 0;
+                }
+                if (this.delay) {
+                    this.delay.delayTime.value = this.params.melody.delayTime;
+                    this.delay.feedback.value = this.params.melody.delayFeedback;
+                    this.delay.wet.value = this.params.melody.delayEnabled ? this.params.melody.delayWet : 0;
                 }
                 if (this.melodyDryGain) {
                     this.melodyDryGain.gain.value = this.params.melody.muted ? 0 : 1;
@@ -482,8 +499,11 @@ export class SoundEngine {
     }
 
     playGestureTone(index = 0, intensity = 0.5) {
-        if (!this.enabled || !this.melodySynth || !this.Tone) return false;
+        // Allow playing even if 'enabled' flag not yet set — critical for
+        // first-touch mobile audio where the context was just unlocked.
+        if (!this.melodySynth || !this.Tone) return false;
         if (this.params.melody.muted) return false;
+        if (!this.isAudioRunning()) return false;
 
         const degrees = [0, 2, 4, 5, 7, 9, 11, 12];
         const octaveIndex = ((Math.round(index) % degrees.length) + degrees.length) % degrees.length;
@@ -547,6 +567,35 @@ export class SoundEngine {
         } catch (err) { }
     }
 
+    /**
+     * Play a distinctive chime when a semantic keyword is recognized.
+     * Quick ascending 3-note arpeggio — higher octave, short notes.
+     * @param {boolean} isSpecial - true for special words (wider arpeggio)
+     */
+    playSemanticChime(isSpecial = false) {
+        if (!this.enabled || !this.melodySynth || !this.Tone) return;
+        if (this.params.melody.muted) return;
+
+        const now = this._now();
+        if (now === undefined) return;
+
+        // Ascending intervals: minor 3rd steps for regular, perfect 5th steps for special
+        const intervals = isSpecial ? [0, 7, 12, 19] : [0, 3, 7];
+        const baseNote = isSpecial ? 72 : 76; // C5 for special, E5 for regular
+        const noteSpacing = isSpecial ? 0.08 : 0.06;
+        const noteDuration = isSpecial ? 0.15 : 0.10;
+
+        try {
+            intervals.forEach((interval, i) => {
+                const midi = baseNote + interval;
+                const freq = 440 * Math.pow(2, (midi - 69) / 12);
+                this.melodySynth.triggerAttackRelease(
+                    freq, noteDuration, now + i * noteSpacing
+                );
+            });
+        } catch (err) { }
+    }
+
     playThunder(intensity) {
         if (!this.enabled || !this.thunderSynth) return;
         try {
@@ -558,6 +607,7 @@ export class SoundEngine {
     updateDrone(hour, weather) {
         if (!this.droneSynth || !this.Tone || this.params.drone.muted) return;
 
+        // Base root note selection (stays stable for harmonic foundation)
         const hourKeys = Object.keys(HOUR_ROOTS).map(Number).sort((a, b) => a - b);
         let rootNote = HOUR_ROOTS[0];
         for (const h of hourKeys) {
@@ -573,11 +623,28 @@ export class SoundEngine {
             } catch (e) { }
         }
 
+        // Live drone evolution based on precise fractional hour (minutes passing)
+        // Midday (12) is brightest/highest modulation, midnight (0) is darkest
+        const timePhase = Math.sin((hour - 6) / 24 * Math.PI * 2); // -1 at midnight, +1 at noon
+
+        // Modulate FM parameters slightly based on time of day
+        try {
+            const baseModIndex = 0.5 + Math.max(0, timePhase) * 1.5; // 0.5 night -> 2.0 noon
+            const baseHarmonicity = 1.0 + Math.abs(timePhase) * 0.5; // 1.5 at noon/midnight, 1.0 at dawn/dusk
+
+            this.droneSynth.set({
+                voice0: {
+                    modulationIndex: baseModIndex,
+                    harmonicity: baseHarmonicity
+                }
+            });
+        } catch (e) { }
+
         const temp = weather.get('temperature');
         const baseFilter = this.params.drone.filterFreq;
         const tempFilter = lerp(Math.max(baseFilter * 0.3, 100), baseFilter, clamp((temp + 10) / 55, 0, 1));
         if (this.droneFilter) {
-            this.droneFilter.frequency.value = tempFilter;
+            this.droneFilter.frequency.rampTo(tempFilter, 0.5);
         }
 
         const storm = weather.get('storm') / 100;

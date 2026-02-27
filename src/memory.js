@@ -9,6 +9,7 @@
    ====================================== */
 
 import { clamp } from './utils/math.js';
+import { CONFIG } from './config.js';
 
 const STORAGE_KEY = 'text2wind_memory';
 
@@ -79,6 +80,8 @@ export class Memory {
     }
 
     update(dt, state) {
+        if (!CONFIG.MEMORY.ENABLED) return;
+
         if (this.revealTimer > 0) {
             this.revealTimer -= dt;
         }
@@ -87,11 +90,24 @@ export class Memory {
             this.agingLevel = clamp(this.agingLevel + 0.0005 * dt, 0, 1);
         }
 
-        // Natural aging (very slow)
-        this.agingLevel = clamp(this.agingLevel + 0.000001 * dt, 0, 1);
+        // Natural aging modified by retention multiplier
+        // Higher retention = slower aging
+        const ageSpeed = 0.000001 / Math.max(0.1, CONFIG.MEMORY.RETENTION);
+        this.agingLevel = clamp(this.agingLevel + ageSpeed * dt, 0, 1);
+
+        // Let individual traces fade out fully based on retention to save memory
+        for (let i = this.traces.length - 1; i >= 0; i--) {
+            const ageMs = Date.now() - this.traces[i].timestamp;
+            // E.g., at 1.0 retention, traces last roughly 10 minutes fully visible
+            if (ageMs > 600000 * CONFIG.MEMORY.RETENTION) {
+                this.traces.splice(i, 1);
+            }
+        }
     }
 
     render(ctx, w, h, state) {
+        if (!CONFIG.MEMORY.ENABLED) return;
+
         const cursor = state.cursor;
 
         // Aging overlay (subtle paper texture darkening)

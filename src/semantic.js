@@ -23,13 +23,25 @@ export class SemanticEngine {
 
             if (dictRes.ok) {
                 const data = await dictRes.json();
-                this.dictionary = data.words || {};
+                const rawDict = data.words || {};
                 this.poles = data.poles || {};
+
+                // Normalize dictionary keys to ignore accents
+                for (const [key, val] of Object.entries(rawDict)) {
+                    const normKey = this.normalizeWord(key);
+                    this.dictionary[normKey] = val;
+                }
                 console.log(`📖 Semantic dict: ${Object.keys(this.dictionary).length} words`);
             }
 
             if (specialRes.ok) {
-                this.specialWords = await specialRes.json();
+                const rawSpecial = await specialRes.json();
+
+                // Normalize special words
+                for (const [key, val] of Object.entries(rawSpecial)) {
+                    const normKey = this.normalizeWord(key);
+                    this.specialWords[normKey] = val;
+                }
                 console.log(`⭐ Special words: ${Object.keys(this.specialWords).length}`);
             }
 
@@ -40,13 +52,17 @@ export class SemanticEngine {
         }
     }
 
+    normalizeWord(str) {
+        return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    }
+
     /**
      * Look up a word. Returns { effects, special? } or null.
      */
     lookup(word) {
         if (!this.loaded) return null;
 
-        const w = word.toLowerCase().trim();
+        const w = this.normalizeWord(word);
         if (w.length < 2) return null;
 
         const result = {};

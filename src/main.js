@@ -18,6 +18,7 @@ import { RainEffect } from './effects/rain.js';
 import { GrassEffect } from './effects/grass.js';
 import { LightningEffect } from './effects/lightning.js';
 import { FogEffect } from './effects/fog.js';
+import { BugsEffect } from './effects/bugs.js';
 
 class Text2Wind {
     constructor() {
@@ -45,6 +46,7 @@ class Text2Wind {
         this.grass = new GrassEffect();
         this.lightning = new LightningEffect();
         this.fog = new FogEffect();
+        this.bugs = new BugsEffect();
 
         // Auto-typewriter
         this.autoText = null;
@@ -92,6 +94,7 @@ class Text2Wind {
         this.grass.init(state);
         this.lightning.init(state);
         this.fog.init(state);
+        this.bugs.init(state);
 
         this.ui.init(state, this.weather, this.sound, this);
 
@@ -176,6 +179,9 @@ class Text2Wind {
             cursor: this.cursor, particles: this.particles,
             memory: this.memory, semantic: this.semantic,
             text: this.text, modes: this.modes, sound: this.sound,
+            sky: this.sky, grass: this.grass, rain: this.rain,
+            lightning: this.lightning, fog: this.fog, bugs: this.bugs,
+            ui: this.ui
         };
     }
 
@@ -249,16 +255,20 @@ class Text2Wind {
         if (!this.started) return;
 
         if (e.cancelable) e.preventDefault();
-        this.sound.primeFromGesture?.();
-        const audioReady = await this.ensureSoundEnabledFromGesture();
         const x = e.clientX;
         const y = e.clientY;
         const state = this.getState();
         this.cursor.update(x, y);
         this.text.onCanvasClick(x, y, state);
-        if (audioReady) {
-            this.sound.playGestureTone?.(0, 0.3);
-        }
+
+        // ── Synchronous audio unlock + play ──
+        // iOS/Safari requires audio to trigger in the same synchronous call
+        // stack as the user gesture. We prime, build, and play BEFORE any await.
+        this.sound.primeFromGesture?.();
+        this.sound.playGestureTone?.(0, 0.3);
+
+        // Async enable for full sound system (drone, etc.) — runs in background
+        this.ensureSoundEnabledFromGesture().catch(() => { });
 
         this.strokeInput.active = true;
         this.strokeInput.pointerId = e.pointerId;
@@ -411,6 +421,7 @@ class Text2Wind {
         this.rain.update(dt, state);
         this.lightning.update(dt, state);
         this.memory.update(dt, state);
+        this.bugs.update(dt, state);
         this.sound.update(dt, state);
         this.updateAutoTypewriter(dt);
 
@@ -424,6 +435,7 @@ class Text2Wind {
         this.rain.render(this.ctx, w, h, state);
         this.lightning.render(this.ctx, w, h, state);
         this.fog.render(this.ctx, w, h, state);
+        this.bugs.render(this.ctx, w, h, state);
         this.cursor.render(this.ctx, w, h, hour);
         this.ctx.restore();
 

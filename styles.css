@@ -180,6 +180,7 @@ body {
   font-size: 0.76rem;
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
   transform-origin: bottom right;
+  cursor: auto; /* Restore cursor over UI panels */
 }
 
 .panel.hidden {
@@ -427,6 +428,7 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   gap: 6px;
   align-items: center;
+  cursor: auto; /* Restore cursor over floating bar */
 }
 
 .floating-btn {

@@ -66,6 +66,30 @@ export class UI {
             weather.set('hourOverride', v < 0 ? -1 : v);
         }, v => v < 0 ? 'Auto' : `${Math.floor(v)}:${String(Math.floor((v % 1) * 60)).padStart(2, '0')}`);
 
+        this.wireToggle('ctrl-sky-glow', checked => {
+            CONFIG.SKY.GLOW_ENABLED = checked;
+        });
+
+        this.wireToggle('ctrl-grass-enabled', checked => {
+            CONFIG.GRASS.ENABLED = checked;
+        });
+
+        this.wireSlider('ctrl-grass-density', v => {
+            CONFIG.GRASS.MAX_BLADES = v;
+            // Also trim existing blades if slider goes down
+            if (this.app?.grass?.blades && this.app.grass.blades.length > v) {
+                this.app.grass.blades.length = v;
+            }
+        });
+
+        this.wireToggle('ctrl-bugs-enabled', checked => {
+            CONFIG.BUGS.ENABLED = checked;
+        });
+
+        this.wireSlider('ctrl-bugs-intensity', v => {
+            CONFIG.BUGS.INTENSITY = v;
+        });
+
         // ── Text controls ──
         this.wireSlider('ctrl-persist', v => {
             CONFIG.TEXT.LIFE_MIN = v * 1000;
@@ -88,6 +112,14 @@ export class UI {
             CONFIG.TEXT.FONT_SIZE = v;
             CONFIG.TEXT.LINE_HEIGHT = Math.round(v * 1.5);
         }, v => v + 'px');
+
+        this.wireToggle('ctrl-memory-enabled', checked => {
+            CONFIG.MEMORY.ENABLED = checked;
+        });
+
+        this.wireSlider('ctrl-memory-retention', v => {
+            CONFIG.MEMORY.RETENTION = v;
+        }, v => v.toFixed(1) + 'x');
 
         // ═══ RHYTHM TAB ═══
         this.wireToggle('ctrl-rhythm-mute', checked => sound.setParam('rhythm', 'muted', !checked));
@@ -115,6 +147,11 @@ export class UI {
         this.wireSlider('ctrl-melody-decay', v => sound.setParam('melody', 'decay', v), v => v.toFixed(2));
         this.wireSlider('ctrl-melody-release', v => sound.setParam('melody', 'release', v), v => v.toFixed(1));
         this.wireSlider('ctrl-melody-reverb', v => sound.setParam('melody', 'reverb', v), v => v.toFixed(2));
+        this.wireToggle('ctrl-melody-reverb-enabled', checked => sound.setParam('melody', 'reverbEnabled', checked));
+        this.wireToggle('ctrl-melody-delay-enabled', checked => sound.setParam('melody', 'delayEnabled', checked));
+        this.wireSlider('ctrl-melody-delay-time', v => sound.setParam('melody', 'delayTime', v), v => v.toFixed(2) + 's');
+        this.wireSlider('ctrl-melody-delay-feedback', v => sound.setParam('melody', 'delayFeedback', v), v => v.toFixed(2));
+        this.wireSlider('ctrl-melody-delay-wet', v => sound.setParam('melody', 'delayWet', v), v => v.toFixed(2));
 
         // Populate scale selector dynamically from scales.json
         this.wireSelect('ctrl-melody-scale', v => sound.setScale(v));
@@ -181,12 +218,21 @@ export class UI {
         this.setControlValue('ctrl-storm', weather.storm);
         this.setControlValue('ctrl-hour', weather.hourOverride);
 
+        // Atmosphere extras
+        this.setControlChecked('ctrl-sky-glow', CONFIG.SKY.GLOW_ENABLED);
+        this.setControlChecked('ctrl-grass-enabled', CONFIG.GRASS.ENABLED);
+        this.setControlValue('ctrl-grass-density', CONFIG.GRASS.MAX_BLADES);
+        this.setControlChecked('ctrl-bugs-enabled', CONFIG.BUGS.ENABLED);
+        this.setControlValue('ctrl-bugs-intensity', CONFIG.BUGS.INTENSITY);
+
         // Text
         this.setControlValue('ctrl-persist', Math.max(2, Math.round(CONFIG.TEXT.LIFE_MIN / 1000)));
         this.setControlValue('ctrl-explosion', CONFIG.TEXT.PARTICLES_PER_LETTER);
         this.setControlValue('ctrl-ink-hue', CONFIG.TEXT._hueOverride || 0);
         this.setControlValue('ctrl-font', CONFIG.TEXT.FONT_FAMILY);
         this.setControlValue('ctrl-font-size', CONFIG.TEXT.FONT_SIZE);
+        this.setControlChecked('ctrl-memory-enabled', CONFIG.MEMORY.ENABLED);
+        this.setControlValue('ctrl-memory-retention', CONFIG.MEMORY.RETENTION);
 
         // Sound
         this.setControlChecked('ctrl-rhythm-mute', !sound.rhythm.muted);
@@ -213,6 +259,11 @@ export class UI {
         this.setControlValue('ctrl-melody-decay', sound.melody.decay);
         this.setControlValue('ctrl-melody-release', sound.melody.release);
         this.setControlValue('ctrl-melody-reverb', sound.melody.reverb);
+        this.setControlChecked('ctrl-melody-reverb-enabled', sound.melody.reverbEnabled !== false);
+        this.setControlChecked('ctrl-melody-delay-enabled', sound.melody.delayEnabled !== false);
+        this.setControlValue('ctrl-melody-delay-time', sound.melody.delayTime);
+        this.setControlValue('ctrl-melody-delay-feedback', sound.melody.delayFeedback);
+        this.setControlValue('ctrl-melody-delay-wet', sound.melody.delayWet);
         this.pendingScaleSelection = this.sound.scaleMode || 'auto';
 
         // Auto

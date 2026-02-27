@@ -51,6 +51,17 @@
           value="0" /><span class="ctrl-value" data-for="ctrl-storm">0</span></div>
       <div class="control-group"><label>Hora</label><input type="range" id="ctrl-hour" min="-1" max="24" step="0.1"
           value="-1" /><span class="ctrl-value" data-for="ctrl-hour">Auto</span></div>
+      <hr class="divider" />
+      <div class="control-group control-toggle"><label>Sol / Luna</label><input type="checkbox" id="ctrl-sky-glow"
+          checked /></div>
+      <div class="control-group control-toggle"><label>Pasto</label><input type="checkbox" id="ctrl-grass-enabled"
+          checked /></div>
+      <div class="control-group"><label>Densidad Pasto</label><input type="range" id="ctrl-grass-density" min="0"
+          max="1000" step="50" value="500" /><span class="ctrl-value" data-for="ctrl-grass-density">500</span></div>
+      <div class="control-group control-toggle"><label>Bichos</label><input type="checkbox" id="ctrl-bugs-enabled"
+          checked /></div>
+      <div class="control-group"><label>Cant. Bichos</label><input type="range" id="ctrl-bugs-intensity" min="0"
+          max="100" value="50" /><span class="ctrl-value" data-for="ctrl-bugs-intensity">50</span></div>
     </div>
 
     <!-- Tab: Texto -->
@@ -74,6 +85,11 @@
       </div>
       <div class="control-group"><label>Tamaño</label><input type="range" id="ctrl-font-size" min="12" max="72" step="1"
           value="28" /><span class="ctrl-value" data-for="ctrl-font-size">28px</span></div>
+      <hr class="divider" />
+      <div class="control-group control-toggle"><label>Memoria</label><input type="checkbox" id="ctrl-memory-enabled"
+          checked /></div>
+      <div class="control-group"><label>Retención</label><input type="range" id="ctrl-memory-retention" min="0.1"
+          max="5.0" step="0.1" value="1.0" /><span class="ctrl-value" data-for="ctrl-memory-retention">1.0x</span></div>
       <p class="hint">Persistencia = segundos que vive el texto. Explosión = partículas/letra. Color 0 = auto (hora).
         Tipografías monospace para ASCII art.</p>
     </div>
@@ -148,9 +164,23 @@
           step="0.05" value="0.6" /><span class="ctrl-value" data-for="ctrl-melody-decay">0.60</span></div>
       <div class="control-group"><label>Release</label><input type="range" id="ctrl-melody-release" min="0.1" max="5.0"
           step="0.1" value="1.5" /><span class="ctrl-value" data-for="ctrl-melody-release">1.5</span></div>
-      <div class="control-group"><label>Reverb</label><input type="range" id="ctrl-melody-reverb" min="0" max="1"
+      <hr class="divider" />
+      <div class="control-group control-toggle"><label>Reverb</label><input type="checkbox"
+          id="ctrl-melody-reverb-enabled" checked /></div>
+      <div class="control-group"><label>Reverb Wet</label><input type="range" id="ctrl-melody-reverb" min="0" max="1"
           step="0.05" value="0.35" /><span class="ctrl-value" data-for="ctrl-melody-reverb">0.35</span></div>
-      <p class="hint">Escala: pentatónica → frigia (tormenta) → lidia (calor).</p>
+      <hr class="divider" />
+      <div class="control-group control-toggle"><label>Delay</label><input type="checkbox"
+          id="ctrl-melody-delay-enabled" checked /></div>
+      <div class="control-group"><label>Delay Time</label><input type="range" id="ctrl-melody-delay-time" min="0.05"
+          max="1.0" step="0.01" value="0.25" /><span class="ctrl-value" data-for="ctrl-melody-delay-time">0.25s</span>
+      </div>
+      <div class="control-group"><label>Delay Feedback</label><input type="range" id="ctrl-melody-delay-feedback"
+          min="0" max="0.9" step="0.05" value="0.2" /><span class="ctrl-value"
+          data-for="ctrl-melody-delay-feedback">0.20</span></div>
+      <div class="control-group"><label>Delay Wet</label><input type="range" id="ctrl-melody-delay-wet" min="0" max="1"
+          step="0.05" value="0.15" /><span class="ctrl-value" data-for="ctrl-melody-delay-wet">0.15</span></div>
+      <p class="hint">Escala: pentatónica → frigia (tormenta) → lidia (calor). Delay y Reverb como efectos de envío.</p>
     </div>
 
     <!-- Tab: Auto-typewriter -->

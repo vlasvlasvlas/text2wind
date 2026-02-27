@@ -2,7 +2,14 @@
    TEXT2WIND — Configuration
    ====================================== */
 
-import runtimeDefaults from '../data/runtime_defaults.json';
+// Fallback in case JSON import fails
+let runtimeDefaults = {};
+
+// We can still try synchronous import, but Vite prefers standard object exports or fetching.
+// Instead of importing the JSON which caused `ERR_IMPORT_ATTRIBUTE_MISSING` in some environments,
+// we will fetch or define the minimal defaults here, or use the asserted version:
+import importedDefaults from '../data/runtime_defaults.json' with { type: 'json' };
+runtimeDefaults = importedDefaults;
 
 const textPersistenceMs = runtimeDefaults.text.persistenceSeconds * 1000;
 
@@ -11,6 +18,11 @@ export const CONFIG = {
 
     // Canvas
     PIXEL_RATIO: Math.min(window.devicePixelRatio, 2),
+
+    // Sky
+    SKY: {
+        GLOW_ENABLED: true,
+    },
 
     // Sky color palettes keyed by hour ranges
     SKY_PALETTES: [
@@ -88,12 +100,25 @@ export const CONFIG = {
 
     // Grass
     GRASS: {
+        ENABLED: true,
         IDLE_THRESHOLD: 30000,     // ms before grass starts growing
         GROWTH_SPEED: 0.001,
         MAX_BLADES: 500,
         BLADE_HEIGHT_MIN: 8,
         BLADE_HEIGHT_MAX: 30,
         COLOR: [0.25, 0.55, 0.20],
+    },
+
+    // Bugs
+    BUGS: {
+        ENABLED: true,
+        INTENSITY: 50,
+    },
+
+    // Memory (Palimpsest)
+    MEMORY: {
+        ENABLED: true,
+        RETENTION: 1.0,  // 0.1 to 5.0 (multiplier for aging speed)
     },
 
     // Modes
