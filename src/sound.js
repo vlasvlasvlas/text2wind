@@ -286,11 +286,24 @@ export class SoundEngine {
         return scale?.notes || SCALES.pentatonic;
     }
 
+    _getRawAudioContext() {
+        if (!this.Tone) return null;
+        return this.Tone.getContext?.()?.rawContext || this.Tone.context?.rawContext || this.Tone.context || null;
+    }
+
+    isAudioRunning() {
+        const ctx = this._getRawAudioContext();
+        return !!ctx && ctx.state === 'running';
+    }
+
     primeFromGesture() {
         if (!this.Tone) return false;
 
         try {
             // iOS/WebKit is strict: call start() directly in gesture call stack.
+            const rawCtx = this._getRawAudioContext();
+            const resumePromise = rawCtx?.resume?.();
+            if (resumePromise?.catch) resumePromise.catch(() => { });
             const startPromise = this.Tone.start?.();
             if (startPromise?.catch) startPromise.catch(() => { });
             this._tuneAudioContextForRealtime();
@@ -298,14 +311,16 @@ export class SoundEngine {
                 this.buildAudioGraph();
             }
 
-            this.enabled = true;
-            if (this.masterGain) this.masterGain.gain.value = this.masterLevel;
-            if (this.melodyDryGain) this.melodyDryGain.gain.value = this.params.melody.muted ? 0 : 1;
-            if (this.melodyFxSendGain) this.melodyFxSendGain.gain.value = this._getMelodyFxSend();
-            this.applyAllParams();
-            if (!this.params.drone.muted) this.startDrone();
-
-            return true;
+            if (this.isAudioRunning()) {
+                this.enabled = true;
+                if (this.masterGain) this.masterGain.gain.value = this.masterLevel;
+                if (this.melodyDryGain) this.melodyDryGain.gain.value = this.params.melody.muted ? 0 : 1;
+                if (this.melodyFxSendGain) this.melodyFxSendGain.gain.value = this._getMelodyFxSend();
+                this.applyAllParams();
+                if (!this.params.drone.muted) this.startDrone();
+                return true;
+            }
+            return false;
         } catch (e) {
             return false;
         }
@@ -316,6 +331,10 @@ export class SoundEngine {
         if (!this.Tone) return;
 
         await this.Tone.start();
+        const rawCtx = this._getRawAudioContext();
+        if (rawCtx?.state !== 'running' && rawCtx?.resume) {
+            try { await rawCtx.resume(); } catch (e) { }
+        }
         this._tuneAudioContextForRealtime();
         if (!this.initialized) {
             try {

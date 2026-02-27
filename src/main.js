@@ -225,12 +225,12 @@ class Text2Wind {
 
     async ensureSoundEnabledFromGesture() {
         this.sound.primeFromGesture?.();
-        if (this.sound?.enabled) return true;
+        if (this.sound?.enabled && this.sound?.isAudioRunning?.()) return true;
         try {
             await this.sound.enable();
             const btn = document.getElementById('btn-sound');
             if (btn) btn.textContent = '🔊';
-            return !!this.sound?.enabled;
+            return !!this.sound?.enabled && !!this.sound?.isAudioRunning?.();
         } catch (e) {
             const btn = document.getElementById('btn-sound');
             if (btn) btn.textContent = '🔇';
@@ -250,12 +250,15 @@ class Text2Wind {
 
         if (e.cancelable) e.preventDefault();
         this.sound.primeFromGesture?.();
-        await this.ensureSoundEnabledFromGesture();
+        const audioReady = await this.ensureSoundEnabledFromGesture();
         const x = e.clientX;
         const y = e.clientY;
         const state = this.getState();
         this.cursor.update(x, y);
         this.text.onCanvasClick(x, y, state);
+        if (audioReady) {
+            this.sound.playGestureTone?.(0, 0.3);
+        }
 
         this.strokeInput.active = true;
         this.strokeInput.pointerId = e.pointerId;
