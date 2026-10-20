@@ -423,4 +423,4 @@ Conectar el repositorio directamente. Build command: `npm run build`. Output: `d
 
 ## Licencia
 
-MIT
+[CC BY-SA 4.0](LICENSE) — © Vladimiro Bellini ([vlasvlasvlas](https://github.com/vlasvlasvlas)). Ver [LICENSE](LICENSE) para los términos completos.
